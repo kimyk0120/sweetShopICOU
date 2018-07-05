@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.sweetk.web.admin.mapper.NoticeMapper">
+
+	<select id="notice_list" parameterType="map" resultType="map">
+
+		select notice_seq,
+			   notice_target,
+			   notice_title,
+			   notice_comment,
+			   notice_file,
+			   notice_view_count,
+			   reg_date,
+			   edit_date
+		from NOTICE
+		where notice_target like CONCAT('%',#{notice_target},'%')
+		and notice_title like CONCAT('%',#{notice_title},'%')
+		order by reg_date desc
+		limit  #{page_num}, #{page_size}
+
+	</select>
+
+	<select id="notice_count" parameterType="map" resultType="int">
+		select count(*)
+		from NOTICE
+		where notice_target like CONCAT('%',#{notice_target},'%')
+		and notice_title like CONCAT('%',#{notice_title},'%')
+	</select>
+
+	<select id="notice" parameterType="int" resultType="hashmap">
+
+		select notice_seq,
+			   notice_target,
+			   notice_title,
+			   notice_comment,
+			   notice_file,
+			   notice_path,
+			   notice_org_name,
+			   notice_view_count,
+			   reg_date,
+			   edit_date
+		from NOTICE
+		where notice_seq = #{0}
+
+	</select>
+
+	<update id="notice_update" parameterType="map">
+		UPDATE NOTICE
+		SET
+			notice_target = #{notice_target},
+			notice_title = #{notice_title},
+			notice_comment = #{notice_comment},
+			notice_file = #{notice_file},
+			notice_path = #{notice_path},
+			notice_org_name = #{notice_org_name},
+			edit_date = NOW()
+		WHERE
+			notice_seq = #{notice_seq}
+	</update>
+
+	<insert id="notice_insert" parameterType="map">
+		insert into NOTICE(notice_target,
+							   notice_title,
+							   notice_comment,
+							   notice_path,
+							   notice_org_name,
+							   notice_file)
+						values (#{notice_target},
+								#{notice_title},
+								#{notice_comment},
+								#{notice_path},
+								#{notice_org_name},
+								#{notice_file})
+	</insert>
+
+	</mapper>

@@ -1,0 +1,40 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+ * v2.0 | 20110126
+ * License: none (public domain) */
+
+.gnb_dropdown { position: absolute; left: 0;  top: 0;  height: 100%;  width: 100%;  background-color: #fff;  font-size: 14px; color:#2c2c2c; }
+.gnb_dropdown > li { padding:0; border-bottom:1px solid #f0eff5; }
+/* .dropdown > li:first-child > a {color:#007aff; font-weight:500;} */
+.gnb_dropdown li a { display: block; width:auto; height:40px; line-height:40px; padding-left:37px; text-decoration: none; text-transform: uppercase; color: black; }
+.gnb_dropdown li > ul li { padding:0; }
+.gnb_dropdown li > ul li a { display: block; height:30px; line-height:30px; color:#888; font-size:14px; }
+
+
+.gnb_dropdown li.selected { background-color: #fff; }
+.gnb_dropdown > li.selected > ul > li { background-color: #fbfbfc; }
+.gnb_dropdown > li.selected > ul  { border-top:1px solid #f0eff5; }
+.gnb_dropdown > li.selected > a { color:#007aff; font-weight:500; }
+.gnb_dropdown > li > ul > li:hover > a { color:#000; }
+
+li.gnb_web_bg01 {
+	background:url("/src/owner/images/common/mo_gnb_bg_01.png") no-repeat 12px 14px;
+
+}
+li.gnb_web_bg02 {
+	background-image:url("/src/owner/images/common/mo_gnb_bg_02.png"), url("/src/owner/images/contents/arr_gobtm.png");
+	background-repeat:no-repeat;
+	background-position:12px 14px, 165px 17px;
+}
+li.gnb_web_bg03 {
+	background-image:url("/src/owner/images/common/mo_gnb_bg_03.png"), url("/src/owner/images/contents/arr_gobtm.png");
+	background-repeat:no-repeat;
+	background-position:12px 14px, 165px 17px;
+}
+li.gnb_web_bg04 { background:url("/src/owner/images/common/mo_gnb_bg_04.png") no-repeat 12px 14px; }
+li.gnb_web_bg05 { background:url("/src/owner/images/common/mo_gnb_bg_05.png") no-repeat 12px 14px; }
+li.gnb_web_bg06 {
+	background-image:url("/src/owner/images/common/mo_gnb_bg_06.png"), url("/src/owner/images/contents/arr_gobtm.png");
+	background-repeat:no-repeat;
+	background-position:12px 14px, 165px 17px;
+}
+li.gnb_web_bg01, li.gnb_web_bg02, li.gnb_web_bg03, li.gnb_web_bg04, li.gnb_web_bg05, li.gnb_web_bg06 {background-size:15px, 12px 7px; }

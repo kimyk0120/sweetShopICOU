@@ -1,0 +1,241 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<!-- ie조건부주석 Conditional Comment //-->
+<!--[if lt IE 7]>      <html class="ie6"> <![endif]-->
+<!--[if IE 7]>         <html class="ie7"> <![endif]-->
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> <html>         <!--<![endif]-->
+<head>
+<title>Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="apple-mobile-web-app-title" content="">
+<meta property="og:title" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:site_name" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:image" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:description" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta name="keywords" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Generator" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Author" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Keywords" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Description" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
+
+<link rel="stylesheet" href="./src/css/import.css" type="text/css" />
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script  src="./src/js/default.js"></script>
+
+
+<!--[if lte IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- IE7 미만에서 HTML 및 CSS 엘리먼트, 투명 PNG 지원//-->
+<!--[if lt IE 9]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+<![endif]-->
+<!--[if lt IE 8]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
+<![endif]-->
+<!--[if lt IE 7]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE7.js"></script>
+<![endif]-->
+
+<!-- ie6~8버전에서 미디어쿼리를 해석할 수 있도록 만들어 주는 자바스크립트 라이브러리 //-->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+</head>
+
+<body>
+<div id="wrap">
+
+<div id="header">
+	<h1>UNTITLED</h1>
+	
+	<div class="log_info" >
+		<a href="#" id="logbtn"  >다시 뵙게되어 반갑습니다. <strong>Super Admin</strong> 님</a>
+	</div>
+	<script type="text/javascript">
+	$('#logbtn').click(function() {
+	  $('#go_loginfo_1').toggle('slow', function() {
+		// Animation complete.
+	  });
+	});
+	</script>
+	<div id="go_loginfo_1"  style="display:none;">
+	<div class="arrow"></div>
+		<ul>
+			<li><a href="#"><img src="./images/common/icon_meminfo.png" />회원 정보</a></li>
+			<li><a href="./main.html"><img src="./images/common/icon_logout.png" />로그아웃</a></li>
+		</ul>
+	</div>
+
+	<script type="text/javascript">
+	$suggest_checking = $("#go_loginfo_1");
+	$suggest_checking.hover(
+	function(){
+			$(this).css("display","block");
+		},
+			function(){
+			$(this).css("display","none");
+		}
+	);
+	</script>
+
+</div><!-- END header//-->
+
+
+
+<div id="gnb">
+	<ul>
+		<li class="gnb01"><a href="./owner_list.html"><span>사장님</span> 관리<div class="arrow"></div></a></li>
+		<li class="gnb02"><a href="#"><span>홈페이지</span> 관리<div class="arrow"></div></a></li>
+		<li class="gnb03"><a href="./notice_list.html" class="on"><span>공지사항</span> 관리<div class="arrow"></div></a></li>
+		<li class="gnb04"><p></p><a href="./qa_list.html"><span>문의하기</span> 관리<div class="arrow"></div></a></li>
+	</ul>
+</div>
+
+
+<div id="container" >
+
+	<div class="page_guide page_guide_03">
+		가맹점ㆍ손님을 위한 공지사항을 관리하기 위해<br /><span>조회ㆍ수정ㆍ등록</span>이 가능한 페이지입니다.
+	</div>
+
+<!-- 리스트 상단 검색 시작 //-->
+	<div class="top_search_box">
+		<fieldset>
+		<legend>검색타입선택</legend>
+			<span class="sitem_list">
+				<span class="designRadio"><span class="radiocls radio"></span></span>
+				<input id="li01" class="chkclass iRadio" type="radio" name="sex" value="전체"  />
+				<label for="li01" class="sitem_text">전체</label>
+			</span>
+			<span class="sitem_list">
+				<span class="designRadio"><span class="radiocls radio"></span></span>
+				<input id="li02" class="iRadio" type="radio" name="sex" value="가맹점" />
+				<label for="li02" class="sitem_text">가맹점</label>
+			</span>
+			<span class="sitem_list">
+				<span class="designRadio"><span class="radiocls radio"></span></span>
+				<input id="li03" class="iRadio" type="radio" name="sex" value="손님" />
+				<label for="li03" class="sitem_text">손님</label>
+			</span>
+			<p class="sform"><input type="text" id="search_input" class="topSearch_blur" value="기룩갸룩"><span class="a_area"><a href="#"></a></span></p>
+		</fieldset>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			/* 선택된값의 value는 _value 에 있음 */
+
+			var _designRadio = $('.designRadio');
+			var _iLabel = $('.sitem_text');
+			//$(_designRadio).children().removeClass('checked');
+
+			/* 체크 항목을 잡기 위한 것 */
+			$('.sitem_text:eq(1)').addClass('checked');
+			$('.radiocls:eq(1)').addClass('checked');
+
+
+			$(_iLabel).click(function(){
+
+				var _thisRadio = $(this).parent().find('> .designRadio');
+				var _value = $(this).parent().find('>input').val();
+
+				$(_designRadio).children().removeClass('checked');
+				$(_thisRadio).children().addClass('checked');
+				$(_iLabel).removeClass('checked');
+
+				//$(this).removeClass('checked');
+				//alert($(this).hasClass("checked"));
+				$(this).addClass('checked');
+
+				/*console.log(_value);*/
+			});
+			
+			$(_designRadio).click(function(){
+				var index = $(_designRadio).index(this);
+
+				$('.sitem_text').removeClass('checked');
+				$('.radiocls').removeClass('checked');
+				
+				$('.sitem_text:eq('+index+')').addClass('checked');
+				$('.radiocls:eq('+index+')').addClass('checked');
+				
+				/*
+				var _value = $(this).parent().find('>input').val();
+				$(_designRadio).children().removeClass('checked');
+				$(this).children().addClass('checked');
+				*/
+				/*console.log(_value);*/
+			});
+		});
+
+	$("#search_input").focus(function() {
+		$(this).attr('class','topSearch_focus');
+	});
+	$("#search_input").blur(function() {
+		$(this).attr('class','topSearch_blur');
+	});
+	</script>
+</div>
+<!-- 리스트 상단 검색 끝 //-->
+
+
+
+
+	<!-- 리스트 테이블 시작 //-->
+	<table class="table_list mb80">
+		<colgroup>
+		<col width="80px" />
+		<col width="611px" />
+		<col width="80px" />
+		<col width="80px;" />
+		</colgroup>
+
+		<thead>
+			<tr>
+				<th>공지대상</th>
+				<td class="tal">제목</td>
+				<td>등록일</td>
+				<td>조회수</td>
+			</tr>
+		</thead>
+
+		<tbody class="result">
+			<tr>
+				<td colspan="4">
+					<p><img src="./images/board/icon_search_result.png" /></p>
+					검색결과가 없습니다.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<script type="text/javascript">
+	$(".paging").focus(function() {
+		$(this).css("color","#000");
+	});
+	$(".paging").blur(function() {
+		$(this).css("color","#ff6600");
+	});
+	</script>
+	<!-- 리스트 테이블 끝 //-->
+
+
+	<div class="btn_plus_area">
+		<a href="#"><img src="./images/common/btn_more.png" /></a>
+	</div>
+	
+
+
+</div><!-- END container//-->
+</div><!-- END wrap//-->
+</body>
+</html>

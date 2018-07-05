@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.sweetk.web.admin.mapper.QnaMapper">
+
+	<select id="qna_list" parameterType="map" resultType="map">
+
+		select qna_seq,
+				qna_target,
+				qna_title,
+				qna_comment,
+				qna_shop_name,
+				qna_status,
+				top_qna_seq,
+				qna_writer,
+				qna_writer_seq,
+				qna_reg_date,
+				qna_edit_date,
+                t2.code_name as qna_type
+		from SHOP_QNA t1
+		join code_mst t2
+		on t1.QNA_TYPE = t2.code_id
+		where t2.code_type = 'qna_type'
+		and qna_title like CONCAT('%',#{qna_title},'%')
+		and qna_writer like CONCAT('%',#{qna_writer},'%')
+		and qna_target like CONCAT('%',#{qna_target},'%')
+		and qna_status like CONCAT('%',#{qna_status},'%')
+		and qna_type like CONCAT('%',#{qna_type},'%')
+		and qna_reg_date BETWEEN #{start_date} and #{end_date}
+		order by qna_reg_date desc
+		limit  #{page_num}, #{page_size}
+
+	</select>
+
+	<select id="qna_count" parameterType="map" resultType="int">
+		select count(*)
+		from SHOP_QNA t1
+		join code_mst t2
+		on t1.QNA_TYPE = t2.code_id
+		where t2.code_type = 'qna_type'
+		and qna_title like CONCAT('%',#{qna_title},'%')
+		and qna_writer like CONCAT('%',#{qna_writer},'%')
+		and qna_target like CONCAT('%',#{qna_target},'%')
+		and qna_status like CONCAT('%',#{qna_status},'%')
+		and qna_type like CONCAT('%',#{qna_type},'%')
+		and qna_reg_date BETWEEN #{start_date} and #{end_date}
+	</select>
+
+	<select id="qna" resultType="map">
+		select qna_seq,
+		        qna_target,
+		        qna_type,
+		        qna_title,
+		        qna_comment,
+		        qna_shop_name,
+		        qna_status,
+		        top_qna_seq,
+		        qna_writer,
+		        qna_writer_seq,
+		        qna_reg_date,
+		        qna_edit_date,
+		        code_name
+		from SHOP_QNA t1 join code_mst t2 on t1.qna_type = t2.code_id
+		where t2.code_type = 'qna_type'
+		and qna_seq = #{qna_seq}
+	</select>
+
+	<select id="qna_prv" parameterType="map" resultType="map">
+		SELECT qna_seq,
+		        qna_title
+		FROM SHOP_QNA
+		<![CDATA[
+        where QNA_SEQ < #{qna_seq}
+        ]]>
+        order by qna_seq desc
+        limit 1
+	</select>
+
+	<select id="qna_next" parameterType="map" resultType="map">
+		SELECT qna_seq,
+        qna_title
+		FROM SHOP_QNA
+		<![CDATA[
+        where QNA_SEQ > #{qna_seq}
+        ]]>
+        limit 1
+	</select>
+
+	<select id="qna_answer" parameterType="String" resultType="map">
+		select qna_seq,
+		        qna_title,
+		        qna_comment,
+		        qna_edit_date,
+		        qna_reg_date
+		from SHOP_QNA
+		where top_qna_seq = #{0}
+	</select>
+
+	<insert id="qna_insert" parameterType="QnaVo">
+		insert into SHOP_QNA(qna_title,
+							qna_comment,
+							top_qna_seq)
+				   values (#{qna_title},
+						   #{qna_comment},
+						   #{top_qna_seq})
+	</insert>
+
+	<update id="qna_update" parameterType="QnaVo">
+		UPDATE SHOP_QNA
+		SET
+			qna_comment = #{qna_comment},
+			qna_edit_date = NOW()
+		WHERE
+			top_qna_seq = #{qna_seq}
+	</update>
+
+	<update id="qna_status_update" parameterType="QnaVo">
+		UPDATE SHOP_QNA
+		SET
+			qna_status = #{qna_status},
+			qna_edit_date = NOW()
+		WHERE
+			qna_seq = #{qna_seq}
+	</update>
+
+</mapper>

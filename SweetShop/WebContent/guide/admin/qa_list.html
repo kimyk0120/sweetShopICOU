@@ -1,0 +1,633 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<!-- ie조건부주석 Conditional Comment //-->
+<!--[if lt IE 7]>      <html class="ie6"> <![endif]-->
+<!--[if IE 7]>         <html class="ie7"> <![endif]-->
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> <html>         <!--<![endif]-->
+<head>
+<title>Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="apple-mobile-web-app-title" content="">
+<meta property="og:title" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:site_name" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:image" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:description" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta name="keywords" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Generator" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Author" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Keywords" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Description" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
+
+<link rel="stylesheet" href="./src/css/import.css" type="text/css" />
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script  src="./src/js/default.js"></script>
+
+
+<!--[if lte IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- IE7 미만에서 HTML 및 CSS 엘리먼트, 투명 PNG 지원//-->
+<!--[if lt IE 9]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+<![endif]-->
+<!--[if lt IE 8]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
+<![endif]-->
+<!--[if lt IE 7]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE7.js"></script>
+<![endif]-->
+
+<!-- ie6~8버전에서 미디어쿼리를 해석할 수 있도록 만들어 주는 자바스크립트 라이브러리 //-->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+</head>
+
+<body>
+<div id="wrap">
+
+<div id="header">
+	<h1>UNTITLED</h1>
+	
+	<div class="log_info" >
+		<a href="#" id="logbtn"  >다시 뵙게되어 반갑습니다. <strong>Super Admin</strong> 님</a>
+	</div>
+	<script type="text/javascript">
+	$('#logbtn').click(function() {
+	  $('#go_loginfo_1').toggle('slow', function() {
+		// Animation complete.
+	  });
+	});
+	</script>
+	<div id="go_loginfo_1"  style="display:none;">
+	<div class="arrow"></div>
+		<ul>
+			<li><a href="#"><img src="./images/common/icon_meminfo.png" />회원 정보</a></li>
+			<li><a href="./main.html"><img src="./images/common/icon_logout.png" />로그아웃</a></li>
+		</ul>
+	</div>
+
+	<script type="text/javascript">
+	$suggest_checking = $("#go_loginfo_1");
+	$suggest_checking.hover(
+	function(){
+			$(this).css("display","block");
+		},
+			function(){
+			$(this).css("display","none");
+		}
+	);
+	</script>
+
+</div><!-- END header//-->
+
+
+
+<div id="gnb">
+	<ul>
+		<li class="gnb01"><a href="./owner_list.html"><span>사장님</span> 관리<div class="arrow"></div></a></li>
+		<li class="gnb02"><a href="#"><span>홈페이지</span> 관리<div class="arrow"></div></a></li>
+		<li class="gnb03"><a href="./notice_list.html"><span>공지사항</span> 관리<div class="arrow"></div></a></li>
+		<li class="gnb04"><p></p><a href="./qa_list.html" class="on"><span>문의하기</span> 관리<div class="arrow"></div></a></li>
+	</ul>
+</div>
+
+
+<div id="container" >
+
+	<div class="page_guide page_guide_04">
+		가맹점ㆍ손님의 문의를 관리하기 위해<br /><span>조회ㆍ수정ㆍ답변</span>이 가능한 페이지입니다.
+	</div>
+
+<!-- 리스트 상단 검색 시작 //-->
+
+	<div class="qa_search_process">
+		<span class="tit">진행상태</span>
+		<span class="sitem_list">
+			<span class="designRadio_qaproc"><span class="radiocls_qaproc radio"></span></span>
+			<input id="li01" class="chkclass iRadio" type="radio" name="sex" value="전체" />
+			<label for="li01" class="sitem_text_qaproc">전체</label>
+		</span>
+		<span class="sitem_list">
+			<span class="designRadio_qaproc"><span class="radiocls_qaproc radio"></span></span>
+			<input id="li02" class="iRadio" type="radio" name="sex" value="가맹점" />
+			<label for="li02" class="sitem_text_qaproc">처리중</label>
+		</span>
+		<span class="sitem_list">
+			<span class="designRadio_qaproc"><span class="radiocls_qaproc radio"></span></span>
+			<input id="li02" class="iRadio" type="radio" name="sex" value="손님" />
+			<label for="li02" class="sitem_text_qaproc">완료</label>
+		</span>
+
+		<script type="text/javascript">
+		$(document).ready(function(){
+			/* 선택된값의 value는 _value 에 있음 */
+
+			var _designRadio_qaproc = $('.designRadio_qaproc');
+			var _iLabel_qaproc = $('.sitem_text_qaproc');
+			$('.sitem_text_qaproc:eq(0)').addClass('checked');
+			$('.radiocls_qaproc:eq(0)').addClass('checked');
+
+			$(_iLabel_qaproc).click(function(){
+
+				var _thisRadio_qaproc = $(this).parent().find('> .designRadio_qaproc');
+				var _value_qaproc = $(this).parent().find('>input').val();
+
+				$(_designRadio_qaproc).children().removeClass('checked');
+				$(_thisRadio_qaproc).children().addClass('checked');
+				$(_iLabel_qaproc).removeClass('checked');
+
+				//$(this).removeClass('checked');
+				//alert($(this).hasClass("checked"));
+				$(this).addClass('checked');
+
+				/*console.log(_value_qaproc);*/
+			});
+			
+			$(_designRadio_qaproc).click(function(){
+				var index = $(_designRadio_qaproc).index(this);
+
+				$('.sitem_text_qaproc').removeClass('checked');
+				$('.radiocls_qaproc').removeClass('checked');
+				
+				$('.sitem_text_qaproc:eq('+index+')').addClass('checked');
+				$('.radiocls_qaproc:eq('+index+')').addClass('checked');
+				
+				/*
+				var _value = $(this).parent().find('>input').val();
+				$(_designRadio).children().removeClass('checked');
+				$(this).children().addClass('checked');
+				*/
+				/*console.log(_value_qaproc);*/
+			});
+		});
+		</script>
+
+		<span class="tit ml100">문의 분야</span>
+		<span class="qa_category">
+			<input type="text" id="btn" class="qa_searproc_input_blur" onclick="qa_category(1);" value="전체"  >	
+			<!-- 레이어팝업으로 나오는 화면에서 선택시 인풋값에 자동 들어가도록 프로그램 처리 필요//-->
+			<script type="text/javascript">
+			<!--
+			function qa_category(num){
+			document.getElementById('qa_category_' + num ).style.display = "";
+			}
+			//-->
+			</script>
+			<div class="qa_cate_type" id="qa_category_1" style="display:none;">
+				<ul>
+					<li><a href="#" class="close_qa">전체</a></li>
+					<li><a href="#" class="close_qa">서비스이용</a></li>
+					<li><a href="#" class="close_qa">쿠폰</a></li>
+					<li><a href="#" class="close_qa">가입/탈퇴</a></li>
+					<li><a href="#" class="close_qa">서비스불량</a></li>
+				</ul>
+			 </div>
+			<script type="text/javascript">
+				$(".close_qa").click(function() {
+				$("#qa_category_1").css("display","none");
+				});
+
+				$qa_category_checking = $("#qa_category_1");
+				$qa_category_checking.hover(
+					function(){
+						$(this).css("display","block");
+					},
+					function(){
+						$(this).css("display","none");
+					}
+				);
+			</script>
+
+		</span>		
+	</div><!-- END qa_search_process //-->
+
+
+
+<!-- 문의자 구분 //-->
+	<div class="qa_search_user">
+		<span class="tit">문의자 구분</span>
+		<span class="sitem_list">
+			<span class="designRadio_qauser"><span class="radiocls_qauser radio"></span></span>
+			<input id="li01" class="chkclass iRadio" type="radio" name="sex" value="전체" />
+			<label for="li01" class="sitem_text_qauser">전체</label>
+		</span>
+		<span class="sitem_list">
+			<span class="designRadio_qauser"><span class="radiocls_qauser radio"></span></span>
+			<input id="li02" class="iRadio" type="radio" name="sex" value="문의자" />
+			<label for="li02" class="sitem_text_qauser">문의자</label>
+		</span>
+		<span class="sitem_list">
+			<span class="designRadio_qauser"><span class="radiocls_qauser radio"></span></span>
+			<input id="li02" class="iRadio" type="radio" name="sex" value="손님" />
+			<label for="li02" class="sitem_text_qauser">손님</label>
+		</span>
+
+		<script type="text/javascript">
+		$(document).ready(function(){
+			/* 선택된값의 value는 _value 에 있음 */
+
+			var _designRadio_qauser = $('.designRadio_qauser');
+			var _iLabel_qauser = $('.sitem_text_qauser');
+			$('.sitem_text_qauser:eq(0)').addClass('checked');
+			$('.radiocls_qauser:eq(0)').addClass('checked');
+
+			$(_iLabel_qauser).click(function(){
+
+				var _thisRadio_qauser = $(this).parent().find('> .designRadio_qauser');
+				var _value_qauser = $(this).parent().find('>input').val();
+
+				$(_designRadio_qauser).children().removeClass('checked');
+				$(_thisRadio_qauser).children().addClass('checked');
+				$(_iLabel_qauser).removeClass('checked');
+
+				//$(this).removeClass('checked');
+				//alert($(this).hasClass("checked"));
+				$(this).addClass('checked');
+
+				/*console.log(_value_qauser);*/
+			});
+			
+			$(_designRadio_qauser).click(function(){
+				var index = $(_designRadio_qauser).index(this);
+
+				$('.sitem_text_qauser').removeClass('checked');
+				$('.radiocls_qauser').removeClass('checked');
+				
+				$('.sitem_text_qauser:eq('+index+')').addClass('checked');
+				$('.radiocls_qauser:eq('+index+')').addClass('checked');
+				
+				/*
+				var _value = $(this).parent().find('>input').val();
+				$(_designRadio).children().removeClass('checked');
+				$(this).children().addClass('checked');
+				*/
+				/*console.log(_value_qauser);*/
+			});
+		});
+		</script>
+
+		<span class="tit ml100">등록일</span>
+		<span class="qa_date">
+			<input type="text" id="btn" class="qa_date_input_blur" onclick="qa_date(1);" value="2016.06.4"  > &nbsp; ~ &nbsp; <input type="text" id="btn" class="qa_date_input_blur" onclick="qa_date(2);" value="2016.06.11"  >	
+			<!-- 레이어팝업으로 나오는 화면에서 선택시 인풋값에 자동 들어가도록 프로그램 처리 필요//-->
+			<script type="text/javascript">
+			<!--
+			function qa_date(num){
+			document.getElementById('qa_date_' + num ).style.display = "";
+			}
+			//-->
+			</script>
+			<div class="qa_date" id="qa_date_1" style="display:none;">
+					<table class="table_date">
+						<colgroup>
+						<col width="14.28571%" />
+						<col width="14.28571%" />
+						<col width="14.28571%" />
+						<col width="14.28571%" />
+						<col width="14.28571%" />
+						<col width="14.28571%" />
+						<col width="14.28571%" />
+						</colgroup>
+
+						<thead>
+							<tr>
+								<th colspan="7">
+									<p class="prev"><a href="#"><img src="./images/contents/btn_prev.png" /></a></p>
+									2016.06
+									<p class="next"><a href="#"><img src="./images/contents/btn_next.png" /></a></p>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>월</th>
+								<th>화</th>
+								<th>수</th>
+								<th>목</th>
+								<th>금</th>
+								<th>토</th>
+								<th>일</th>
+							</tr>
+							<tr>
+								<td></td>
+								<td><a href="#">1</a></td>
+								<td><a href="#">2</a></td>
+								<td><a href="#">3</a></td>
+								<td><a href="#">4</a></td>
+								<td><a href="#">5</a></td>
+								<td><a href="#">6</a></td>
+							</tr>
+							<tr>
+								<td><a href="#">7</a></td>
+								<td><a href="#">8</a></td>
+								<td><a href="#">9</a></td>
+								<td><a href="#">10</a></td>
+								<td><a href="#">11</a></td>
+								<td><a href="#">12</a></td>
+								<td><a href="#">13</a></td>
+							</tr>
+							<tr>
+								<td><a href="#">14</a></td>
+								<td><a href="#">15</a></td>
+								<td><a href="#">16</a></td>
+								<td><a href="#">17</a></td>
+								<td><a href="#">18</a></td>
+								<td><a href="#">19</a></td>
+								<td><a href="#">20</a></td>
+							</tr>
+							<tr>
+								<td><a href="#">21</a></td>
+								<td><a href="#">22</a></td>
+								<td><a href="#">23</a></td>
+								<td><a href="#">24</a></td>
+								<td><a href="#">25</a></td>
+								<td><a href="#">26</a></td>
+								<td><a href="#">27</a></td>
+							</tr>
+							<tr>
+								<td><a href="#">28</a></td>
+								<td><a href="#">29</a></td>
+								<td><a href="#">30</a></td>
+								<td><a href="#">31</a></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+			 </div>
+
+
+			 <div class="qa_date date_last" id="qa_date_2" style="display:none;">
+					<table class="table_date">
+						<colgroup>
+						<col width="14.28571%" />
+						<col width="14.28571%" />
+						<col width="14.28571%" />
+						<col width="14.28571%" />
+						<col width="14.28571%" />
+						<col width="14.28571%" />
+						<col width="14.28571%" />
+						</colgroup>
+
+						<thead>
+							<tr>
+								<th colspan="7">
+									<p class="prev"><a href="#"><img src="./images/contents/btn_prev.png" /></a></p>
+									2016.06
+									<p class="next"><a href="#"><img src="./images/contents/btn_next.png" /></a></p>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>월</th>
+								<th>화</th>
+								<th>수</th>
+								<th>목</th>
+								<th>금</th>
+								<th>토</th>
+								<th>일</th>
+							</tr>
+							<tr>
+								<td></td>
+								<td><a href="#">1</a></td>
+								<td><a href="#">2</a></td>
+								<td><a href="#">3</a></td>
+								<td><a href="#">4</a></td>
+								<td><a href="#">5</a></td>
+								<td><a href="#">6</a></td>
+							</tr>
+							<tr>
+								<td><a href="#">7</a></td>
+								<td><a href="#">8</a></td>
+								<td><a href="#">9</a></td>
+								<td><a href="#">10</a></td>
+								<td><a href="#">11</a></td>
+								<td><a href="#">12</a></td>
+								<td><a href="#">13</a></td>
+							</tr>
+							<tr>
+								<td><a href="#">14</a></td>
+								<td><a href="#">15</a></td>
+								<td><a href="#">16</a></td>
+								<td><a href="#">17</a></td>
+								<td><a href="#">18</a></td>
+								<td><a href="#">19</a></td>
+								<td><a href="#">20</a></td>
+							</tr>
+							<tr>
+								<td><a href="#">21</a></td>
+								<td><a href="#">22</a></td>
+								<td><a href="#">23</a></td>
+								<td><a href="#">24</a></td>
+								<td><a href="#">25</a></td>
+								<td><a href="#">26</a></td>
+								<td><a href="#">27</a></td>
+							</tr>
+							<tr>
+								<td><a href="#">28</a></td>
+								<td><a href="#">29</a></td>
+								<td><a href="#">30</a></td>
+								<td><a href="#">31</a></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+			 </div>
+
+			<script type="text/javascript">
+				$qa_date_checking = $("#qa_date_1");
+				$qa_date_checking.hover(
+					function(){
+						$(this).css("display","block");
+					},
+					function(){
+						$(this).css("display","none");
+					}
+				);
+				$qa_date_checking = $("#qa_date_2");
+				$qa_date_checking.hover(
+					function(){
+						$(this).css("display","block");
+					},
+					function(){
+						$(this).css("display","none");
+					}
+				);
+
+
+			</script>
+
+		</span>		
+	</div><!-- END qa_search_process //-->
+
+
+
+
+
+
+	<div class="top_search_box">		
+		<fieldset>
+		<legend>검색타입선택</legend>
+			<span class="sitem_list">
+				<span class="designRadio"><span class="radiocls radio"></span></span>
+				<input id="li01" class="chkclass iRadio" type="radio" name="sex" value="제목" />
+				<label for="li01" class="sitem_text">제목</label>
+			</span>
+			<span class="sitem_list">
+				<span class="designRadio"><span class="radiocls radio"></span></span>
+				<input id="li02" class="iRadio" type="radio" name="sex" value="문의자" />
+				<label for="li02" class="sitem_text">문의자</label>
+			</span>
+			<p class="sform"><input type="text" id="search_input" class="topSearch_blur"><span class="a_area"><a href="#"></a></span></p>
+		</fieldset>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			/* 선택된값의 value는 _value 에 있음 */
+
+			var _designRadio = $('.designRadio');
+			var _iLabel = $('.sitem_text');
+			//$(_designRadio).children().removeClass('checked');
+
+			$(_iLabel).click(function(){
+
+				var _thisRadio = $(this).parent().find('> .designRadio');
+				var _value = $(this).parent().find('>input').val();
+
+				$(_designRadio).children().removeClass('checked');
+				$(_thisRadio).children().addClass('checked');
+				$(_iLabel).removeClass('checked');
+
+				//$(this).removeClass('checked');
+				//alert($(this).hasClass("checked"));
+				$(this).addClass('checked');
+
+				/*console.log(_value);*/
+			});
+			
+			$(_designRadio).click(function(){
+				var index = $(_designRadio).index(this);
+
+				$('.sitem_text').removeClass('checked');
+				$('.radiocls').removeClass('checked');
+				
+				$('.sitem_text:eq('+index+')').addClass('checked');
+				$('.radiocls:eq('+index+')').addClass('checked');
+				
+				/*
+				var _value = $(this).parent().find('>input').val();
+				$(_designRadio).children().removeClass('checked');
+				$(this).children().addClass('checked');
+				*/
+				/*console.log(_value);*/
+			});
+		});
+
+	$("#search_input").focus(function() {
+		$(this).attr('class','topSearch_focus');
+	});
+	$("#search_input").blur(function() {
+		$(this).attr('class','topSearch_blur');
+	});
+	</script>
+</div>
+<!-- 리스트 상단 검색 끝 //-->
+
+
+
+
+	<!-- 리스트 테이블 시작 //-->
+	<table class="table_list mb80">
+		<colgroup>
+		<col width="15%" />
+		<col width="*" />
+		<col width="10%" />
+		<col width="12%" />
+		<col width="10%" />
+		<col width="8%" />
+		</colgroup>
+
+		<thead>
+			<tr>
+				<th>문의분야</th>
+				<td class="tal">제목</td>
+				<td>구분</td>
+				<td>문의자</td>
+				<td>등록일</td>
+				<td>진행상태</td>
+			</tr>
+		</thead>
+
+		<tfoot>
+			<tr>
+				<th colspan="7">
+					<ul class="borad_paging">
+						<li class="paging_info">1-10 &nbsp; of &nbsp; 678</li>
+						<li class="paging_first"><a href="#"><img src="./images/board/btn_first.png" /></a></li>
+						<li class="paging_prev"><a href="#"><img src="./images/board/btn_prev.png" /></a></li>
+						<li class="paging_now"><input type="text" placeholder="1"   value="1" class="paging" ></li>
+						<li class="paging_next"><a href="#"><img src="./images/board/btn_next.png" /></a></li>
+						<li class="paging_end"><a href="#"><img src="./images/board/btn_end.png" /></a></li>
+					</ul>			
+				</th>
+			</tr>
+		</tfoot>
+
+		<tbody>
+			<tr>
+				<th>서비스 불량 신고</th>
+				<td class="tal"><a href="#">이벤트 등록이 안되요, 쿠폰발급도 안되고 불편합니다.</a></td>
+				<td>가맹점</td>
+				<td>박사무엘</td>
+				<td>2016.06.10</td>
+				<td><span class="process_ing">처리중</span></td>
+			</tr>
+			<tr>
+				<th>쿠폰</th>
+				<td class="tal"><a href="#">쿠폰이 중복 처리되었어요.</a></td>
+				<td>가맹점</td>
+				<td>박사무엘</td>
+				<td>2016.06.10</td>
+				<td>완료</td>
+			</tr>
+			<tr>
+				<th>서비스 불량 신고</th>
+				<td class="tal"><a href="#">이벤트 등록이 안되요, 쿠폰발급도 안되고 불편합니다.</a></td>
+				<td>가맹점</td>
+				<td>박사무엘</td>
+				<td>2016.06.10</td>
+				<td><span class="process_ing">처리중</span></td>
+			</tr>
+
+		</tbody>
+	</table>
+
+	<script type="text/javascript">
+	$(".paging").focus(function() {
+		$(this).css("color","#000");
+	});
+	$(".paging").blur(function() {
+		$(this).css("color","#ff6600");
+	});
+	</script>
+	<!-- 리스트 테이블 끝 //-->
+
+
+</div><!-- END container//-->
+</div><!-- END wrap//-->
+</body>
+</html>

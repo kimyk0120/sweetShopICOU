@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="statsSchedulerMapper">
+
+	<insert id="shopCustomerDateResult" parameterType="String">
+	<![CDATA[
+		INSERT INTO SHOP_CUSTOMER_DATE_RESULT (SHOP_SEQ,RS_DATE,RS_DAY,AROUND_COUNT,INTEREST_COUNT,BUY_COUNT)
+		SELECT sm.SHOP_SEQ, #{0},DAYOFWEEK(#{0}),ifnull(ar.around_count,0),ifnull(it.intrest_count,0),ifnull(bc.buy_count,0)
+		FROM shop_mst sm 
+		left join (
+		SELECT shop_seq,count(*) as around_count 
+		FROM SHOP_AROUND_CUSTOMER 
+		WHERE date_format(AROUND_DATETIME,'%Y-%m-%d') = #{0}
+		GROUP BY shop_seq) as ar ON sm.shop_seq = ar.shop_seq
+		left join (
+		SELECT shop_seq,count(*) as intrest_count 
+		FROM SHOP_INTEREST_CUSTOMER 
+		WHERE date_format(INTEREST_DATETIME,'%Y-%m-%d') = #{0}
+		GROUP BY shop_seq) as it ON sm.shop_seq = it.shop_seq
+		left join (
+		SELECT shop_seq,count(*) as buy_count 
+		FROM SHOP_BUY_CUSTOMER 
+		WHERE date_format(BUY_DATE,'%Y-%m-%d') = #{0}
+		GROUP BY shop_seq) as bc ON sm.shop_seq = bc.shop_seq
+	]]>
+	</insert>
+	
+	<insert id="shopCustomerGenderAgeResult" parameterType="String">
+	<![CDATA[
+		INSERT INTO SHOP_CUSTOMER_GENDER_AGE_RESULT (SHOP_SEQ,RS_DATE,RS_DAY,GENDER,AGE,AROUND_COUNT,INTEREST_COUNT,BUY_COUNT)
+		SELECT sm.SHOP_SEQ, #{0},DAYOFWEEK(#{0}),sm.gender_id,sm.age_id,ifnull(ar.around_count,0),ifnull(it.intrest_count,0),ifnull(bc.buy_count,0)
+		FROM 
+		(
+			SELECT sm.shop_seq,cm.code_id as gender_id,cm.code_name as gender_name,
+			cm2.code_id as age_id,cm2.code_name as age_name
+			FROM shop_mst sm
+			inner join code_mst cm ON cm.code_type = 'gender_type'
+			inner join code_mst cm2 ON cm2.code_type = 'age_type'
+		) sm 
+		left join 
+		(
+			SELECT shop_seq,ifnull(user_gender,'0') as gender_id,
+			case 
+			 when ifnull(user_age,0) = 0 then '0'
+			 when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 20 then '10' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 30 then '20' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 40 then '30' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 50 then '40' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 60 then '50' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 > 59 then '60' 
+	         end as age_id ,
+	        count(*) as around_count 
+			FROM SHOP_AROUND_CUSTOMER sac
+	        INNER JOIN user_mst um ON sac.user_seq = um.user_seq
+			WHERE date_format(AROUND_DATETIME,'%Y-%m-%d') = #{0}
+			GROUP BY shop_seq,user_age,user_gender
+		) as ar ON sm.shop_seq = ar.shop_seq AND sm.gender_id = ar.gender_id AND sm.age_id = ar.age_id COLLATE utf8_unicode_ci
+		left join (
+		
+			SELECT shop_seq,ifnull(user_gender,'0') as gender_id,
+			case 
+			 when ifnull(user_age,0) = 0 then '0'
+			 when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 20 then '10' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 30 then '20' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 40 then '30' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 50 then '40' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 60 then '50' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 > 59 then '60' 
+	         end as age_id
+	         ,count(*) as intrest_count 
+			FROM SHOP_INTEREST_CUSTOMER sic
+	        INNER JOIN user_mst um ON sic.user_seq = um.user_seq
+			WHERE date_format(INTEREST_DATETIME,'%Y-%m-%d') = #{0}
+			GROUP BY shop_seq,user_age,user_gender
+		) as it ON sm.shop_seq = it.shop_seq AND sm.gender_id = it.gender_id AND sm.age_id = it.age_id COLLATE utf8_unicode_ci
+		left join 
+		(
+			SELECT shop_seq,ifnull(user_gender,'0') as gender_id,
+			case 
+			 when ifnull(user_age,0) = 0 then '0'
+			 when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 20 then '10' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 30 then '20' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 40 then '30' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 50 then '40' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 60 then '50' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 > 59 then '60' 
+	         end as age_id
+	         ,count(*) as buy_count 
+			FROM SHOP_BUY_CUSTOMER sbc
+	        INNER JOIN user_mst um ON sbc.user_seq = um.user_seq
+			WHERE date_format(BUY_DATE,'%Y-%m-%d') = #{0}
+			GROUP BY shop_seq,user_age,user_gender
+		) as bc ON sm.shop_seq = bc.shop_seq AND sm.gender_id = bc.gender_id AND sm.age_id = bc.age_id COLLATE utf8_unicode_ci
+		
+	]]>
+	</insert>
+
+	<insert id="shopCustomerTimeResult" parameterType="String">
+	<![CDATA[
+		INSERT INTO SHOP_CUSTOMER_TIME_RESULT (SHOP_SEQ,RS_DATE,RS_DAY,RS_TIME,AROUND_COUNT,INTEREST_COUNT,BUY_COUNT)
+		SELECT sm.SHOP_SEQ, #{0},DAYOFWEEK(#{0}),sm.time_id,ifnull(ar.around_count,0),ifnull(it.intrest_count,0),ifnull(bc.buy_count,0)
+		FROM 
+		(
+			SELECT sm.shop_seq,cm.code_id as time_id,cm.code_name as time_name
+			FROM shop_mst sm
+			inner join code_mst cm ON cm.code_type = 'time_type'
+		) sm 
+		left join 
+		(
+			SELECT shop_seq,date_format(AROUND_DATETIME,'%h') as time_id,
+	        count(*) as around_count 
+			FROM SHOP_AROUND_CUSTOMER sac
+			WHERE date_format(AROUND_DATETIME,'%Y-%m-%d') = #{0}
+			GROUP BY shop_seq,date_format(AROUND_DATETIME,'%h')
+		) as ar ON sm.shop_seq = ar.shop_seq AND sm.time_id = ar.time_id COLLATE utf8_unicode_ci
+		left join (
+		
+			SELECT shop_seq,date_format(INTEREST_DATETIME,'%h') as time_id,
+	        count(*) as intrest_count 
+			FROM SHOP_INTEREST_CUSTOMER sic
+			WHERE date_format(INTEREST_DATETIME,'%Y-%m-%d') = #{0}
+			GROUP BY shop_seq,date_format(INTEREST_DATETIME,'%h')
+		) as it ON sm.shop_seq = it.shop_seq AND sm.time_id = it.time_id COLLATE utf8_unicode_ci
+		left join 
+		(
+			SELECT shop_seq,date_format(BUY_DATE,'%h') as time_id,
+			count(*) as buy_count 
+			FROM SHOP_BUY_CUSTOMER sbc
+			WHERE date_format(BUY_DATE,'%Y-%m-%d') = #{0}
+			GROUP BY shop_seq,date_format(BUY_DATE,'%h')
+		) as bc ON sm.shop_seq = bc.shop_seq AND sm.time_id = bc.time_id COLLATE utf8_unicode_ci
+		
+	]]>
+	</insert>
+
+
+	<insert id="shopEventDateResult" parameterType="String">
+	<![CDATA[
+		INSERT INTO SHOP_EVENT_DATE_RESULT (SHOP_SEQ,EVENT_SEQ,RS_DATE,RS_DAY,VIEW_COUNT,DOWN_COUNT,USE_COUNT)
+		SELECT sm.SHOP_SEQ,sm.EVENT_SEQ, #{0},DAYOFWEEK(#{0}),ifnull(ar.view_count,0),ifnull(it.down_count,0),ifnull(bc.use_count,0)
+		FROM SHOP_EVENT_MST sm 
+		left join (
+		SELECT EVENT_SEQ,count(*) as view_count 
+		FROM SHOP_EVENT_VIEW 
+		WHERE date_format(VIEW_DATETIME,'%Y-%m-%d') = #{0}
+		GROUP BY EVENT_SEQ) as ar ON sm.EVENT_SEQ = ar.EVENT_SEQ
+		left join (
+		SELECT EVENT_SEQ,count(*) as down_count 
+		FROM SHOP_EVENT_CP_DOWN 
+		WHERE date_format(DOWN_DATETIME,'%Y-%m-%d') = #{0}
+		GROUP BY EVENT_SEQ) as it ON sm.EVENT_SEQ = it.EVENT_SEQ
+		left join (
+		SELECT EVENT_SEQ,count(*) as use_count 
+		FROM SHOP_EVENT_CP_USE 
+		WHERE date_format(USE_DATETIME,'%Y-%m-%d') = #{0}
+		GROUP BY EVENT_SEQ) as bc ON sm.EVENT_SEQ = bc.EVENT_SEQ
+		WHERE #{0} BETWEEN EVENT_START_DAY and EVENT_END_DAY
+	]]>
+	</insert>
+	
+	<insert id="shopEventGenderAgeResult" parameterType="String">
+	<![CDATA[
+		INSERT INTO SHOP_EVENT_GENDER_AGE_RESULT (SHOP_SEQ,EVENT_SEQ,RS_DATE,RS_DAY,GENDER,AGE,VIEW_COUNT,DOWN_COUNT,USE_COUNT)
+		SELECT sm.SHOP_SEQ,sm.EVENT_SEQ, #{0},DAYOFWEEK(#{0}),sm.gender_id,sm.age_id,ifnull(ar.view_count,0),ifnull(it.down_count,0),ifnull(bc.use_count,0)
+		FROM 
+		(
+			SELECT sm.shop_seq,sm.EVENT_SEQ,cm.code_id as gender_id,cm.code_name as gender_name,
+			cm2.code_id as age_id,cm2.code_name as age_name
+			FROM SHOP_EVENT_MST sm
+			inner join code_mst cm ON cm.code_type = 'gender_type'
+			inner join code_mst cm2 ON cm2.code_type = 'age_type'
+			WHERE #{0} BETWEEN EVENT_START_DAY and EVENT_END_DAY
+		) sm 
+		left join 
+		(
+			SELECT EVENT_SEQ,ifnull(user_gender,'0') as gender_id,
+			case 
+			 when ifnull(user_age,0) = 0 then '0'
+			 when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 20 then '10' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 30 then '20' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 40 then '30' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 50 then '40' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 60 then '50' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 > 59 then '60' 
+	         end as age_id ,
+	        count(*) as view_count 
+			FROM SHOP_EVENT_VIEW sac
+	        INNER JOIN user_mst um ON sac.user_seq = um.user_seq
+			WHERE date_format(VIEW_DATETIME,'%Y-%m-%d') = #{0}
+			GROUP BY EVENT_SEQ,user_age,user_gender
+		) as ar ON sm.EVENT_SEQ = ar.EVENT_SEQ AND sm.gender_id = ar.gender_id AND sm.age_id = ar.age_id COLLATE utf8_unicode_ci
+		left join (
+		
+			SELECT EVENT_SEQ,ifnull(user_gender,'0') as gender_id,
+			case 
+			 when ifnull(user_age,0) = 0 then '0'
+			 when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 20 then '10' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 30 then '20' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 40 then '30' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 50 then '40' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 60 then '50' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 > 59 then '60' 
+	         end as age_id
+	         ,count(*) as down_count 
+			FROM SHOP_EVENT_CP_DOWN sic
+	        INNER JOIN user_mst um ON sic.user_seq = um.user_seq
+			WHERE date_format(DOWN_DATETIME,'%Y-%m-%d') = #{0}
+			GROUP BY EVENT_SEQ,user_age,user_gender
+		) as it ON sm.EVENT_SEQ = it.EVENT_SEQ AND sm.gender_id = it.gender_id AND sm.age_id = it.age_id COLLATE utf8_unicode_ci
+		left join 
+		(
+			SELECT EVENT_SEQ,ifnull(user_gender,'0') as gender_id,
+			case 
+			 when ifnull(user_age,0) = 0 then '0'
+			 when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 20 then '10' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 30 then '20' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 40 then '30' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 50 then '40' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 60 then '50' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 > 59 then '60' 
+	         end as age_id
+	         ,count(*) as use_count 
+			FROM SHOP_EVENT_CP_USE sbc
+	        INNER JOIN user_mst um ON sbc.user_seq = um.user_seq
+			WHERE date_format(USE_DATETIME,'%Y-%m-%d') = #{0}
+			GROUP BY EVENT_SEQ,user_age,user_gender
+		) as bc ON sm.EVENT_SEQ = bc.EVENT_SEQ AND sm.gender_id = bc.gender_id AND sm.age_id = bc.age_id COLLATE utf8_unicode_ci
+		
+	]]>
+	</insert>
+
+	<insert id="shopEventTimeResult" parameterType="String">
+	<![CDATA[
+		INSERT INTO SHOP_EVENT_TIME_RESULT (SHOP_SEQ,EVENT_SEQ,RS_DATE,RS_DAY,RS_TIME,VIEW_COUNT,DOWN_COUNT,USE_COUNT)
+		SELECT sm.SHOP_SEQ,sm.EVENT_SEQ, #{0},DAYOFWEEK(#{0}),sm.time_id,ifnull(ar.view_count,0),ifnull(it.down_count,0),ifnull(bc.use_count,0)
+		FROM 
+		(
+			SELECT sm.shop_seq,sm.EVENT_SEQ,cm.code_id as time_id,cm.code_name as time_name
+			FROM SHOP_EVENT_MST sm
+			inner join code_mst cm ON cm.code_type = 'time_type'
+			WHERE #{0} BETWEEN EVENT_START_DAY and EVENT_END_DAY		
+		) sm 
+		left join 
+		(
+			SELECT EVENT_SEQ,date_format(VIEW_DATETIME,'%h') as time_id,
+	        count(*) as view_count 
+			FROM SHOP_EVENT_VIEW sac
+			WHERE date_format(VIEW_DATETIME,'%Y-%m-%d') = #{0}
+			GROUP BY EVENT_SEQ,date_format(VIEW_DATETIME,'%h')
+		) as ar ON sm.EVENT_SEQ = ar.EVENT_SEQ AND sm.time_id = ar.time_id COLLATE utf8_unicode_ci
+		left join (
+		
+			SELECT EVENT_SEQ,date_format(DOWN_DATETIME,'%h') as time_id,
+	        count(*) as down_count 
+			FROM SHOP_EVENT_CP_DOWN sic
+			WHERE date_format(DOWN_DATETIME,'%Y-%m-%d') = #{0}
+			GROUP BY EVENT_SEQ,date_format(DOWN_DATETIME,'%h')
+		) as it ON sm.EVENT_SEQ = it.EVENT_SEQ AND sm.time_id = it.time_id COLLATE utf8_unicode_ci
+		left join 
+		(
+			SELECT EVENT_SEQ,date_format(USE_DATETIME,'%h') as time_id,
+			count(*) as use_count 
+			FROM SHOP_EVENT_CP_USE sbc
+			WHERE date_format(USE_DATETIME,'%Y-%m-%d') = #{0}
+			GROUP BY EVENT_SEQ,date_format(USE_DATETIME,'%h')
+		) as bc ON sm.EVENT_SEQ = bc.EVENT_SEQ AND sm.time_id = bc.time_id COLLATE utf8_unicode_ci
+		
+	]]>
+	</insert>
+
+
+
+	<insert id="shopPromotionDateResult" parameterType="String">
+	<![CDATA[
+		INSERT INTO SHOP_PROMOTION_DATE_RESULT (SHOP_SEQ,PROMOTION_SEQ,RS_DATE,RS_DAY,VIEW_COUNT,DOWN_COUNT,USE_COUNT)
+		SELECT sm.SHOP_SEQ,sm.PROMOTION_SEQ, #{0},DAYOFWEEK(#{0}),ifnull(ar.view_count,0),ifnull(it.down_count,0),0
+		FROM SHOP_PROMOTION sm 
+		left join (
+		SELECT PROMOTION_SEQ,count(*) as view_count 
+		FROM SHOP_PROMOTION_VIEW 
+		WHERE date_format(VIEW_DATETIME,'%Y-%m-%d') = #{0}
+		GROUP BY PROMOTION_SEQ) as ar ON sm.PROMOTION_SEQ = ar.PROMOTION_SEQ
+		left join (
+		SELECT PROMOTION_SEQ,count(*) as down_count 
+		FROM SHOP_PROMOTION_CP_DOWN 
+		WHERE date_format(DOWN_DATETIME,'%Y-%m-%d') = #{0}
+		GROUP BY PROMOTION_SEQ) as it ON sm.PROMOTION_SEQ = it.PROMOTION_SEQ
+		
+		WHERE #{0} BETWEEN PROMOTION_START_DAY and PROMOTION_END_DAY
+	]]>
+	</insert>
+	
+	<insert id="shopPromotionGenderAgeResult" parameterType="String">
+	<![CDATA[
+		INSERT INTO SHOP_PROMOTION_GENDER_AGE_RESULT (SHOP_SEQ,PROMOTION_SEQ,RS_DATE,RS_DAY,GENDER,AGE,VIEW_COUNT,DOWN_COUNT,USE_COUNT)
+		SELECT sm.SHOP_SEQ,sm.PROMOTION_SEQ, #{0},DAYOFWEEK(#{0}),sm.gender_id,sm.age_id,ifnull(ar.view_count,0),ifnull(it.down_count,0),0
+		FROM 
+		(
+			SELECT sm.shop_seq,sm.PROMOTION_SEQ,cm.code_id as gender_id,cm.code_name as gender_name,
+			cm2.code_id as age_id,cm2.code_name as age_name
+			FROM SHOP_PROMOTION sm
+			inner join code_mst cm ON cm.code_type = 'gender_type'
+			inner join code_mst cm2 ON cm2.code_type = 'age_type'
+			WHERE #{0} BETWEEN PROMOTION_START_DAY and PROMOTION_END_DAY
+		) sm 
+		left join 
+		(
+			SELECT PROMOTION_SEQ,ifnull(user_gender,'0') as gender_id,
+			case 
+			 when ifnull(user_age,0) = 0 then '0'
+			 when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 20 then '10' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 30 then '20' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 40 then '30' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 50 then '40' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 60 then '50' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 > 59 then '60' 
+	         end as age_id ,
+	        count(*) as view_count 
+			FROM SHOP_PROMOTION_VIEW sac
+	        INNER JOIN user_mst um ON sac.user_seq = um.user_seq
+			WHERE date_format(VIEW_DATETIME,'%Y-%m-%d') = #{0}
+			GROUP BY PROMOTION_SEQ,user_age,user_gender
+		) as ar ON sm.PROMOTION_SEQ = ar.PROMOTION_SEQ AND sm.gender_id = ar.gender_id AND sm.age_id = ar.age_id COLLATE utf8_unicode_ci
+		left join (
+		
+			SELECT PROMOTION_SEQ,ifnull(user_gender,'0') as gender_id,
+			case 
+			 when ifnull(user_age,0) = 0 then '0'
+			 when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 20 then '10' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 30 then '20' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 40 then '30' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 50 then '40' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 < 60 then '50' 
+	         when DATE_FORMAT(NOW(),'%Y') - user_age + 1 > 59 then '60' 
+	         end as age_id
+	         ,count(*) as down_count 
+			FROM SHOP_PROMOTION_CP_DOWN sic
+	        INNER JOIN user_mst um ON sic.user_seq = um.user_seq
+			WHERE date_format(DOWN_DATETIME,'%Y-%m-%d') = #{0}
+			GROUP BY PROMOTION_SEQ,user_age,user_gender
+		) as it ON sm.PROMOTION_SEQ = it.PROMOTION_SEQ AND sm.gender_id = it.gender_id AND sm.age_id = it.age_id COLLATE utf8_unicode_ci
+		
+	]]>
+	</insert>
+
+	<insert id="shopPromotionTimeResult" parameterType="String">
+	<![CDATA[
+		INSERT INTO SHOP_EVENT_TIME_RESULT (SHOP_SEQ,PROMOTION_SEQ,RS_DATE,RS_DAY,RS_TIME,VIEW_COUNT,DOWN_COUNT,USE_COUNT)
+		SELECT sm.SHOP_SEQ,sm.PROMOTION_SEQ, #{0},DAYOFWEEK(#{0}),sm.time_id,ifnull(ar.view_count,0),ifnull(it.down_count,0),0
+		FROM 
+		(
+			SELECT sm.shop_seq,sm.PROMOTION_SEQ,cm.code_id as time_id,cm.code_name as time_name
+			FROM SHOP_PROMOTION sm
+			inner join code_mst cm ON cm.code_type = 'time_type'
+			WHERE #{0} BETWEEN PROMOTION_START_DAY and PROMOTION_END_DAY		
+		) sm 
+		left join 
+		(
+			SELECT PROMOTION_SEQ,date_format(VIEW_DATETIME,'%h') as time_id,
+	        count(*) as view_count 
+			FROM SHOP_PROMOTION_VIEW sac
+			WHERE date_format(VIEW_DATETIME,'%Y-%m-%d') = #{0}
+			GROUP BY PROMOTION_SEQ,date_format(VIEW_DATETIME,'%h')
+		) as ar ON sm.PROMOTION_SEQ = ar.PROMOTION_SEQ AND sm.time_id = ar.time_id COLLATE utf8_unicode_ci
+		left join (
+		
+			SELECT PROMOTION_SEQ,date_format(DOWN_DATETIME,'%h') as time_id,
+	        count(*) as down_count 
+			FROM SHOP_PROMOTION_CP_DOWN sic
+			WHERE date_format(DOWN_DATETIME,'%Y-%m-%d') = #{0}
+			GROUP BY PROMOTION_SEQ,date_format(DOWN_DATETIME,'%h')
+		) as it ON sm.PROMOTION_SEQ = it.PROMOTION_SEQ AND sm.time_id = it.time_id COLLATE utf8_unicode_ci
+		
+	]]>
+	</insert>
+	
+	
+	
+	<insert id="shopReviewDateResult" parameterType="String">
+	<![CDATA[
+		INSERT INTO SHOP_REVIEW_DATE_RESULT (SHOP_SEQ,RS_DATE,RS_DAY,REVIEW_COUNT,REVIEW_GRADE)
+		SELECT sm.SHOP_SEQ, #{0},DAYOFWEEK(#{0}),ifnull(ar.review_count,0),ifnull(ar.review_grade,0)
+		FROM shop_mst sm 
+		left join (
+		SELECT SHOP_SEQ,count(*) as review_count,sum(review_grade)/count(*) as review_grade
+		FROM SHOP_REVIEW 
+		WHERE date_format(REVIEW_DATE,'%Y-%m-%d') = #{0}
+		GROUP BY SHOP_SEQ) as ar ON sm.SHOP_SEQ = ar.SHOP_SEQ
+	]]>
+	</insert>
+	
+	<insert id="shopReviewGenderAgeResult" parameterType="String">
+	<![CDATA[
+		INSERT INTO SHOP_REVIEW_GENDER_AGE_RESULT (SHOP_SEQ,RS_DATE,RS_DAY,GENDER,AGE,REVIEW_COUNT,REVIEW_GRADE)
+		SELECT sm.SHOP_SEQ, #{0},DAYOFWEEK(#{0}),sm.gender_id,sm.age_id,ifnull(ar.review_count,0),ifnull(ar.review_grade,0)
+		FROM 
+		(
+			SELECT sm.shop_seq,cm.code_id as gender_id,cm.code_name as gender_name,
+			cm2.code_id as age_id,cm2.code_name as age_name
+			FROM shop_mst sm
+			inner join code_mst cm ON cm.code_type = 'gender_type'
+			inner join code_mst cm2 ON cm2.code_type = 'age_type'
+		) sm 
+		left join 
+		(
+			SELECT SHOP_SEQ,ifnull(WRITER_GENDER,'0') as gender_id,
+			case 
+			 when ifnull(WRITER_YEAR,0) = 0 then '0'
+			 when DATE_FORMAT(NOW(),'%Y') - WRITER_YEAR + 1 < 20 then '10' 
+	         when DATE_FORMAT(NOW(),'%Y') - WRITER_YEAR + 1 < 30 then '20' 
+	         when DATE_FORMAT(NOW(),'%Y') - WRITER_YEAR + 1 < 40 then '30' 
+	         when DATE_FORMAT(NOW(),'%Y') - WRITER_YEAR + 1 < 50 then '40' 
+	         when DATE_FORMAT(NOW(),'%Y') - WRITER_YEAR + 1 < 60 then '50' 
+	         when DATE_FORMAT(NOW(),'%Y') - WRITER_YEAR + 1 > 59 then '60' 
+	         end as age_id ,
+	        count(*) as review_count,sum(review_grade)/count(*) as review_grade
+			FROM SHOP_REVIEW sac
+			WHERE date_format(REVIEW_DATE,'%Y-%m-%d') = #{0}
+			GROUP BY SHOP_SEQ,WRITER_GENDER,WRITER_YEAR
+		) as ar ON sm.SHOP_SEQ = ar.SHOP_SEQ AND sm.gender_id = ar.gender_id AND sm.age_id = ar.age_id COLLATE utf8_unicode_ci
+		
+	]]>
+	</insert>
+
+	<insert id="shopReviewVisitDateResult" parameterType="String">
+	<![CDATA[
+		INSERT INTO SHOP_REVIEW_VISIT_DATE_RESULT (SHOP_SEQ,RS_DATE,RS_DAY,VISIT_COUNT)
+		SELECT sm.SHOP_SEQ, #{0},DAYOFWEEK(#{0}),ifnull(ar.review_count,0)
+		FROM shop_mst sm 
+		left join (
+		SELECT SHOP_SEQ,count(*) as review_count
+		FROM SHOP_REVIEW 
+		WHERE REVIEW_VISIT_DATE = #{0}
+		GROUP BY SHOP_SEQ) as ar ON sm.SHOP_SEQ = ar.SHOP_SEQ
+	]]>
+	</insert>
+	
+	<insert id="shopReviewVisitTypeResult" parameterType="String">
+	<![CDATA[
+		INSERT INTO SHOP_REVIEW_VISIT_TYPE_RESULT (SHOP_SEQ,RS_DATE,RS_DAY,REVIEW_VISIT_TYPE,VISIT_TYPE_COUNT)
+		SELECT sm.SHOP_SEQ, #{0},DAYOFWEEK(#{0}),sm.visit_type_id,ifnull(ar.review_count,0)
+		FROM 
+		(
+			SELECT sm.shop_seq,cm.code_id as visit_type_id,cm.code_name as visit_type_name
+			FROM shop_mst sm
+			inner join code_mst cm ON cm.code_type = 'visit_type'
+		) sm 
+		left join (
+		SELECT SHOP_SEQ,REVIEW_VISIT_TYPE,count(*) as review_count
+		FROM SHOP_REVIEW 
+		WHERE REVIEW_VISIT_DATE = #{0}
+		GROUP BY SHOP_SEQ,REVIEW_VISIT_TYPE) as ar ON sm.SHOP_SEQ = ar.SHOP_SEQ AND sm.visit_type_id = ar.REVIEW_VISIT_TYPE
+	]]>
+	</insert>
+	
+	<insert id="shopReviewVisitDetailResult" parameterType="String">
+	<![CDATA[
+		INSERT INTO SHOP_REVIEW_VISIT_DETAIL_RESULT (SHOP_SEQ,RS_DATE,RS_DAY,REVIEW_DETAIL_TYPE,REVIEW_DETAIL_GRADE)
+		SELECT sm.SHOP_SEQ, #{0},DAYOFWEEK(#{0}),sm.review_type_id,ifnull(ar.REVIEW_DETAIL_GRADE,0)
+		FROM 
+		(
+			SELECT sm.shop_seq,cm.code_id as review_type_id,cm.code_name as review_type_name
+			FROM shop_mst sm
+			inner join code_mst cm ON cm.code_type = 'review_type'
+		) sm 
+		left join (
+		SELECT SHOP_SEQ,REVIEW_DETAIL_TYPE,sum(REVIEW_DETAIL_GRADE)/count(*) as REVIEW_DETAIL_GRADE
+		FROM SHOP_REVIEW sr 
+		INNER JOIN SHOP_REVIEW_DETAIL srd ON sr.REVIEW_SEQ = srd.REVIEW_SEQ
+		WHERE date_format(REVIEW_DATE,'%Y-%m-%d') = #{0}
+		GROUP BY SHOP_SEQ,REVIEW_DETAIL_TYPE) as ar ON sm.SHOP_SEQ = ar.SHOP_SEQ AND sm.review_type_id = ar.REVIEW_DETAIL_TYPE
+	]]>
+	</insert>
+	
+	</mapper>
+	

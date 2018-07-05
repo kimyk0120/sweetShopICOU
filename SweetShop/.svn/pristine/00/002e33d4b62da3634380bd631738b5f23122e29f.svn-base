@@ -1,0 +1,701 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<!-- ie조건부주석 Conditional Comment //-->
+<!--[if lt IE 7]>      <html class="ie6"> <![endif]-->
+<!--[if IE 7]>         <html class="ie7"> <![endif]-->
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> <html>         <!--<![endif]-->
+<head>
+<title>Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="apple-mobile-web-app-title" content="">
+<meta property="og:title" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:site_name" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:image" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:description" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta name="keywords" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Generator" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Author" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Keywords" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Description" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
+
+<link rel="stylesheet" href="./src/css/import.css" type="text/css" />
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script  src="./src/js/default.js"></script>
+
+<!--[if lte IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- IE7 미만에서 HTML 및 CSS 엘리먼트, 투명 PNG 지원//-->
+<!--[if lt IE 9]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+<![endif]-->
+<!--[if lt IE 8]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
+<![endif]-->
+<!--[if lt IE 7]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE7.js"></script>
+<![endif]-->
+
+<!-- ie6~8버전에서 미디어쿼리를 해석할 수 있도록 만들어 주는 자바스크립트 라이브러리 //-->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<!-- 웹 좌측 메뉴 구성 //-->
+<link rel="stylesheet" href="./src/css/gnb_web_sub.css">
+
+
+<!-- 모바일 좌측 메뉴 오픈 구성 //-->
+<script type="text/javascript" src="./src/js/jquery.mmenu.all.min.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function( $ ) {
+       $("#menu").mmenu({
+           "slidingSubmenus": false,
+           "extensions": [
+            "pagedim-black"
+            ]
+         });
+     });
+
+ </script>
+
+
+
+
+</head>
+
+<body>
+
+
+<div id="wrap">
+
+
+<!-- 스킵 버튼 //-->
+<div id="skipnavigation">
+    <p>메뉴 건너뛰기</p>
+    <a href="#content_area">본문으로 바로가기</a>
+    <a href="#gnb_web">주메뉴로 바로가기</a> 
+</div><!-- END : id : skipnavigation -->
+<hr/>
+
+
+
+<div id="header">
+	
+	<!-- 모바일일때 우측 메뉴 아이콘 노출 //-->
+	<div class="gnb_mobile" >
+		<a  href="javascript:top.history.go(-1);"><img src="./images/common/btn_back.png" alt="뒤로가기" /></a>
+	</div>
+	<!-- 모바일일때 우측 메뉴 아이콘 노출 끝 //-->
+
+	
+	<h1><a href="#">UNTITLED</a></h1>
+	
+	
+	<!-- 웹 일때 오픈 //-->
+	<div class="log_info" >
+		<a href="#" id="logbtn" onclick="go_loginfo(1);"><span class="log_text">다시 뵙게되어 반갑습니다. <strong>Super Admin</strong> 님</span> <img src="./images/common/icon_loginfo_more.png" alt="더 보기"></a>
+	</div>
+
+	<!-- 모바일 일때 오픈 사용안함
+	<div class="log_info_mobile" >
+		<a href="#" id="logbtn" onclick="go_loginfo(1);" ><img src="./images/common/icon_loginfo_more_mobile.png" /></a>
+	</div>
+	//-->
+
+
+	<script type="text/javascript">
+	$('#logbtn').click(function() {
+	  $('#go_loginfo_1').toggle('slow', function() {
+		// Animation complete.
+	  });
+	});
+	</script>
+	<div id="go_loginfo_1"  style="display:none;">
+	<div class="arrow"></div>
+		<ul>
+			<li><a href="#"><img src="./images/common/icon_meminfo.png" alt="" />회원 정보</a></li>
+			<li><a href="./main.html"><img src="./images/common/icon_logout.png" alt="" />로그아웃</a></li>
+		</ul>
+	</div>
+
+	<script type="text/javascript">
+	$suggest_checking = $("#go_loginfo_1");
+	$suggest_checking.hover(
+	function(){
+			$(this).css("display","block");
+		},
+			function(){
+			$(this).css("display","none");
+		}
+	);
+	</script>
+
+
+</div><!-- END header//-->
+
+
+
+
+
+
+
+<div id="container">
+
+	<!-- 960 이상 웹 화면시 좌측 메뉴 구성 부분 시작 //-->
+	<div id="gnb_web">
+	
+	
+	<ul class="gnb_dropdown">
+      
+	  <li class="gnb_web_bg01"><a class="dashboard" href="./dashboard.html">Dashboard</a></li>
+	  <li class="gnb_web_bg02">
+		<a class="anal" href="#">통계분석</a>
+			<ul>
+				<li><a class="depth2" href="./analy_customer.html">고객분석</a></li>
+				<li><a class="depth2" href="./analy_review.html">리뷰분석</a></li>
+				<li><a class="depth2" href="./analy_visiter.html">홈페이지방문자분석</a></li>
+			</ul>
+      </li>
+	  <li class="gnb_web_bg03">
+		<a class="pr" href="./pr_event_list.html">홍보ㆍ마케팅 상품</a>
+			<ul>
+				<li class="on"><a class="depth2" href="./pr_event_list.html">이벤트</a></li>
+				<li><a class="depth2" href="./pr_handbill_list.html">홍보전단</a></li>
+				<li><a class="depth2" href="./pr_shopcard_regis.html">가게 명함</a></li>
+			</ul>
+      </li>
+	  <li class="gnb_web_bg04"><a class="homepage" href="#">가게 홈페이지 관리</a></li>
+	  <li class="gnb_web_bg05"><a class="owner" href="#">사장님 커뮤니티</a></li>
+	  <li class="gnb_web_bg06">
+		<a class="notice" href="./bbs_notice_list.html">공지 및 문의</a>
+			<ul>
+				<li><a class="depth2" href="./bbs_notice_list.html">공지사항</a></li>
+				<li><a class="depth2" href="./bbs_qa_list.html">문의하기</a></li>
+				<li><a class="depth2" href="#">FAQ</a></li>
+			</ul>
+      </li>
+    </ul>
+
+    <script src="./src/js/tendina.js"></script>
+    <script>
+      $('.gnb_dropdown').tendina({
+        animate: true,
+        speed: 700,
+        onHover: false,
+        hoverDelay: 300,
+        activeMenu: $('.pr'),
+        openCallback: function(clickedEl) {
+          console.log('open!');
+        },
+        closeCallback: function(clickedEl) {
+          console.log('close');
+        }
+      })
+    </script>
+	</div><!-- END gnb_web//-->
+	<!-- 960 이상 웹 화면시 좌측 메뉴 구성 부분 끝//-->
+
+
+
+	<!-- 우측 콘텐츠의 시작 //-->
+	<div id="content_area">
+		<h3><img src="./images/contents/h3_img_03.png" alt=""  /><span>홍보ㆍ마케팅 상품 &nbsp; &gt; &nbsp; </span> 이벤트</h3>
+
+
+		<div class="guide_area_wide">
+			<ul>
+				<li class="guide_wid"><span>현재 우리가게 고객 현황과 이벤트를 한눈에 확인하실 수 있습니다.</span></li>
+			</ul>
+		</div><!-- END guide_area //-->
+
+
+
+
+
+		<div class="half_box">
+			<ul>
+				<!-- 좌측 콘텐츠 //-->
+				<li class="left">
+
+					<!-- 상단칸//-->
+					<div class="cont_area ">
+						<div class="ev_regis_subject">
+							<p>2016.06.08</p>
+							<input type="text" id="event_subject" class="regis_input_blur" placeholder=" 이벤트 명을 입력하여 주세요.">
+						</div>
+					</div>
+
+					<!-- 하단칸 //-->
+					<div class="cont_area ev_regis_cont mt20">
+						<ul class="tap_menu">
+							<li class="on"><a href="#">할인 이벤트</a><li>
+							<li><a href="#">혜택 제공 이벤트</a><li>
+						</ul>
+
+
+						<div class="gab_box">
+							<div>
+								<label for="pum">할인 이벤트 품목</label>
+								<input type="text" id="pum" class="regis_input_blur"  placeholder="할인 이벤트 품목을 입력해 주세요.">
+							</div>
+
+							<div class="w_half whleft">
+								<label for="detail_guide">할인 방식</label>
+								<input type="text" id="detail_guide" class="regis_input_blur bg_arrow"  onclick="suggest(1);" style="background: url('../../images/contents/arrow_btm.png') no-repeat 98% center;" placeholder="방식을 선택해 주세요.        "><!-- 반응형웹 사이즈 문제로 화살표가 들어가는 인풋화면에서는 플레이스홀더 옆에 8칸 비워주세요 !! //-->
+									<!-- 레이어팝업으로 나오는 화면에서 선택시 인풋값에 자동 들어가도록 프로그램 처리 필요//-->
+									<script type="text/javascript">
+									<!--
+									function suggest(num){
+									 document.getElementById('suggest_' + num ).style.display = "";
+									}
+									//-->
+									</script>
+									 <div class="business_type" id="suggest_1" style="display:none;">
+										<ul>
+											<li><a href="#" class="close"><span class="stile_vh">업종</span>미용/스파</a></li>
+											<li><a href="#" class="close"><span class="stile_vh">업종</span>헤어/메이크업</a></li>
+											<li><a href="#" class="close"><span class="stile_vh">업종</span>부동산중개</a></li>
+											<li><a href="#" class="close"><span class="stile_vh">업종</span>빵집/제과점</a></li>
+											<li><a href="#" class="close"><span class="stile_vh">업종</span>숙박</a></li>
+											<li><a href="#" class="close"><span class="stile_vh">업종</span>슈퍼/마트</a></li>
+											<li><a href="#" class="close"><span class="stile_vh">업종</span>약국</a></li>
+											<li><a href="#" class="close"><span class="stile_vh">업종</span>음식점</a></li>
+											<li><a href="#" class="close"><span class="stile_vh">업종</span>카페</a></li>
+											<li><a href="#" class="close"><span class="stile_vh">업종</span>인테리어</a></li>
+											<li><a href="#" class="close"><span class="stile_vh">업종</span>청소</a></li>
+											<li><a href="#" class="close"><span class="stile_vh">업종</span>스포츠/헬스</a></li>
+										</ul>
+									 </div>
+									 <script type="text/javascript">
+										$(".close").click(function() {
+											$("#suggest_1").css("display","none");
+										});
+										$suggest_checking = $("#suggest_1");
+										$suggest_checking.hover(
+											function(){
+												$(this).css("display","block");
+											},
+											function(){
+												$(this).css("display","none");
+											}
+										);
+									</script>
+							</div>
+							<div class="w_half whright" >
+								<label for="detail_guide" class="hide">할인 방식 직접입력</label>
+								<input type="text" id="detail_guide" class="regis_input_blur"  placeholder="할인방식 선택 후 입력해 주세요.">
+							</div>
+
+							<div class="design evimgbox on"><!-- 이벤트 이미지쪽 작업시 클래스 on 추가하면 라인 블루색으로 조정 됨 //-->
+								<div class="title">이벤트 이미지</div>
+								<div class="cont">
+									<div class="item_cont_area">
+										<span class="thum"><img src="./images/contents/@thum_01.png" /></span>
+										<span class="thum"><img src="./images/contents/@thum_01.png" /></span>
+										<span class="thum">&nbsp;</span>
+										<p class="more_green ml20"><a href="#"><img src="./images/contents/icon_camera.png" /></a></p>									
+									</div>
+								</div>
+							</div>
+
+							<div>
+								<label for="pum">상세 설명</label>
+								<input type="text" id="pum" class="regis_input_blur"  placeholder="이용 방법 등 이벤트에 대한 추가적인 설명을 입력해 주세요.">
+							</div>
+
+							<div class="design"><!-- 이벤트 이미지쪽 작업시 클래스 on 추가하면 라인 블루색으로 조정 됨 //-->
+								<div class="title">이벤트 기간</div>
+								<div class="cont tar">
+									<span class="seach_date">
+						<input type="text" id="btn" class="seach_date_input_blur" onclick="seach_date(1);" value="2016.06.4" title="시작일 선택" > &nbsp; ~ &nbsp; <input type="text" id="btn" class="seach_date_input_blur" onclick="seach_date(2);" value="2016.06.11"  title="종료일 선택">	
+						<!-- 레이어팝업으로 나오는 화면에서 선택시 인풋값에 자동 들어가도록 프로그램 처리 필요//-->
+						<script type="text/javascript">
+						<!--
+						function seach_date(num){
+						document.getElementById('seach_date_' + num ).style.display = "";
+						}
+						//-->
+						</script>
+						<div class="seach_date" id="seach_date_1" style="display:none;" >
+								<table class="table_date" summary="날짜 검색을 위한 달력">
+								<caption>달력</caption>
+									<colgroup>
+									<col width="14.28571%" />
+									<col width="14.28571%" />
+									<col width="14.28571%" />
+									<col width="14.28571%" />
+									<col width="14.28571%" />
+									<col width="14.28571%" />
+									<col width="14.28571%" />
+									</colgroup>
+
+									<thead>
+										<tr>
+											<th colspan="7">
+												<p class="prev"><a href="#"><img src="./images/contents/btn_prev.png" alt="이전 월"/></a></p>
+												2016.06
+												<p class="next"><a href="#"><img src="./images/contents/btn_next.png" alt="다음 월" /></a></p>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th>월</th>
+											<th>화</th>
+											<th>수</th>
+											<th>목</th>
+											<th>금</th>
+											<th>토</th>
+											<th>일</th>
+										</tr>
+										<tr>
+											<td></td>
+											<td><a href="#">1</a></td>
+											<td><a href="#">2</a></td>
+											<td><a href="#">3</a></td>
+											<td><a href="#">4</a></td>
+											<td><a href="#">5</a></td>
+											<td><a href="#">6</a></td>
+										</tr>
+										<tr>
+											<td><a href="#">7</a></td>
+											<td><a href="#">8</a></td>
+											<td><a href="#">9</a></td>
+											<td><a href="#">10</a></td>
+											<td><a href="#">11</a></td>
+											<td><a href="#">12</a></td>
+											<td><a href="#">13</a></td>
+										</tr>
+										<tr>
+											<td><a href="#">14</a></td>
+											<td><a href="#">15</a></td>
+											<td><a href="#">16</a></td>
+											<td><a href="#">17</a></td>
+											<td><a href="#">18</a></td>
+											<td><a href="#">19</a></td>
+											<td><a href="#">20</a></td>
+										</tr>
+										<tr>
+											<td><a href="#">21</a></td>
+											<td><a href="#">22</a></td>
+											<td><a href="#">23</a></td>
+											<td><a href="#">24</a></td>
+											<td><a href="#">25</a></td>
+											<td><a href="#">26</a></td>
+											<td><a href="#">27</a></td>
+										</tr>
+										<tr>
+											<td><a href="#">28</a></td>
+											<td><a href="#">29</a></td>
+											<td><a href="#">30</a></td>
+											<td><a href="#">31</a></td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+									</tbody>
+								</table>
+						 </div>
+
+
+						 <div class="seach_date date_last" id="seach_date_2" style="display:none;">
+								<table class="table_date" summary="날짜 검색을 위한 달력">
+								<caption>달력</caption>
+									<colgroup>
+									<col width="14.28571%" />
+									<col width="14.28571%" />
+									<col width="14.28571%" />
+									<col width="14.28571%" />
+									<col width="14.28571%" />
+									<col width="14.28571%" />
+									<col width="14.28571%" />
+									</colgroup>
+
+									<thead>
+										<tr>
+											<th colspan="7">
+												<p class="prev"><a href="#"><img src="./images/contents/btn_prev.png" alt="이전 월" /></a></p>
+												2016.06
+												<p class="next"><a href="#"><img src="./images/contents/btn_next.png" alt="다음 월" /></a></p>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th>월</th>
+											<th>화</th>
+											<th>수</th>
+											<th>목</th>
+											<th>금</th>
+											<th>토</th>
+											<th>일</th>
+										</tr>
+										<tr>
+											<td></td>
+											<td><a href="#">1</a></td>
+											<td><a href="#">2</a></td>
+											<td><a href="#">3</a></td>
+											<td><a href="#">4</a></td>
+											<td><a href="#">5</a></td>
+											<td><a href="#">6</a></td>
+										</tr>
+										<tr>
+											<td><a href="#">7</a></td>
+											<td><a href="#">8</a></td>
+											<td><a href="#">9</a></td>
+											<td><a href="#">10</a></td>
+											<td><a href="#">11</a></td>
+											<td><a href="#">12</a></td>
+											<td><a href="#">13</a></td>
+										</tr>
+										<tr>
+											<td><a href="#">14</a></td>
+											<td><a href="#">15</a></td>
+											<td><a href="#">16</a></td>
+											<td><a href="#">17</a></td>
+											<td><a href="#">18</a></td>
+											<td><a href="#">19</a></td>
+											<td><a href="#">20</a></td>
+										</tr>
+										<tr>
+											<td><a href="#">21</a></td>
+											<td><a href="#">22</a></td>
+											<td><a href="#">23</a></td>
+											<td><a href="#">24</a></td>
+											<td><a href="#">25</a></td>
+											<td><a href="#">26</a></td>
+											<td><a href="#">27</a></td>
+										</tr>
+										<tr>
+											<td><a href="#">28</a></td>
+											<td><a href="#">29</a></td>
+											<td><a href="#">30</a></td>
+											<td><a href="#">31</a></td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+									</tbody>
+								</table>
+						 </div>
+
+						<script type="text/javascript">
+							$seach_date_checking = $("#seach_date_1");
+							$seach_date_checking.hover(
+								function(){
+									$(this).css("display","block");
+								},
+								function(){
+									$(this).css("display","none");
+								}
+							);
+							$seach_date_checking = $("#seach_date_2");
+							$seach_date_checking.hover(
+								function(){
+									$(this).css("display","block");
+								},
+								function(){
+									$(this).css("display","none");
+								}
+							);
+						</script>
+					</span>	
+								</div>								
+							</div>
+							<p class="guide_text">현재, (<span>7일</span>, 1주일) 동안 이벤트가 진행 될 예정입니다.</p>
+
+
+							<div class="btn_regis_area">
+								<p><a href="#">등록</a></p>
+								<!-- 수정모드 등에서 활성화 될 경우 p태글에 on클래스 추가로 배경색 바뀌게 적용    <p class="on"><a href="#">등록</a></p> //-->
+								<p class="cancle"><a href="#">취소</a></p>							
+							</div>
+
+
+
+
+
+
+						</div>
+
+					</div>	
+
+
+		
+		<!-- 767 이하 1칸 조정되면서 미리보기 아이콘 노출 시작 //-->
+		<div class="btn_floatting_area">
+			<p class="more_green"><a onclick="go_popup()" style='cursor:pointer; cursor:hand;'><img src="./images/contents/btn_icon_flotting.png" /></a></p>
+		</div>
+
+
+
+		<!-- 모바일에서 노출되는 팝업 미리보기 //-->
+		<script src="./src/js/jquery.bpopup.min.js"></script>
+		<script type="text/javascript">
+			function go_popup() {
+							 $('#preview_layer').bPopup({
+           speed: 650,
+            transition: 'slideDown',
+	    transitionClose: 'slideBack'
+        });
+			 };
+
+
+		</script>
+
+
+		<div id="preview_layer" class="preview_layer">
+		<p class="more_green preview_close"><a  href="#" class="b-close"><img src="./images/contents/btn_icon_flotting.png" /></a></p>
+		<div class="preview_cont" >
+
+
+  			<div class="preview_area mb30">
+				<p class="category_icon"><img src="./images/contents/ribbon_bakery.png" /><p>
+				<div class="preview_title">
+					업종키워드
+					<p>가게명 노출</p>
+				</div>
+				<div class="preview_img">
+					<img src="./images/contents/noimg.jpg" />
+					<p>0/0</p>
+				</div>
+				<div class="preview_infotext">
+					기존에 입력하신 가게 소개글이 자동으로 노출됩니다.
+				</div>						
+				<div class="preview_dotted"></div>
+				<div class="preview_event_title">
+					2016.06.08 ~ 2016.06.14
+					<p>이벤트명이 노출됩니다.</p>
+				</div>
+				<div class="preview_event_infotext">
+				메인메뉴 포함 모든 와인 주문시, 20% 할인 .. 많은 이용 바랍니다. 이벤트 내용이 노출되는 공간 길면 길수록 스크롤 생성<br />메인메뉴 포함 모든 와인 주문시, 20% 할인 .. 많은 이용 바랍니다. 이벤트 내용이 노출되는 공간 길면 길수록 스크롤 생성<br />메인메뉴 포함 모든 와인 주문시, 20% 할인 .. 많은 이용 바랍니다. 이벤트 내용이 노출되는 공간 길면 길수록 스크롤 생성<br />
+				</div>						
+			</div><!-- END preview_area //-->
+
+		</div>
+		</div>
+
+		<!-- 모바일에서 노출되는 팝업 미리보기 끝 //-->
+
+
+				
+
+
+
+					
+				</li>
+				<script type="text/javascript">	
+				$("div.gab_box > div > input").focus(function() {
+					$(this).attr('class','regis_input_focus');
+				});
+				$("div.gab_box > div > input").blur(function() {
+					$(this).attr('class','regis_input_blur');
+				});
+				</script>
+
+
+
+
+				<!-- 우측 콘텐츠 //-->
+				<li class="right rightpadding">
+
+					<!-- 상단 칸 //-->
+					<div class="cont_area ev_regis_subject rightpadd" >
+						<p>등록 전 이벤트를 미리 볼 수 있습니다.</p>
+						<span class="title">미리보기</span>
+					</div>
+
+
+
+					<!-- 하단 칸 //-->
+					<div class="cont_area mt20" >
+					<div class="preview_area">
+
+						<p class="category_icon"><img src="./images/contents/ribbon_bakery.png" /><p>
+						<p class="heart_icon"><img src="./images/contents/icon_heart.png" /><p>
+
+						<div class="preview_title">
+							업종키워드
+							<p>가게명 노출</p>
+						</div>
+
+						<div class="preview_img">
+							<img src="./images/contents/noimg.jpg" />
+							<p>0/0</p>
+						</div>
+
+						<div class="preview_infotext">
+						기존에 입력하신 가게 소개글이 자동으로 노출됩니다.
+						</div>
+						
+						<div class="preview_dotted"></div>
+
+						<div class="preview_event_title">
+							2016.06.08 ~ 2016.06.14
+							<p>이벤트명이 노출됩니다.</p>
+						</div>
+
+						<div class="preview_event_infotext">
+						기존에 입력하신 가게 소개글이 자동으로 노출됩니다.
+						</div>
+
+						<div class="preview_btn_area">
+							<p><a href="#">자세히</a></p>
+							<p class="gocart"><a href="#">담기</a></p>							
+						</div>
+					</div><!-- END preview_area //-->
+
+					</div><!-- END cont_area //-->
+
+
+
+
+				
+				
+				</li>
+			</ul>
+		</div>
+
+
+
+
+
+
+
+
+
+	</div><!-- END content_area//-->
+	<!-- 우측 콘텐츠의 시작 //-->
+
+</div><!-- END container//-->
+
+
+
+
+<div id="footer">
+© Sweet K. All Rights Reserved.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div><!-- END wrap//-->
+</body>
+</html>

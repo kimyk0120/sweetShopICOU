@@ -1,0 +1,5 @@
+jdbc.datasource=jdbc/DataSource
+jdbc.driverClass=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://hint.c4w4eqizqhcz.us-west-2.rds.amazonaws.com:3306/icou?useUnicode=yes&characterEncoding=utf-8&autoReconnect=true
+jdbc.username=sweetk
+jdbc.password=sweet1004hint

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.sweetk.web.shop.mapper.EventMapper">
+
+	<select id="event_list" parameterType="map" resultType="map">
+		select t4.event_seq,
+			   t4.shop_seq,
+			   t4.event_title,
+			   <![CDATA[
+			   if(t4.event_end_day > now(),"0","1") as event_status,
+			   ]]>
+			   t4.event_kind,
+			   t4.event_discount_way,
+			   t4.event_discount_target,
+			   t4.event_discount,
+			   t4.event_detail_desc,
+			   t4.event_start_day,
+			   t4.event_end_day,
+			   t4.reg_date,
+			   t4.edit_date,
+			   <![CDATA[
+               if(count(t3.EVENT_SEQ)/down >= 0.2,"s","f") as success
+			   ]]>
+		from (select t1.*,
+              count(t2.EVENT_SEQ) as down
+			  from SHOP_EVENT_MST t1
+              left join SHOP_EVENT_CP_DOWN t2
+        	  on t1.EVENT_SEQ = t2.EVENT_SEQ
+			  group by t1.event_seq ) t4
+        	  left join SHOP_EVENT_CP_USE t3
+        	  on t4.EVENT_SEQ = t3.EVENT_SEQ
+		where shop_seq = #{shop_seq}
+		and reg_date BETWEEN #{start_date} and #{end_date}
+		and event_title like CONCAT('%',#{event_name},'%')
+		group by t4.event_seq
+		order by reg_date desc
+		limit  #{page_num}, #{page_size}
+	</select>
+
+	<insert id="event_insert" parameterType="ShopEventVo" useGeneratedKeys="true" keyProperty="event_seq" >
+		insert into SHOP_EVENT_MST(shop_seq,
+								   event_title,
+								   event_status,
+								   event_kind,
+								   event_discount_way,
+								   event_discount_target,
+								   event_discount,
+								   event_detail_desc,
+								   event_start_day,
+								   event_end_day,REG_DATE)
+						   values (#{shop_seq},
+								   #{event_title},
+								   #{event_status},
+								   #{event_kind},
+								   #{event_discount_way},
+								   #{event_discount_target},
+								   #{event_discount},
+								   #{event_detail_desc},
+								   #{event_start_day},
+								   #{event_end_day},now())
+	</insert>
+
+	<select id="event_img_list" parameterType="String" resultType="hashmap">
+		select event_seq,
+			   event_order,
+			   img_path,
+			   img_file_name,
+			   img_org_name
+		from SHOP_EVENT_IMG
+		where event_seq = #{0}
+	</select>
+
+	<insert id="event_img_insert" parameterType="EventImgVo">
+		insert into SHOP_EVENT_IMG(event_seq,
+								   event_order,
+								   img_path,
+								   img_file_name,
+								   img_org_name)
+						   values (#{event_seq},
+								   #{event_order},
+								   #{img_path},
+								   #{img_file_name},
+								   #{img_org_name})
+	</insert>
+
+	<delete id="event_img_delete" parameterType="String">
+		DELETE FROM SHOP_EVENT_IMG
+		WHERE event_seq = #{0}
+	</delete>
+
+	<update id="event_update" parameterType="ShopEventVo">
+		UPDATE SHOP_EVENT_MST
+		SET
+			event_title = #{event_title},
+		    event_status = #{event_status},
+		    event_kind = #{event_kind},
+			event_discount_way = #{event_discount_way},
+			event_discount_target = #{event_discount_target},
+			event_discount = #{event_discount},
+			event_detail_desc = #{event_detail_desc},
+			event_start_day = #{event_start_day},
+			event_end_day = #{event_end_day},
+			edit_date = NOW()
+		WHERE
+			event_seq = #{event_seq}
+	</update>
+	
+	<delete id="event_delete" parameterType="int">
+		DELETE FROM SHOP_EVENT_MST
+		WHERE event_seq = #{0}
+	</delete>
+	
+	<select id="event_count" parameterType="int" resultType="int">
+		select count(*)
+		from SHOP_EVENT_MST
+		where shop_seq = #{shop_seq}
+		and reg_date BETWEEN #{start_date} and #{end_date}
+		and event_title like CONCAT('%',#{event_name},'%')
+	</select>
+
+	<select id="shop" parameterType="String" resultType="hashmap">
+		SELECT t1.shop_seq,
+			   t1.shop_name,
+			   t1.shop_reg_number,
+			   t1.shop_zip,
+			   t1.shop_sido,
+			   t1.shop_gu,
+			   t1.shop_addr1,
+			   t1.shop_addr2,
+			   t1.shop_location_lat,
+			   t1.shop_location_long,
+			   t1.shop_tel,
+			   t1.shop_kind,
+			   t1.shop_menu,
+			   t1.shop_owner_name,
+			   t1.shop_phone,
+			   t1.shop_fax,
+			   t1.shop_homepage_url,
+			   t1.shop_img_path,
+			   t1.shop_img_name,
+			   t1.shop_img_org_name,
+			   t1.shop_reg_date,
+			   t2.code_name
+        FROM shop_mst t1 JOIN code_mst t2
+        on t1.SHOP_KIND = t2.code_id
+		where t1.shop_seq =  #{0}
+	</select>
+
+
+	<select id="event" parameterType="String" resultType="hashmap">
+		SELECT event_seq,
+			   shop_seq,
+			   event_title,
+			   event_status,
+			   event_kind,
+			   event_discount_way,
+			   event_discount_target,
+			   event_discount,
+			   event_detail_desc,
+			   event_start_day,
+			   event_end_day,
+			   reg_date,
+			   edit_date
+		FROM SHOP_EVENT_MST
+		where event_seq = #{0}
+	</select>
+
+
+	<select id="event_view_count" parameterType="map" resultType="int">
+        SELECT count(*) as event_count
+        FROM SHOP_EVENT_VIEW
+        where event_seq = #{event_seq}
+	</select>
+
+	<select id="event_down_count" parameterType="map" resultType="int">
+        SELECT count(*) as event_count
+        FROM SHOP_EVENT_CP_DOWN
+        where event_seq = #{event_seq}
+	</select>
+
+	<select id="event_use_count" parameterType="map" resultType="int">
+		SELECT count(*) as event_count
+        FROM SHOP_EVENT_CP_USE
+        where event_seq = #{event_seq}
+	</select>
+
+	<select id="event_date_chart" parameterType="map" resultType="hashmap">
+		SELECT shop_seq,
+			   event_seq,
+			   rs_date,
+			   rs_day,
+			   view_count,
+			   down_count,
+			   use_count
+		FROM SHOP_EVENT_DATE_RESULT
+        where event_seq = #{event_seq}
+	</select>
+
+	<select id="event_time_chart" parameterType="map" resultType="hashmap">
+		SELECT rs_time,
+			   IFNULL(avg(VIEW_COUNT),0) as view_count,
+			   IFNULL(avg(DOWN_COUNT),0) as down_count,
+			   IFNULL(avg(USE_COUNT),0) as use_count
+	    FROM icou.SHOP_EVENT_TIME_RESULT
+        where event_seq = #{event_seq}
+	    group by RS_TIME
+	    order by CAST(RS_TIME AS SIGNED)
+	</select>
+
+	<select id="event_view_gender_chart" parameterType="map" resultType="hashmap">
+		SELECT IFNULL(sum(if(gender = "M",VIEW_COUNT,null)),0) as "m",
+				IFNULL(sum(if(gender = "F",VIEW_COUNT,null)),0) as "f"
+        FROM icou.SHOP_EVENT_GENDER_AGE_RESULT
+		where event_seq = #{event_seq}
+	</select>
+
+	<select id="event_down_gender_chart" parameterType="map" resultType="hashmap">
+		SELECT IFNULL(sum(if(gender = "M",DOWN_COUNT,null)),0) as "m",
+				IFNULL(sum(if(gender = "F",DOWN_COUNT,null)),0) as "f"
+        FROM icou.SHOP_EVENT_GENDER_AGE_RESULT
+		where event_seq = #{event_seq}
+	</select>
+
+	<select id="event_use_gender_chart" parameterType="map" resultType="hashmap">
+		SELECT IFNULL(sum(if(gender = "M",USE_COUNT,null)),0) as "m",
+				IFNULL(sum(if(gender = "F",USE_COUNT,null)),0) as "f"
+        FROM icou.SHOP_EVENT_GENDER_AGE_RESULT
+		where event_seq = #{event_seq}
+	</select>
+
+	<select id="event_view_age_chart" parameterType="map" resultType="hashmap">
+			SELECT IFNULL(sum(if(age = 10,VIEW_COUNT,null)),0) as "Y10",
+					IFNULL(sum(if(age = 20,VIEW_COUNT,null)),0) as "Y20",
+			        IFNULL(sum(if(age = 30,VIEW_COUNT,null)),0) as "Y30",
+			        IFNULL(sum(if(age = 40,VIEW_COUNT,null)),0) as "Y40",
+			        IFNULL(sum(if(age = 50,VIEW_COUNT,null)),0) as "Y50",
+			        IFNULL(sum(if(age = 60,VIEW_COUNT,null)),0) as "Y60"
+			FROM SHOP_EVENT_GENDER_AGE_RESULT
+			where event_seq= #{event_seq}
+	</select>
+
+	<select id="event_down_age_chart" parameterType="map" resultType="hashmap">
+			SELECT IFNULL(sum(if(age = 10,DOWN_COUNT,null)),0) as "Y10",
+					IFNULL(sum(if(age = 20,DOWN_COUNT,null)),0) as "Y20",
+			        IFNULL(sum(if(age = 30,DOWN_COUNT,null)),0) as "Y30",
+			        IFNULL(sum(if(age = 40,DOWN_COUNT,null)),0) as "Y40",
+			        IFNULL(sum(if(age = 50,DOWN_COUNT,null)),0) as "Y50",
+			        IFNULL(sum(if(age = 60,DOWN_COUNT,null)),0) as "Y60"
+			FROM SHOP_EVENT_GENDER_AGE_RESULT
+			where event_seq= #{event_seq}
+	</select>
+
+	<select id="event_use_age_chart" parameterType="map" resultType="hashmap">
+			SELECT IFNULL(sum(if(age = 10,USE_COUNT,null)),0) as "Y10",
+					IFNULL(sum(if(age = 20,USE_COUNT,null)),0) as "Y20",
+			        IFNULL(sum(if(age = 30,USE_COUNT,null)),0) as "Y30",
+			        IFNULL(sum(if(age = 40,USE_COUNT,null)),0) as "Y40",
+			        IFNULL(sum(if(age = 50,USE_COUNT,null)),0) as "Y50",
+			        IFNULL(sum(if(age = 60,USE_COUNT,null)),0) as "Y60"
+			FROM SHOP_EVENT_GENDER_AGE_RESULT
+			where event_seq= #{event_seq}
+	</select>
+
+	</mapper>

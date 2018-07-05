@@ -1,0 +1,482 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<!-- ie조건부주석 Conditional Comment //-->
+<!--[if lt IE 7]>      <html class="ie6"> <![endif]-->
+<!--[if IE 7]>         <html class="ie7"> <![endif]-->
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if gt IE 8]><!-->         <!--<![endif]-->
+<head>
+<title>USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+<meta name="apple-mobile-web-app-title" content="">
+<meta property="og:title" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:site_name" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:image" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:description" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta name="keywords" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Generator" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Author" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Keywords" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Description" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
+
+<link rel="stylesheet" href="./src/css/import.css" type="text/css" />
+<link rel="stylesheet" href="./src/css/toggle_switch.css" type="text/css" />
+<link rel="stylesheet" href="./src/css/libs/default.css">
+<link rel="stylesheet" href="./src/css/libs/default.date.css">
+
+<script type="text/javascript" src="./src/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="./src/js/jquery.touchSwipe.min.js"></script>
+<script type="text/javascript" src="./src/js/jquery.starCountWrite.js"></script>
+<script type="text/javascript" src="./src/js/default.js"></script>
+<script type="text/javascript" src="./src/js/picker.js"></script>
+<script type="text/javascript" src="./src/js/picker.date.js"></script>
+<script type="text/javascript" src="./src/js/jquery.autosize.min.js"></script>
+
+<script>
+	$(function(){		
+		
+		var chk_review = [0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+		
+		//별 체크
+		var starCount_top = $("#star_top").starCountWrite({initCount:0, useTouch:true, 		
+			chkCount:function(e){
+				var chk = starCount_top.returnCount();
+				( chk > 0 ?	chk_review[0] = 1 : chk_review[0] = 0 );
+				total_check();
+			}			
+		});
+
+		var starCount_bottom1 = $( "#star_b1" ).starCountWrite({initCount:0, useTouch:true, 		
+			chkCount:function(e){					
+				var chk = starCount_bottom1.returnCount();					
+				( chk > 0 ?	chk_review[5] = 1 : chk_review[5] = 0 );
+				total_check();
+			}			
+		});
+		var starCount_bottom2 = $( "#star_b2" ).starCountWrite({initCount:0, useTouch:true, 		
+			chkCount:function(e){					
+				var chk = starCount_bottom2.returnCount();					
+				( chk > 0 ?	chk_review[6] = 1 : chk_review[6] = 0 );
+				total_check();
+			}			
+		});
+		var starCount_bottom3 = $( "#star_b3" ).starCountWrite({initCount:0, useTouch:true, 		
+			chkCount:function(e){					
+				var chk = starCount_bottom3.returnCount();					
+				( chk > 0 ?	chk_review[7] = 1 : chk_review[7] = 0 );
+				total_check();
+			}			
+		});
+		var starCount_bottom4 = $( "#star_b4" ).starCountWrite({initCount:0, useTouch:true, 		
+			chkCount:function(e){					
+				var chk = starCount_bottom4.returnCount();					
+				( chk > 0 ?	chk_review[8] = 1 : chk_review[8] = 0 );
+				total_check();
+			}			
+		});
+		var starCount_bottom5 = $( "#star_b5" ).starCountWrite({initCount:0, useTouch:true, 		
+			chkCount:function(e){					
+				var chk = starCount_bottom5.returnCount();					
+				( chk > 0 ?	chk_review[9] = 1 : chk_review[9] = 0 );
+				total_check();
+			}			
+		});
+		var starCount_bottom6 = $( "#star_b6" ).starCountWrite({initCount:0, useTouch:true, 		
+			chkCount:function(e){					
+				var chk = starCount_bottom6.returnCount();					
+				( chk > 0 ?	chk_review[10] = 1 : chk_review[10] = 0 );
+				total_check();
+			}			
+		});
+		
+
+		//셀렉트박스(방문유형, 성별, 생년)
+		$(".review_write_select").change(function(e) {		
+			var thisObj = $(this);	
+			var index = thisObj.attr("data-index");
+			select_review(thisObj, index);			
+		});
+		
+		function select_review(obj, num){
+			var select_txt = obj.children("option:selected").text();
+			var select_index = obj.children("option:selected").index(); 
+			if( select_index == 0 ){ 
+				obj.removeClass("on");
+				obj.next("input").val("");
+				chk_review[num] = 0;
+			}else{
+				obj.addClass("on");	
+				obj.next("input").val(select_txt);
+				chk_review[num] = 1;
+			}
+			total_check();			
+		}
+		
+		//방문시기
+		var $input = $( '.datepicker' ).pickadate({
+			monthsFull: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+			monthsShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+			format: 'yyyy-mm-d',
+			formatSubmit: 'yyyy/mm/dd',
+			today: '오늘',
+			clear: '지우기',
+			close: '닫기',
+			onClose: function() {
+				var date_txt = $('.datepicker').val();
+				if(date_txt == ""){
+					$('.datepicker').removeClass("on");
+					chk_review[2] = 0;
+				}else{
+					$('.datepicker').addClass("on");
+					chk_review[2] = 1;
+				}
+				total_check();
+			}
+		});
+		
+		/*
+		$(".review_write_date").change(function(e) {
+			var select_date = $(this).val();
+			$(this).addClass("on");		
+			$(this).next("input").val(select_date);			
+		})
+		*/
+		
+		//리뷰 제목
+		$(document).on('keyup','input[type="text"]',function(e){
+			var $this = $(this);	
+			if($this.val() !== $this.data('previousValue')){
+				$this.trigger('change'); 
+			}
+			$this.data('previousValue',$this.val());		  
+		});	
+		
+		$(document).on('keyup','textarea',function(e){
+			var $this = $(this);	
+			if($this.val() !== $this.data('previousValue')){
+				$this.trigger('change'); 
+			}
+			$this.data('previousValue',$this.val());		  
+		});		
+		
+		$("#review_subject").on('change', function(e) {
+			( this.value == "" ? chk_review[3] = 0 : chk_review[3] = 1 );
+			total_check();
+		});
+		
+		//리뷰내용
+		$("#review_cont").on('change', function(e) {
+			( this.value == "" ? chk_review[4] = 0 : chk_review[4] = 1 );
+			total_check();
+		});
+		$("#review_cont").autosize();
+		/*
+		$('.textarea_box').on( 'keyup', 'textarea', function (e){
+			$(this).css('height', 'auto' );
+			$(this).height( this.scrollHeight );
+		});
+		$('.textarea_box').find( 'textarea' ).keyup();
+		*/
+		
+		//리뷰 전송동의
+		var checkSwipe = $(".switch");
+		checkSwipe.swipe( {
+			swipe:function(event, direction, distance, duration, fingerCount, fingerData) {		
+				console.log(direction)		
+				if( direction == "right" ){
+					$("#cmn-toggle-1").attr("checked", true);
+					$(".cmn-toggle-before").css({"background-color": "#ff8b72"});
+					$(".cmn-toggle-after").css({"left": "28px"});
+					chk_review[13] = 1;
+				}else if( direction == "left" ){
+					$("#cmn-toggle-1").attr("checked", false);
+					$(".cmn-toggle-before").css({"background-color": "#f1f1f1"});
+					$(".cmn-toggle-after").css({"left": "0"});
+					chk_review[13] = 0;
+				}	
+				total_check();
+			},
+			tap:function(event, target) {
+				if($("#cmn-toggle-1").attr("checked")){
+					$("#cmn-toggle-1").attr("checked", false);
+					$(".cmn-toggle-before").css({"background-color": "#f1f1f1"});
+					$(".cmn-toggle-after").css({"left": "0"});
+					chk_review[13] = 0;
+				}else{
+					$("#cmn-toggle-1").attr("checked", true);
+					$(".cmn-toggle-before").css({"background-color": "#ff8b72"});
+					$(".cmn-toggle-after").css({"left": "28px"});
+					chk_review[13] = 1;
+				} 
+				total_check();
+			},
+		   threshold:1
+		});
+		
+		var total_num = 0;
+		//글등록
+		$(".btn_one").on("click", function(){
+			var len = chk_review.length;
+			(total_num >= len ? alert('글등록 완료!') : alert('항목을 모두 입력하세요') );
+		})
+		
+		//전체 입력 체크 확인 : 전체 체크 확인되면 확인버튼 주황색으로 활성화
+		function total_check(){
+			var len = chk_review.length;
+			console.log(len)
+			var total = 0;
+			for(var i=0; i<len; i++){
+				total += chk_review	[i];
+			}	
+			total_num = total;
+			
+			console.log("total=",total, " , ",chk_review);
+			( total >= len ? $(".btn_one").addClass("on") : $(".btn_one").removeClass("on") );	
+		}
+		
+		
+	})
+</script>
+<style>
+
+</style>
+</head>
+
+<body>
+
+<div id="wrap_wide" >
+
+	<!-- 서브 상단 //-->
+	<header class="sub">
+		<ul>
+			<li><a href="javascript: var uAgent=navigator.userAgent; if(uAgent.match(/opr|u;/i)) location.href=document.referrer; else history.back();" class="menu-btn"><img src="./images/common/btn_arrow_back.png" style="width:16px; height:auto; margin-right:5px;" />Back</a></li>
+			<li>리뷰 등록</li>
+			<li></li>
+		</ul>
+	</header>
+
+
+
+<section class="sub_content_wrap_wide" style="padding-bottom:15px; background:linear-gradient(to bottom,  #ffffff 0%,#e8d4d0 100%);">
+
+	<dl class="review_write_top">
+		<dt>이 장소는 어떠셨나요?</dt>
+		<dd>
+			<ul class="check_area_star big" id="star_top">
+				<li><span href="#" class="btn_minus"><img src="./images/common/btn_minus.png" alt="마이너스" style="width:30px; height:auto;" /></span></li>
+				<li class="check_star_area">
+                	<span class="icon_star st_1"></span>
+                    <span class="icon_star st_2"></span>
+                    <span class="icon_star st_3"></span>
+                    <span class="icon_star st_4"></span>
+                    <span class="icon_star st_5"></span>
+				</li>
+				<li><span href="#" class="btn_plus"><img src="./images/common/btn_plus.png" alt="플러스" style="width:30px; height:auto;" /></span></li>
+			</ul>
+		</dd>
+	</dl>
+
+
+	<div class="review_write_check_list">
+		<ul>
+			<li>
+				<label for="id" class="review_write_tit">방문유형</label>
+				<select  id="review_write_select" class="review_write_select" data-index="1"><!-- 선택 완료시 화살표 색상 변경은 클래스 review_write_select_on 으로 변경 / 기본은 review_write_select  //-->
+					 <option selected>누구와 방문하셨나요?</option>
+					 <option>가족</option>
+					 <option>비즈니스</option>
+					 <option>커플</option>
+					 <option>친구</option>
+					 <option>나홀로</option>
+				</select>
+                <input type="text" readonly class="review_write_txt" placeholder="누구와 방문하셨나요?">
+			</li>
+			<li>
+				<label for="date" class="review_write_tit">방문시기</label>
+				<!--<input type="date" id="date" class="review_write_input  placeholderclass"  onClick="$(this).removeClass('placeholderclass')" onfocus="$(this).removeClass('placeholderclass')">-->
+
+                <!--<input type="date" id="date" class="review_write_date" >
+                <input type="text" readonly class="review_write_txt" placeholder="언제 방문하셨나요?">-->
+                
+                <input type="text" readonly class="review_write_txt datepicker" placeholder="언제 방문하셨나요?">
+                
+
+			<!--
+			<style>
+				.dateclass{   text-align:right;}
+				.placeholderclass::before{ position: absolute;right:35px;top: 8px; content: "언제 방문하셨나요?"; color: #777786;width: 100%;line-height: 45px; text-align:right; }
+				.placeholderclass:hover::before{ display: none;}
+			</style>
+            -->
+				
+			</li>
+			<li style="padding-top:40px">
+				<label  for="review_subject" class="review_write_tit2">리뷰 제목</label>
+				<input type="text" id="review_subject" class="review_write_input2" placeholder="리뷰 제목을 적어주세요." style="width:100%;" >
+			</li>
+			<li class="textarea_box" style="padding-top:40px">
+				<label  for="review_cont" class="review_write_tit2">리뷰 내용</label>
+				<textarea id="review_cont"  placeholder="답변을 입력해 주세요.&#13;&#10;마음에 들었던 점이나 부족하다고 생각되었던 점을 말해주세요!" class="review_write_textarea" style="width:100%;" ></textarea>	
+			</li>
+		</ul>
+	</div>
+
+
+	
+	<div class="review_write_check_list2 mt20">
+		<ul>
+
+			<li>
+				<p>서비스</p>
+				<ul class="check_area_star small check_list_star" id="star_b1">
+					<li><span class="btn_minus"><img src="./images/common/btn_minus.png" alt="마이너스" style="width:20px; height:auto;" /></span></li>
+					<li class="check_star_area">
+                        <span class="icon_star st_1"></span>
+                        <span class="icon_star st_2"></span>
+                        <span class="icon_star st_3"></span>
+                        <span class="icon_star st_4"></span>
+                        <span class="icon_star st_5"></span>
+                    </li>
+					<li><span class="btn_plus"><img src="./images/common/btn_plus.png" alt="플러스" style="width:20px; height:auto;" /></span ></li>
+				</ul>	 
+			</li>
+
+			<li>
+				<p>맛</p>
+				<ul class="check_area_star small check_list_star" id="star_b2">
+					<li><span class="btn_minus"><img src="./images/common/btn_minus.png" alt="마이너스" style="width:20px; height:auto;" /></span></li>
+					<li class="check_star_area">
+                        <span class="icon_star st_1"></span>
+                        <span class="icon_star st_2"></span>
+                        <span class="icon_star st_3"></span>
+                        <span class="icon_star st_4"></span>
+                        <span class="icon_star st_5"></span>
+                    </li>
+					<li><span class="btn_plus"><img src="./images/common/btn_plus.png" alt="플러스" style="width:20px; height:auto;" /></span ></li>
+				</ul>	 
+			</li>
+
+			<li>
+				<p>가격</p>
+				<ul class="check_area_star small check_list_star" id="star_b3">
+					<li><span class="btn_minus"><img src="./images/common/btn_minus.png" alt="마이너스" style="width:20px; height:auto;" /></span></li>
+					<li class="check_star_area">
+                        <span class="icon_star st_1"></span>
+                        <span class="icon_star st_2"></span>
+                        <span class="icon_star st_3"></span>
+                        <span class="icon_star st_4"></span>
+                        <span class="icon_star st_5"></span>
+                    </li>
+					<li><span class="btn_plus"><img src="./images/common/btn_plus.png" alt="플러스" style="width:20px; height:auto;" /></span ></li>
+				</ul>	 
+			</li>
+
+			<li>
+				<p>청결도</p>
+				<ul class="check_area_star small check_list_star" id="star_b4">
+					<li><span class="btn_minus"><img src="./images/common/btn_minus.png" alt="마이너스" style="width:20px; height:auto;" /></span></li>
+					<li class="check_star_area">
+                        <span class="icon_star st_1"></span>
+                        <span class="icon_star st_2"></span>
+                        <span class="icon_star st_3"></span>
+                        <span class="icon_star st_4"></span>
+                        <span class="icon_star st_5"></span>
+                    </li>
+					<li><span class="btn_plus"><img src="./images/common/btn_plus.png" alt="플러스" style="width:20px; height:auto;" /></span ></li>
+				</ul>	 
+			</li>
+
+			<li>
+				<p>시설</p>
+				<ul class="check_area_star small check_list_star" id="star_b5">
+					<li><span class="btn_minus"><img src="./images/common/btn_minus.png" alt="마이너스" style="width:20px; height:auto;" /></span></li>
+					<li class="check_star_area">
+                        <span class="icon_star st_1"></span>
+                        <span class="icon_star st_2"></span>
+                        <span class="icon_star st_3"></span>
+                        <span class="icon_star st_4"></span>
+                        <span class="icon_star st_5"></span>
+                    </li>
+					<li><span class="btn_plus"><img src="./images/common/btn_plus.png" alt="플러스" style="width:20px; height:auto;" /></span ></li>
+				</ul>	 
+			</li>
+
+			<li>
+				<p>위치</p>
+				<ul class="check_area_star small check_list_star" id="star_b6">
+					<li><span class="btn_minus"><img src="./images/common/btn_minus.png" alt="마이너스" style="width:20px; height:auto;" /></span></li>
+					<li class="check_star_area">
+                        <span class="icon_star st_1"></span>
+                        <span class="icon_star st_2"></span>
+                        <span class="icon_star st_3"></span>
+                        <span class="icon_star st_4"></span>
+                        <span class="icon_star st_5"></span>
+                    </li>
+					<li><span class="btn_plus"><img src="./images/common/btn_plus.png" alt="플러스" style="width:20px; height:auto;" /></span ></li>
+				</ul>	 
+			</li>
+		</ul>
+	</div>
+
+
+	<div class="review_write_check_list mt20">
+		<ul>
+			<li>
+            	<label for="sex" class="review_write_tit">방문유형</label>
+				<select  id="sex" class="review_write_select" data-index="11" >
+					 <option selected>성별을 선택해 주세요.</option>
+					 <option>남성</option>
+					 <option>여성</option>
+				</select>
+                <input type="text" readonly class="review_write_txt" placeholder="성별을 선택해 주세요.">
+			</li>
+
+			<li>
+				<label for="birthday" class="review_write_tit">생년</label>
+				<select  id="birthday" class="review_write_select" data-index="12">
+					 <option selected>생년을 선택해 주세요.</option>
+					 <option>2016년</option>
+					 <option>2015년</option>
+					 <option>2014년</option>
+					 <option>2013년</option>
+					 <option>2012년</option>
+				</select>
+                <input type="text" readonly class="review_write_txt" placeholder="생년을 선택해 주세요.">
+			</li>
+		</ul>
+	</div>
+    
+	<div class="review_send_check mt20">
+		<ul>
+			<li>
+				<p>리뷰 전송 동의</p>
+				<div class="switch" id="switch">
+					<input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox">
+					<div class="input_label">
+                        <div class="cmn-toggle-before"></div>
+                        <div class="cmn-toggle-after"></div>
+                    </div>
+			  </div>
+			</li>
+		</ul>
+	</div>
+    <div>
+    	<p class="btn_one" style="margin-top:30px; margin-bottom:30px;"><a href="#">글등록</a></p>
+    </div>
+<!--
+	<div class="btn_btm_box">
+		<p class="btn_one"><a href="#">글등록</a></p>
+	</div>-->
+</section>
+
+
+
+
+</div><!-- END wrap//-->
+</body>
+</html>

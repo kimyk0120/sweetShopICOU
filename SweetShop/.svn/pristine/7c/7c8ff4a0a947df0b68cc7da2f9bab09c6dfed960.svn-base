@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.sweetk.web.admin.mapper.ShopMapper">
+
+
+	<select id="shop_list" parameterType="map" resultType="hashmap">
+
+		select t1.*,t2.code_name from
+        (SELECT t1.shop_seq,
+			   t1.shop_name,
+			   t1.shop_reg_number,
+			   t1.shop_zip,
+			   t1.shop_sido,
+			   t1.shop_gu,
+			   t1.shop_addr1,
+			   t1.shop_addr2,
+			   t1.shop_location_lat,
+			   t1.shop_location_long,
+			   t1.shop_tel,
+			   t1.shop_kind,
+			   t1.shop_menu,
+			   t1.shop_owner_name,
+			   t1.shop_phone,
+			   t1.shop_fax,
+			   t1.shop_homepage_url,
+			   t1.shop_img_path,
+			   t1.shop_img_name,
+			   t1.shop_img_org_name,
+			   t1.shop_reg_date,
+			   t2.id
+		FROM shop_mst t1 JOIN login_user t2 ON t1.shop_seq=t2.shop_seq
+		order by t1.shop_seq desc) t1 join code_mst t2 on t1.shop_kind = t2.code_id
+		and t1.shop_name like CONCAT('%',#{shop_name},'%')
+		and t1.shop_reg_number like CONCAT('%',#{shop_reg_number},'%')
+		order by t1.shop_seq desc
+		limit  #{page_num}, #{page_size}
+	</select>
+
+	<select id="shop_total_count" parameterType="String" resultType="int">
+
+		select count(*)
+		from shop_mst
+		where shop_name like CONCAT('%',#{shop_name},'%')
+		and shop_reg_number like CONCAT('%',#{shop_reg_number},'%')
+
+	</select>
+
+	<select id="shop_by_name" parameterType="ShopVo" resultType="ShopVo">
+
+		select *
+		from shop_mst
+		where shop_name = #{shop_name}
+
+	</select>
+
+    <select id="shop" parameterType="String" resultType="hashmap">
+
+		SELECT t1.shop_seq,
+			   t1.shop_name,
+			   t1.shop_reg_number,
+			   t1.shop_zip,
+			   t1.shop_sido,
+			   t1.shop_gu,
+			   t1.shop_addr1,
+			   t1.shop_addr2,
+			   t1.shop_location_lat,
+			   t1.shop_location_long,
+			   t1.shop_tel,
+			   t1.shop_kind,
+			   t1.shop_menu,
+			   t1.shop_owner_name,
+			   t1.shop_phone,
+			   t1.shop_fax,
+			   t1.shop_homepage_url,
+			   t1.shop_img_path,
+			   t1.shop_img_name,
+			   t1.shop_img_org_name,
+			   t1.shop_reg_date,
+			   t2.id
+		FROM shop_mst t1 JOIN login_user t2 ON t1.shop_seq=t2.shop_seq
+		where t1.shop_seq = #{0}
+
+	</select>
+
+    <select id="shop_reg_number_check" parameterType="ShopVo" resultType="int">
+
+		select count(*)
+		from shop_mst
+		where shop_reg_number = #{shop_reg_number}
+
+	</select>
+
+    <select id="shop_name_check" parameterType="ShopVo" resultType="int">
+
+		select count(*)
+		from shop_mst
+		where shop_name = #{0}
+
+	</select>
+
+	<update id="shop_update" parameterType="ShopVo">
+		UPDATE shop_mst
+		SET
+			shop_name = #{shop_name},
+			shop_reg_number = #{shop_reg_number},
+			shop_zip = #{shop_zip},
+			shop_sido = #{shop_sido},
+			shop_gu = #{shop_gu},
+			shop_addr1 = #{shop_addr1},
+			shop_addr2 = #{shop_addr2},
+			shop_location_lat = #{shop_location_lat},
+			shop_location_long = #{shop_location_long},
+			shop_tel = #{shop_tel},
+			shop_kind = #{shop_kind},
+			shop_menu = #{shop_menu},
+			shop_owner_name = #{shop_owner_name},
+			shop_phone = #{shop_phone},
+			shop_fax = #{shop_fax},
+			shop_homepage_url = #{shop_homepage_url},
+			shop_img_path = #{shop_img_path},
+			shop_img_name = #{shop_img_name},
+			shop_img_org_name  = #{shop_img_org_name}
+		WHERE
+			shop_seq = #{shop_seq}
+	</update>
+
+	<insert id="shop_insert" parameterType="ShopVo">
+		insert into shop_mst  (shop_name,
+								shop_reg_number,
+								shop_zip,
+								shop_sido,
+								shop_gu,
+								shop_addr1,
+								shop_addr2,
+								shop_location_lat,
+								shop_location_long,
+								shop_tel,
+								shop_kind,
+								shop_menu,
+								shop_owner_name,
+								shop_phone,
+								shop_fax,
+								shop_homepage_url,
+								shop_img_path,
+								shop_img_name,
+								shop_img_org_name)
+						values (#{shop_name},
+								#{shop_reg_number},
+								#{shop_zip},
+								#{shop_sido},
+								#{shop_gu},
+								#{shop_addr1},
+								#{shop_addr2},
+								#{shop_location_lat},
+								#{shop_location_long},
+								#{shop_tel},
+								#{shop_kind},
+								#{shop_menu},
+								#{shop_owner_name},
+								#{shop_phone},
+								#{shop_fax},
+								#{shop_homepage_url},
+								#{shop_img_path},
+								#{shop_img_name},
+								#{shop_img_org_name})
+	</insert>
+
+	<delete id="shop_delete" parameterType="String">
+		DELETE FROM shop_mst
+		WHERE shop_seq = #{0}
+	</delete>
+
+	</mapper>

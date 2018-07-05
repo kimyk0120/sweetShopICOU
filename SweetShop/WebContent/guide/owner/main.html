@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<!-- ie조건부주석 Conditional Comment //-->
+<!--[if lt IE 7]>      <html class="ie6"> <![endif]-->
+<!--[if IE 7]>         <html class="ie7"> <![endif]-->
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> <html>         <!--<![endif]-->
+<head>
+<title>Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="apple-mobile-web-app-title" content="">
+<meta property="og:title" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:site_name" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:image" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:description" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta name="keywords" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Generator" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Author" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Keywords" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Description" content="Shop Owner ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
+
+<link rel="stylesheet" href="./src/css/import.css" type="text/css" />
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script  src="./src/js/default.js"></script>
+
+<!--[if lte IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- IE7 미만에서 HTML 및 CSS 엘리먼트, 투명 PNG 지원//-->
+<!--[if lt IE 9]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+<![endif]-->
+<!--[if lt IE 8]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
+<![endif]-->
+<!--[if lt IE 7]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE7.js"></script>
+<![endif]-->
+
+<!-- ie6~8버전에서 미디어쿼리를 해석할 수 있도록 만들어 주는 자바스크립트 라이브러리 //-->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<!-- 모바일 좌측 메뉴 오픈 구성 //-->
+<script type="text/javascript" src="./src/js/jquery.mmenu.all.min.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function( $ ) {
+       $("#menu").mmenu({
+           "slidingSubmenus": false,
+           "extensions": [
+            "pagedim-black"
+            ]
+         });
+     });
+ </script>
+
+
+</head>
+
+<body>
+<div id="wrap">
+
+
+
+<div id="header">
+	<h1>UNTITLED</h1>
+</div><!-- END header//-->
+
+
+
+<div id="login_title">
+	<img src="./images/login/icon_log.png" alt="" /><p>Super Admin</p>	
+</div><!-- END login_title//-->
+
+
+<div id="login_area">
+	<div class="arrow_top">▲</div>
+	<ul>
+		<li><p>안녕하세요.<br /><span class="en_letter">UNTITLED</span> 서비스 이용을 위하여<br /><strong>로그인</strong> 해주세요.</p></li>
+		<li>
+			<input type="text" id="log_input_id" class="logbox_blur" placeholder="아이디"  onClick="this.value=''" value="아이디"  title="아이디">
+			<input type="text" id="log_input_pw" class="logbox_blur" placeholder="비밀번호"  onClick="this.value=''" value="비밀번호" title="비밀번호">	
+			<!-- 아이디 저장 / 로그인 상태 유지 //-->
+			<div class="login_plus_area">
+				<fieldset>
+				<legend>로그인 추가 기능</legend>
+					<input type='checkbox' name='saveid' value='valuable' id="saveid"/><label for="saveid" class="mr30">아이디 저장</label>
+					<input type='checkbox' name='autolog' value='valuable' id="autolog"/><label for="autolog">로그인 상태 유지</label>
+				</fieldset>
+			</div>
+			<!-- 아이디 저장 / 로그인 상태 유지 끝 //-->
+			<div class="login_find_area">
+				<a href="#">아이디/비밀번호 찾기</a>
+			</div>
+		</li>
+	</ul>
+
+
+
+	<div class="btn_log"><a href="./owner_list.html">로그인</a></div>
+</div><!-- END login_area//-->
+
+	<script type="text/javascript">
+		$("#log_input_id").focus(function() {
+			$(this).attr('class','logbox_focus');
+			});
+			$("#log_input_id").blur(function() {
+				$(this).attr('class','logbox_blur');
+		});
+		$("#log_input_pw").focus(function() {
+			$(this).attr('class','logbox_focus');
+			});
+			$("#log_input_pw").blur(function() {
+				$(this).attr('class','logbox_blur');
+		});
+	</script>
+
+	<style>
+		@media only screen and (max-width: 767px) {
+			div#header {  display:none; }
+		}
+	</style>
+
+
+
+</div><!-- END wrap//-->
+</body>
+</html>

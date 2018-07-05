@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.sweetk.mobile.user.mapper.NoticeQnAMapper">
+		
+		<select id="selectNoticeCount" resultType="int">
+			SELECT count(*) 
+			FROM NOTICE
+			WHERE NOTICE_TARGET = "U"
+		</select>
+
+		<select id="selectNoticeList" resultType="NoticeQnAVO">
+			SELECT 
+				(@rownum:=@rownum+1) as rnum,
+				NOTICE_SEQ,
+				NOTICE_TARGET,
+				NOTICE_TITLE,
+				NOTICE_COMMENT,
+				NOTICE_PATH,
+				NOTICE_FILE,
+				NOTICE_ORG_NAME,
+				NOTICE_VIEW_COUNT,
+				REG_DATE,
+				EDIT_DATE 
+			FROM NOTICE,(select @rownum:=0) as v
+			WHERE NOTICE_TARGET = "U"
+			ORDER BY REG_DATE DESC
+            limit #{0},#{1}
+		</select>
+
+		<select id="selectNoticeContent" resultType="Map" parameterType="int">
+			SELECT * 
+			FROM NOTICE
+			WHERE NOTICE_SEQ = #{0}
+			AND 1=1
+		</select>
+
+		<select id="selectQnAList" resultType="NoticeQnAVO" parameterType="int">
+			SELECT 
+				(@rownum:=@rownum+1) as rnum,
+				QNA_SEQ,
+				QNA_TARGET,
+				QNA_TYPE,
+				QNA_TITLE,
+				QNA_COMMENT,
+				QNA_SHOP_NAME,
+				QNA_STATUS,
+				TOP_QNA_SEQ,
+				QNA_WRITER,
+				QNA_WRITER_SEQ,
+				QNA_REG_DATE,
+				QNA_EDIT_DATE 
+			FROM SHOP_QNA,(select @rownum:=0) as v
+			WHERE QNA_WRITER_SEQ = #{0}
+			ORDER BY QNA_REG_DATE DESC
+			 limit #{1},#{2}
+		</select>
+
+		<select id="selectQnAContent" resultType="NoticeQnAVO" parameterType="int">
+			SELECT * 
+			FROM SHOP_QNA
+			WHERE QNA_SEQ = #{0}
+		</select>
+
+		
+
+		<insert id="insertQnA" parameterType="NoticeQnAVO" >
+			INSERT INTO SHOP_QNA (QNA_TYPE, QNA_TITLE, QNA_COMMENT, QNA_STATUS, QNA_WRITER_SEQ,QNA_TARGET)
+			VALUES (#{qna_type}, #{qna_title}, #{qna_comment}, #{qna_status} , #{user_seq},"A")
+			<selectKey resultType="int" keyProperty="QNA_SEQ" order="AFTER">
+				select max(QNA_SEQ) FROM SHOP_QNA
+			</selectKey>
+		</insert>
+	
+	</mapper>

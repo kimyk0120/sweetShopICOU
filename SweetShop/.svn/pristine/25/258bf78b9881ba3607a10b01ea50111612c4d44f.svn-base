@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<!-- ie조건부주석 Conditional Comment //-->
+<!--[if lt IE 7]>      <html class="ie6"> <![endif]-->
+<!--[if IE 7]>         <html class="ie7"> <![endif]-->
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> <html>         <!--<![endif]-->
+<head>
+<title>Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="apple-mobile-web-app-title" content="">
+<meta property="og:title" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:site_name" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:image" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:description" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta name="keywords" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Generator" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Author" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Keywords" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Description" content="Super Admin ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
+
+<link rel="stylesheet" href="./src/css/import.css" type="text/css" />
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script  src="./src/js/default.js"></script>
+
+
+<!--[if lte IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- IE7 미만에서 HTML 및 CSS 엘리먼트, 투명 PNG 지원//-->
+<!--[if lt IE 9]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+<![endif]-->
+<!--[if lt IE 8]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
+<![endif]-->
+<!--[if lt IE 7]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE7.js"></script>
+<![endif]-->
+
+<!-- ie6~8버전에서 미디어쿼리를 해석할 수 있도록 만들어 주는 자바스크립트 라이브러리 //-->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+</head>
+
+
+
+
+<style>
+
+table td, table th { border:1px solid #d4d4d4; text-align:center; padding:10px; margin:0; border-collapse:collapse;border-spacing:0; font-size:14px; color:#000; background:#fff; }
+.ok { background:#eaffea; }
+</style>
+
+
+</head>
+<body>
+
+<table style="width:1000px; margin:150px auto; ">
+<colgroup>
+<col width="*" />
+<col width="15%" />
+<col width="15%" />
+<col width="15%" />
+<col width="15%" />
+<col width="15%" />
+</colgroup>
+
+	<tbody class="bgcolor">
+		<tr>
+			<th colspan="6"  class="ok"><a href="./main.html">로그인</a></th>
+		</tr>
+		<tr>
+			<th>Shop Owner 관리</th>
+			<td class="ok"><a href="./owner_list.html">리스트</a></td>
+			<td class="ok"><a href="./owner_search_result.html">검색결과 (없음)</a></td>
+			<td class="ok"><a href="./owner_detail.html">상세보기</a></td>
+			<td class="ok"><a href="./owner_modify.html">수정</a></td>
+			<td class="ok"><a href="./owner_regis.html">등록</a></td>
+		</tr>
+		<tr>
+			<th>홈페이지 관리</th>
+			<td><a href="./owner_list.html">리스트</a></td>
+			<td><a href="#">수정</a></td>
+			<td><a href="#">삭제</a></td>
+			<td><a href="#">등록</a></td>
+			<td><a href="#">등록</a></td>
+		</tr>
+		<tr>
+			<th>공지사항 관리</th>
+			<td class="ok"><a href="./notice_list.html">리스트</a></td>
+			<td class="ok"><a href="./notice_search_result.html">검색결과 (없음)</a></td>
+			<td class="ok"><a href="./notice_detail.html"">상세보기</a></td>
+			<td class="ok"><a href="./notice_modify.html">수정</a></td>
+			<td class="ok"><a href="notice_write.html">등록</a></td>
+		</tr>
+		<tr>
+			<th>문의하기 관리</th>
+			<td class="ok"><a href="./qa_list.html">리스트</a></td>
+			<td class="ok"><a href="./qa_search_result.html">검색결과 (없음)</a></td>
+			<td class="ok"><a href="./qa_detail.html">상세보기</a></td>
+			<td class="ok"><a href="./qa_reply_modify.html">답변수정</a></td>
+			<td class="ok"><a href="./qa_reply_detail.html">답변등록글보기</a></td>
+		</tr>
+		<tr>
+			<th>팝업메세지</th>
+			<td class="ok"><a href="#pop_error" class="btn_pop_error">로그인오류</a></td>
+			<td class="ok"><a href="#pop_delete" class="btn_pop_delete">SHOP OWNER 삭제</a></td>
+			<td class="ok"><a href="#pop_modify" class="btn_pop_modify">수정완료</a></td>
+			<td class="ok"><a href="#pop_ok" class="btn_pop_ok">등록완료</a></td>
+			<td class="ok"><a href="#pop_reply_ok" class="btn_pop_reply_ok">답변등록완료</a></td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+<!-- 팝업 시리즈 시작 //-->
+
+
+
+<!-- 로그인 오류 팝업 //-->
+<div class="dim-layer">
+    <div class="dimBg"></div>
+    <div id="pop_error" class="pop_layer">
+        <div class="pop_title" style="background:url(./images/popup/pop_tit_bg_red.png) no-repeat center top;"><img src="./images/popup/icon_01.png" /></div>
+		<div class="pop_cont">
+			<p>로그인 오류</p>
+			아이디 또는 비밀번호를 확인해 주세요.
+		</div>
+		<div class="pop_btn_area">
+			<a href="#" class="btn-layerClose"><img src="./images/popup/btn_confirm.png" /></a>
+		</div>
+     </div><!-- END pop_error//-->
+</div><!-- END dim-layer//-->
+<!-- 로그인 오류 팝업 끝 //-->
+
+
+
+
+<!-- 샵오너 삭제 팝업 //-->
+<div class="dim-layer-02">
+    <div class="dimBg-02"></div>
+    <div id="pop_delete" class="pop_layer">
+        <div class="pop_title" style="background:url(./images/popup/pop_tit_bg_red.png) no-repeat center top;"><img src="./images/popup/icon_02.png" /></div>
+		<div class="pop_cont">
+			<p>Shop Owner 삭제</p>
+			Shop Owner를 삭제하시겠습니까?
+		</div>
+		<div class="pop_btn_area">
+			<a href="#" class="btn-layerClose-02"><img src="./images/popup/btn_yes.png" /></a>
+			<a href="#" class="btn-layerClose-02"><img src="./images/popup/btn_no.png" /></a>
+		</div>
+     </div><!-- END pop_error//-->
+</div><!-- END dim-layer//-->
+<!-- 샵오너 삭제 팝업 끝 //-->
+
+
+
+
+<!-- 수정완료 팝업 //-->
+<div class="dim-layer-03">
+    <div class="dimBg-03"></div>
+    <div id="pop_modify" class="pop_layer">
+        <div class="pop_title" style="background:url(./images/popup/pop_tit_bg_green.png) no-repeat center top;"><img src="./images/popup/icon_03.png" /></div>
+		<div class="pop_cont">
+			<p class="green">수정 완료</p>
+			Shop Owner 정보가 수정되었습니다.
+		</div>
+		<div class="pop_btn_area">
+			<a href="#" class="btn-layerClose-03"><img src="./images/popup/btn_confirm.png" /></a>
+		</div>
+     </div><!-- END pop_error//-->
+</div><!-- END dim-layer//-->
+<!-- 수정완료 팝업 끝 //-->
+
+
+<!-- 등록완료 팝업 //-->
+<div class="dim-layer-04">
+    <div class="dimBg-04"></div>
+    <div id="pop_ok" class="pop_layer">
+        <div class="pop_title" style="background:url(./images/popup/pop_tit_bg_green.png) no-repeat center top;"><img src="./images/popup/icon_03.png" /></div>
+		<div class="pop_cont">
+			<p class="green">등록 완료</p>
+			Shop Owner 등록이 완료되었습니다.
+		</div>
+		<div class="pop_btn_area">
+			<a href="#" class="btn-layerClose-04"><img src="./images/popup/btn_confirm.png" /></a>
+		</div>
+     </div><!-- END pop_error//-->
+</div><!-- END dim-layer//-->
+<!-- 등록완료 팝업 끝 //-->
+
+
+
+<!-- 답변등록완료 팝업 //-->
+<div class="dim-layer-05">
+    <div class="dimBg-05"></div>
+    <div id="pop_reply_ok" class="pop_layer">
+        <div class="pop_title" style="background:url(./images/popup/pop_tit_bg_green.png) no-repeat center top;"><img src="./images/popup/icon_03.png" /></div>
+		<div class="pop_cont">
+			<p class="green">등록 완료</p>
+			답변 등록이 완료되었습니다.
+		</div>
+		<div class="pop_btn_area">
+			<a href="#" class="btn-layerClose-05"><img src="./images/popup/btn_confirm.png" /></a>
+		</div>
+     </div><!-- END pop_error//-->
+</div><!-- END dim-layer//-->
+<!-- 답변등록완료 팝업 끝 //-->
+
+
+
+
+
+<script  src="./src/js/dim_popup.js"></script>
+
+
+</body>
+</html>

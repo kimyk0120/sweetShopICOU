@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.sweetk.web.admin.mapper.LoginMapper">
+
+	<select id="login_check" parameterType="LoginVo" resultType="int">
+
+		select count(*)
+		from login_user
+		where id = #{id}
+		and pwd = #{pwd}
+
+
+	</select>
+
+	<select id="login_id_check" parameterType="LoginVo" resultType="int">
+
+		select count(*)
+		from login_user
+		where id = #{id}
+
+	</select>
+
+	<insert id="groupConcatMaxLenSet" parameterType="int">
+	    SET SESSION group_concat_max_len = 1000000;
+	</insert>
+
+	<select id="loginInfo" parameterType="LoginVo" resultType="LoginVo">
+
+		select id, pwd , user_type ,shop_seq
+		from login_user
+		where id = #{id}
+		and pwd = #{pwd}
+
+	</select>
+
+	<select id="login_user_info" parameterType="map" resultType="map">
+
+		select id, pwd , user_type ,shop_seq
+		from login_user
+		where shop_seq = #{shop_seq}
+
+	</select>
+
+	<update id="login_update" parameterType="LoginVo">
+		UPDATE login_user
+		SET
+			id = #{id},
+			<if test="pw != null and pw != '' ">
+			pwd = #{pwd} ,
+			</if>
+			id = #{id}
+		WHERE
+			id = #{id}
+	</update>
+
+	<update id="login_update_by_shop_seq" parameterType="LoginVo">
+		UPDATE login_user
+		SET
+			pwd = #{pwd}
+		WHERE
+			shop_seq = #{shop_seq}
+	</update>
+
+	<insert id="login_insert" parameterType="LoginVo">
+		insert into login_user  (id, pwd,user_type,shop_seq)
+		values (#{id}, #{pwd}, #{user_type}, #{shop_seq})
+	</insert>
+
+	<delete id="login_delete" parameterType="String">
+		DELETE FROM login_user
+		WHERE  id = #{0}
+	</delete>
+
+	<delete id="login_delete_by_shop_seq" parameterType="String">
+		DELETE FROM login_user
+		WHERE  shop_seq = #{0}
+	</delete>
+
+	</mapper>

@@ -1,0 +1,343 @@
+<!doctype html>
+<!-- ie조건부주석 Conditional Comment //-->
+<!--[if lt IE 7]>      <html class="ie6"> <![endif]-->
+<!--[if IE 7]>         <html class="ie7"> <![endif]-->
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html lang="ko">
+<!--<![endif]-->
+<head>
+<title>USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+<meta name="apple-mobile-web-app-title" content="">
+<meta property="og:title" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:site_name" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:image" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:description" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta name="keywords" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Generator" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Author" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Keywords" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Description" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
+
+<link rel="stylesheet" href="./src/css/import.css" type="text/css" />
+<script  src="./src/js/jquery-1.11.3.min.js"></script>
+<script  src="./src/js/default.js"></script>
+
+<script>
+	$(function(){
+		function pop_layer( show ){
+			if( show ){
+				$("#overlay_t").show();
+				setTimeout(function(){
+					show_pop($("#popup_layer_1"));		
+				}, 100 );
+				$("body").on("touchmove", function(e){e.preventDefault()});
+			}else{
+				$('#popup_layer_1, #overlay_t').hide(); 	
+				$("body").off("touchmove");
+			}
+		}   	
+	   
+	   $('#overlay_t, .close').click(function(e){ 
+		   e.preventDefault(); 
+		   pop_layer(false);
+	   }); 	
+	   
+		function show_pop( obj ){
+			obj.show();				
+			var popH = obj.innerHeight();
+			var popW = obj.innerWidth();
+			var winW = $(window).width();
+			var winH = $(window).height();
+			var posW = (winW-popW)/2;
+			var posY = (winH-popH)/2;
+			obj.css({"left":posW, "top":posY});	   
+		}
+	   
+	   pop_layer(true);	
+	});
+</script>
+
+</head>
+
+<body >
+
+
+
+
+<!-- 클릭으로 오픈 시 사용 <a href="#" class="trigger">레이어팝업 열기</a> //-->
+<div id="overlay_t"></div> 
+<div id="popup_layer_1">
+	<div class="layer_padding">
+		<div class="pop_title">
+			<p>리뷰 등록 완료</p>
+			리뷰가 정상적으로 등록되었습니다.
+		</div>
+	
+	</div><!--END layer_padding//-->
+
+	<div class="pop_btm_btn_area">
+		<a href="#" class="close">OK</a>
+	</div>
+
+
+
+</div><!--END popup_layer_1//-->
+
+
+
+<div id="wrap_wide" >
+
+	<!-- 서브 상단 //-->
+	<header class="sub">
+		<ul>
+			<li><a href="javascript: var uAgent=navigator.userAgent; if(uAgent.match(/opr|u;/i)) location.href=document.referrer; else history.back();" class="menu-btn"><img src="./images/common/btn_arrow_back.png" style="width:16px; height:auto; margin-right:5px;" />Back</a></li>
+			<li>리뷰 등록</li>
+			<li></li>
+		</ul>
+	</header>
+
+
+
+<section class="sub_content_wrap_wide">
+
+	<dl class="review_write_top">
+		<dt>이 장소는 어떠셨나요?</dt>
+		<dd>
+			<ul>
+				<li><a href="http://www.naver.com"><img src="./images/common/btn_minus.png" alt="마이너스" style="width:30px; height:auto;" /></a></li>
+				<li>
+					<img src="./images/common/star_gray_big_single_on.png" alt="" style="width:30px; height:auto;" />
+					<img src="./images/common/star_gray_big_single_half.png" alt="" style="width:30px; height:auto;" />
+					<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:30px; height:auto;" />
+					<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:30px; height:auto;" />
+					<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:30px; height:auto;" />
+				</li>
+				<li><a href="#"><img src="./images/common/btn_plus.png" alt="플러스" style="width:30px; height:auto;" /></a></li>
+			</ul>
+		</dd>
+	</dl>
+
+
+	<div class="review_write_check_list">
+		<ul>
+			<li>
+				<label for="id" class="review_write_tit">방문유형</label>
+				<select  id="id" class="review_write_select" ><!-- 선택 완료시 화살표 색상 변경은 클래스 on 삽입 추가 //-->
+					 <option selected>?누구와 방문하셨나요</option>
+					 <option>가족</option>
+					 <option>비즈니스</option>
+					 <option>커플</option>
+					 <option>친구</option>
+					 <option>나홀로</option>
+				</select>
+			</li>
+			<li>
+				<label for="date" class="review_write_tit">방문시기</label>
+				<input type="date"  id="date" class="review_write_input on" placeholder="언제 방문하셨나요?"  ><!-- 선택 완료시 화살표 색상 변경은 클래스 on 삽입 추가 //-->
+				<script>
+					$('input[type=date]').each(function(){
+						var input=$(this);
+						var id=input.attr('id');
+						if (!id){
+							id='RandomGeneratedId_'+Math.random().toString(36).substring(7);
+							input.attr('id',id);
+						}
+						var placeholder=input.attr('placeholder');
+						if (placeholder){
+							$('head').append('<style> #'+id+':before{ content:"'+placeholder+'"; width:100%; color:#777786; } #'+id+':focus:before,#'+id+'.not_empty:before{ content:none }</style>');
+						}
+						input.on('change keyup',function(){
+							if ($(this).val()){
+								$(this).addClass('not_empty')
+							}else{
+								$(this).removeClass('not_empty')
+							}
+							return false;
+						});
+					});
+				</script>
+			</li>
+			<li style="padding-top:40px">
+				<label  for="review_subject" class="review_write_tit2">리뷰 제목</label>
+				<input type="text" id="review_subject" class="review_write_input2" placeholder="리뷰 제목을 적어주세요."  style="width:100%;" >
+			</li>
+			<li class="textarea_box" style="padding-top:40px">
+				<label  for="review_cont" class="review_write_tit2">리뷰 내용</label>
+				<textarea id="review_cont"  placeholder="답변을 입력해 주세요.&#13;&#10;마음에 들었던 점이나 부족하다고 생각되었던 점을 말해주세요!" class="review_write_textarea" style="width:100%;" ></textarea>	
+				<script type="text/javascript">
+					$(document).ready(function() {
+						$('.textarea_box').on( 'keyup', 'textarea', function (e){
+							$(this).css('height', 'auto' );
+							$(this).height( this.scrollHeight );
+						});
+						$('.textarea_box').find( 'textarea' ).keyup();
+					});	
+
+				</script>
+			</li>
+		</ul>
+	</div>
+
+
+	
+	<div class="review_write_check_list2 mt20">
+		<ul>
+
+			<li>
+				<p>서비스</p>
+				<ul class="check_list_star">
+					<li><img src="./images/common/btn_minus.png" alt="마이너스" style="width:20px; height:auto;" /></li>
+					<li>
+						<img src="./images/common/star_gray_big_single_on.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_half.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:20px; height:auto;" />
+					</li>
+					<li><img src="./images/common/btn_plus.png" alt="플러스" style="width:20px; height:auto;" /></li>
+				</ul>	 
+			</li>
+
+			<li>
+				<p>맛</p>
+				<ul class="check_list_star">
+					<li><img src="./images/common/btn_minus.png" alt="마이너스" style="width:20px; height:auto;" /></li>
+					<li>
+						<img src="./images/common/star_gray_big_single_on.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_half.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:20px; height:auto;" />
+					</li>
+					<li><img src="./images/common/btn_plus.png" alt="플러스" style="width:20px; height:auto;" /></li>
+				</ul>	 
+			</li>
+
+			<li>
+				<p>가격</p>
+				<ul class="check_list_star">
+					<li><img src="./images/common/btn_minus.png" alt="마이너스" style="width:20px; height:auto;" /></li>
+					<li>
+						<img src="./images/common/star_gray_big_single_on.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_half.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:20px; height:auto;" />
+					</li>
+					<li><img src="./images/common/btn_plus.png" alt="플러스" style="width:20px; height:auto;" /></li>
+				</ul>	 
+			</li>
+
+			<li>
+				<p>청결도</p>
+				<ul class="check_list_star">
+					<li><img src="./images/common/btn_minus.png" alt="마이너스" style="width:20px; height:auto;" /></li>
+					<li>
+						<img src="./images/common/star_gray_big_single_on.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_half.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:20px; height:auto;" />
+					</li>
+					<li><img src="./images/common/btn_plus.png" alt="플러스" style="width:20px; height:auto;" /></li>
+				</ul>	 
+			</li>
+
+			<li>
+				<p>시설</p>
+				<ul class="check_list_star">
+					<li><img src="./images/common/btn_minus.png" alt="마이너스" style="width:20px; height:auto;" /></li>
+					<li>
+						<img src="./images/common/star_gray_big_single_on.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_half.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:20px; height:auto;" />
+					</li>
+					<li><img src="./images/common/btn_plus.png" alt="플러스" style="width:20px; height:auto;" /></li>
+				</ul>	 
+			</li>
+
+			<li>
+				<p>위치</p>
+				<ul class="check_list_star">
+					<li><img src="./images/common/btn_minus.png" alt="마이너스" style="width:20px; height:auto;" /></li>
+					<li>
+						<img src="./images/common/star_gray_big_single_on.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_half.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:20px; height:auto;" />
+						<img src="./images/common/star_gray_big_single_off.png" alt="" style="width:20px; height:auto;" />
+					</li>
+					<li><img src="./images/common/btn_plus.png" alt="플러스" style="width:20px; height:auto;" /></li>
+				</ul>	 
+			</li>
+		</ul>
+	</div>
+
+
+	<div class="review_write_check_list mt20">
+		<ul>
+			<li>
+				<label for="sex" class="review_write_tit">성별</label>
+				<select  id="sex" class="review_write_select">
+					 <option selected>성별을 선택해 주세요</option>
+					 <option>남성</option>
+					 <option>여성</option>
+				</select>
+			</li>
+
+			<li>
+				<label for="birthday" class="review_write_tit">생년</label>
+				<select  id="birthday" class="review_write_select">
+					 <option selected>생년을 선택해 주세요</option>
+					 <option>2016년</option>
+					 <option>2015년</option>
+					 <option>2014년</option>
+					 <option>2013년</option>
+					 <option>2012년</option>
+				</select>
+			</li>
+		</ul>
+	</div>
+
+
+	<link rel="stylesheet" href="./src/css/toggle_switch.css" type="text/css" />
+	<div class="review_send_check mt20">
+		<ul>
+			<li>
+				<p>리뷰 전송 동의</p>
+				<div class="switch">
+					<input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox">
+					<label for="cmn-toggle-1"></label>
+			  </div>
+			</li>
+		</ul>
+	</div>
+
+
+	<div class="btn_btm_box">
+		<p class="btn_one_on"><a href="#">글등록</a></p>
+
+	</div>
+
+
+
+
+
+
+</section>
+
+
+
+
+</div><!-- END wrap//-->
+</body>
+</html>

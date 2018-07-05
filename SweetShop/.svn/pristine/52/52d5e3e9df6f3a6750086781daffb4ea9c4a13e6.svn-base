@@ -1,0 +1,199 @@
+<!doctype html>
+<!-- ie조건부주석 Conditional Comment //-->
+<!--[if lt IE 7]>      <html class="ie6"> <![endif]-->
+<!--[if IE 7]>         <html class="ie7"> <![endif]-->
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html lang="ko">
+<!--<![endif]-->
+<head>
+<title>USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+<meta name="apple-mobile-web-app-title" content="">
+<meta property="og:title" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:site_name" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:image" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:description" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta name="keywords" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Generator" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Author" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Keywords" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Description" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
+
+<link rel="stylesheet" href="./src/css/import.css" type="text/css" />
+<script  src="./src/js/jquery-1.11.3.min.js"></script>
+<script  src="./src/js/default.js"></script>
+
+
+<!-- 좌우 스크롤 슬라이드 스와이프 //-->
+<link rel="stylesheet" href="./src/css/swiper.min.css">
+
+
+</head>
+
+<body >
+
+
+
+<div id="wrap_wide" >
+	<!-- 서브 상단 //-->
+	<header class="sub">
+		<ul>
+			<li><a href="javascript: var uAgent=navigator.userAgent; if(uAgent.match(/opr|u;/i)) location.href=document.referrer; else history.back();"  class="menu-btn"><img src="./images/common/btn_arrow_back.png" style="width:16px; height:auto; margin-right:5px;" />Back</a></li>
+			<li>Sandals</li>
+			<li><a href="#" class="menu-btn"><img src="./images/common/btn_logout.png" style="width:18px; height:auto; margin-right:5px;" /></a></li>
+		</ul>
+	</header>
+
+
+
+	<section class="sub_content_wrap">
+	
+	<!-- 섹션 시작 //-->
+	<div class="shop_detail">
+		<div class="ribbon"><img src="./images/common/ribbon_bakery.png" /></div>
+		<div class="favorite"><img src="./images/common/icon_favorite_off.png"  /></div>
+		
+		<ul class="cont">
+			<li class="title"><a href="http://daum.net" class="color_bakery"><p class="notcolor">빵집ㆍ석촌호수</p>2Cafe Rosy</a></li>
+			<li class="photo"><a href="#"><img src="./images/common/@photo_02.jpg"  /></a></li>
+			<li class="memo">노곤한 몸의 피로를 풀어줄 <br />THE VINOTHERAPY SPA "Sandals"</li>
+			<li class="infomation">
+				<ul>
+					<li><img src="./images/common/icon_list_new.png" /><img src="./images/common/icon_list_dc.png" /></li>
+					<li><p><img src="./images/common/star_gray_min_5.png" /></p>3.6km</li>
+				</ul>			
+			</li>
+		</ul>
+
+		<div class="shop_info_basic">
+			<dl>
+				<dt><img src="./images/common/icon_coremenu.png" style="width:14px; height:auto; margin-right:7px;" alt="" />주요메뉴</dt>
+				<dd>바캉스 패키지</dd>
+			</dl>
+			<dl>
+				<dt><img src="./images/common/icon_opentime.png" style="width:14px; height:auto; margin-right:7px;" alt="" />영업시간</dt>
+				<dd>09:00 ~ 20:00</dd>
+			</dl>
+			<dl>
+				<dt><img src="./images/common/icon_homepage.png" style="width:14px; height:auto; margin-right:7px;" alt="" />홈페이지</dt>
+				<dd  class="underline">www.liberty.com</dd>
+			</dl>
+			<dl>
+				<dt><img src="./images/common/icon_tel.png" style="width:14px; height:auto; margin-right:7px;" alt="" />휴대전화</dt>
+				<dd  class="underline"><span class="tel_color">010-8282-4021</span></dd>
+			</dl>
+		</div>
+
+
+
+<!-- 아코디언 효과 필요 //-->
+		<div class="shoview_detail_text">
+			<p class="arrow"><a href="#"><img src="./images/common/arrow_btm.png" /></a></p>
+			<p class="title">상세설명</p>
+			<p class="cont">기본 구성 패키지는 10만원 부터 시작됩니다. 방문 전 상담 및 예약 일정을 잡...</p>
+		</div>
+
+		<div class="shoview_detail_map">
+			<p class="arrow"><a href="#"><img src="./images/common/arrow_top.png" /></a></p>
+			<p class="title">위치정보</p>
+			<p class="cont"><img src="./images/common/@map.jpg" alt="" style="width:100%; height:auto;" /></p>
+			<p class="address_text">경기도 안양시 동안구 평촌대로217번길 45 평촌코아주 3층</p>
+		</div>
+
+
+
+	</div><!-- 섹션 끝 //-->
+
+
+
+
+
+
+</section>
+<section class="sub_content_wrap_wide">
+
+
+	<div class="evre_menu  pl5 pr5">
+		<ul>
+			<li><a href="#">Event</a></li>
+			<li class="on"><a href="#">Review</a></li>
+		</ul>		
+	</div>
+	<div class="btn_review_more"><a href="#">전체 리뷰 보기</a></div>
+
+
+	<!-- 리뷰 디자인 시작 //-->
+	<div class="review_wrap">
+		<ul>
+			<li>
+				<p class="reviews"><img src="./images/common/icon_people.png" style="width:16px; height:auto;" /><span>113</span> Reviews</p>
+				<div class="review_jumsu">
+					<ul>
+						<li>4</li>
+						<li>.</li>
+						<li>8</li>
+					</ul>
+				</div>
+				<p class="review_star"><img src="./images/common/star_big_full.png" /><img src="./images/common/star_big_full.png" /><img src="./images/common/star_big_full.png" /><img src="./images/common/star_big_half.png" /><img src="./images/common/star_big_no.png" /></p>
+
+			</li>
+
+			<li>
+				<ul class="jumsu">
+					<li>서비스<p>4.5<span> / 5</span></p></li>
+					<li>품질<p>4<span> / 5</span></p></li>
+					<li>가격<p>4.1<span> / 5</span></p></li>
+					<li>청결도<p>4.8<span> / 5</span></p></li>
+					<li>시설<p>3.2<span> / 5</span></p></li>
+					<li>위치<p>3.2<span> / 5</span></p></li>
+				</ul>			
+			</li>
+
+			<li>
+				<ul class="jumsu_star">
+					<li>
+						5.0<span>
+						<img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" />
+						</span><strong>45%</strong>
+					</li>
+					<li>
+						4.0<span>
+						<img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" />
+						</span><strong>38%</strong>
+					</li>
+					<li>
+						3.0<span>
+						<img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" />
+						</span><strong>11%</strong>
+					</li>
+					<li>
+						2.0<span>
+						<img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" />
+						</span><strong>8%</strong>
+					</li>
+					<li>1.0<span>
+						<img src="./images/common/star_gray_single.png" />
+						</span><strong>6%</strong>
+					</li>
+				</ul>	
+				<p class="btn_review"><a href="#"><img src="./images/common/btn_review_write.png" style="width:65px; height:auto;" /></a></p>
+			</li>
+		</ul>
+	</div><!-- end review_wrap //-->
+
+
+
+
+</section>
+
+
+
+</div><!-- END wrap//-->
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!doctype html>
+<!-- ie조건부주석 Conditional Comment //-->
+<!--[if lt IE 7]>      <html class="ie6"> <![endif]-->
+<!--[if IE 7]>         <html class="ie7"> <![endif]-->
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html lang="ko">
+<!--<![endif]-->
+<head>
+<title>USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+<meta name="apple-mobile-web-app-title" content="">
+<meta property="og:title" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:site_name" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:image" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:description" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta name="keywords" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Generator" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Author" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Keywords" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Description" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
+
+<link rel="stylesheet" href="./src/css/import.css" type="text/css" />
+<link rel="stylesheet" href="./src/css/toggle_switch.css" type="text/css" />
+<script type="text/javascript" src="./src/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="./src/js/jquery.touchSwipe.min.js"></script>
+<script type="text/javascript" src="./src/js/default.js"></script>
+
+<script>
+	$(function(){		
+		//동의 버튼
+		
+		function CheckSwipeButton( obj ){
+			this.checkSwipe = obj;
+			this.cmn_toggle = this.checkSwipe.find(".cmn-toggle");
+			this.cmn_toggle_before = this.checkSwipe.find(".cmn-toggle-before");
+			this.cmn_toggle_after = this.checkSwipe.find(".cmn-toggle-after");				
+			this.swipe();				
+		}
+		
+		CheckSwipeButton.prototype.swipe = function(){
+			var thisObj = this;
+			this.checkSwipe.swipe( {
+				swipe:function(event, direction, distance, duration, fingerCount, fingerData) {		
+					if( direction == "right" ){
+						thisObj.checkEffect(true);
+					}else if( direction == "left" ){
+						thisObj.checkEffect(false);
+					}	
+				},
+				tap:function(event, target) {
+					if(thisObj.cmn_toggle.attr("checked")){
+						thisObj.checkEffect(false);
+					}else{
+						thisObj.checkEffect(true);
+					} 				
+				},
+			   threshold:1
+			});		
+		}
+		
+		CheckSwipeButton.prototype.checkEffect =  function( state ){
+			this.cmn_toggle.attr("checked", state);
+			var bgColor;
+			var moveX;
+			if( state ){
+				bgColor = "#ff8b72";
+				moveX = "28px";	
+			}else{
+				bgColor = "#f1f1f1";
+				moveX = "0";	
+			}			
+			this.cmn_toggle_before.css({"background-color": bgColor});
+			this.cmn_toggle_after.css({"left": moveX });
+		}
+		
+		
+		$(".switch").each( function( index, obj ){
+			var checkSwipeButton = new CheckSwipeButton( $(obj) );			
+		});
+		
+		
+		
+		
+	})
+</script>
+
+</head>
+
+<body class="addH">
+
+<div id="wrap_wide" >
+
+	<!-- 서브 상단 //-->
+	<header class="sub">
+		<ul>
+			<li><a href="javascript: var uAgent=navigator.userAgent; if(uAgent.match(/opr|u;/i)) location.href=document.referrer; else history.back();" class="menu-btn"><img src="./images/common/btn_arrow_back.png" style="width:16px; height:auto; margin-right:5px;" />Back</a></li>
+			<li>설정</li>
+			<li></li>
+		</ul>
+	</header>
+
+
+
+<section class="sub_content_wrap_wide pb20">
+
+
+	
+	<div class="review_send_check">
+		<ul>
+			<li>
+				<p>알림 허용</p>                
+				<div class="switch a1" id="test1">
+					<input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox">
+					<div class="input_label">
+                        <div class="cmn-toggle-before"></div>
+                        <div class="cmn-toggle-after"></div>
+                    </div>
+			  </div>
+			</li>
+		</ul>
+	</div>
+
+	<div class="review_send_check mt20">
+		<ul>
+			<li>
+				<p>이벤트</p>
+				<div class="switch a2">
+					<input id="cmn-toggle-2" class="cmn-toggle cmn-toggle-round" type="checkbox" >
+					<div class="input_label">
+                        <div class="cmn-toggle-before"></div>
+                        <div class="cmn-toggle-after"></div>
+                    </div>
+			  </div>
+			</li>
+			<li>
+				<p>홍보전단</p>
+				<div class="switch a3">
+					<input id="cmn-toggle-3" class="cmn-toggle cmn-toggle-round" type="checkbox">
+					<div class="input_label">
+                        <div class="cmn-toggle-before"></div>
+                        <div class="cmn-toggle-after"></div>
+                    </div>
+			  </div>
+			</li>
+			<li>
+				<p>자주 찾는 가게 소식</p>
+				<div class="switch a4">
+					<input id="cmn-toggle-4" class="cmn-toggle cmn-toggle-round" type="checkbox">
+					<div class="input_label">
+                        <div class="cmn-toggle-before"></div>
+                        <div class="cmn-toggle-after"></div>
+                    </div>
+			  </div>
+			</li>
+			<li>
+				<p>1:1 문의 답변</p>
+				<div class="switch a5">
+					<input id="cmn-toggle-5" class="cmn-toggle cmn-toggle-round" type="checkbox">
+					<div class="input_label">
+                        <div class="cmn-toggle-before"></div>
+                        <div class="cmn-toggle-after"></div>
+                    </div>
+			  </div>
+			</li>
+			<li>
+				<p>공지사항</p>
+				<div class="switch a6">
+					<input id="cmn-toggle-6" class="cmn-toggle cmn-toggle-round" type="checkbox">
+					<div class="input_label">
+                        <div class="cmn-toggle-before"></div>
+                        <div class="cmn-toggle-after"></div>
+                    </div>
+			  </div>
+			</li>     
+                  
+		</ul>
+         
+	</div>
+
+
+
+</section>
+
+
+
+
+</div><!-- END wrap//-->
+</body>
+</html>

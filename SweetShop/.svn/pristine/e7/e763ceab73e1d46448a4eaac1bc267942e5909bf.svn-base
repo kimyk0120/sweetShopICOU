@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.sweetk.mobile.api.mapper.AppApiMapper">
+
+	<select id="user_check" parameterType="map" resultType="int">
+
+		SELECT count(*)
+		FROM user_mst
+		WHERE user_key = #{deviceUDID}
+		
+	</select>
+
+	<select id="getUserSeq" parameterType="map" resultType="String">
+
+		SELECT USER_SEQ as userSeq
+		FROM user_mst
+		WHERE user_key = #{deviceUDID}
+
+	</select>
+
+	<insert id="user_insert" parameterType="map">
+		insert into user_mst  (user_key,user_device,user_push_key)
+						values (#{deviceUDID},#{deviceOS},#{devicePushKey})
+	</insert>
+
+	<update id="user_update" parameterType="map">
+		update user_mst set user_push_key = #{devicePushKey}
+		where user_key = #{deviceUDID}
+	</update>
+
+	<select id="mainShopList" parameterType="map" resultType="AppApiShopVo">
+
+		SELECT 
+		sm.SHOP_SEQ as shopSeq 
+		, sm.SHOP_NAME as shopTitle
+		, sm.SHOP_IMG_PATH as shopImageUrl
+		, '' as shopLinkUrl
+		, sm.shop_kind as shopKind
+		, cm.code_name as shopCategory
+		, sm.SHOP_MENU as shopMenu
+		, (6371000 * acos(cos(radians(#{userLat})) * cos(radians(SHOP_LOCATION_LAT)) * cos(radians(SHOP_LOCATION_LONG) - radians(#{userLong})) + sin(radians(#{userLat})) * sin(radians(SHOP_LOCATION_LAT))))  as shopDist 
+		, case when ifnull(ufs.USER_SEQ,'0') = '0' then '0' else '1' end as bookmark
+		, REVIEW_GRADE as reviewGrade
+		FROM shop_mst sm 
+		INNER JOIN code_mst cm ON sm.shop_kind = cm.code_id AND cm.code_type = 'shop_type'
+		LEFT JOIN USER_FAVORITES_SHOP ufs ON sm.shop_seq = ufs.shop_seq AND ufs.USER_SEQ = #{userSeq}
+		LEFT JOIN  (SELECT SHOP_SEQ , sum(REVIEW_GRADE)/count(*) as  REVIEW_GRADE FROM SHOP_REVIEW group by SHOP_SEQ) as sr 
+		ON sm.shop_seq = sr.shop_seq
+		WHERE 1 = 1
+		<if test="sido != null and sido != ''">
+		AND sm.shop_addr1 like CONCAT('%',#{addr},'%')
+		</if>
+
+		<if test='orderBy == "R"'>
+		order by ifnull(sr.review_grade,0) desc
+		</if>
+
+		<if test='orderBy != "R"'>
+		order by ifnull(shopDist,0)
+		</if>
+		limit 0,40
+
+	</select>
+
+	<select id="mainEventList" parameterType="map" resultType="AppApiEventVo">
+
+		SELECT 
+		sem.event_seq as eventSeq
+		, sm.SHOP_NAME as shopTitle
+		, sem.event_title as eventTitle
+		, sei.IMG_PATH as eventImageUrl
+		, '' as eventLinkUrl
+		, sem.event_discount_way as eventDiscountWay
+		, sem.event_discount_target as eventDiscountTarget
+		, sem.event_discount as eventDiscount
+		, sm.shop_kind as shopKind
+		, cm.code_name as shopCategory
+		, sm.SHOP_LOCATION_LAT as shopLat
+		, sm.SHOP_LOCATION_LONG as shopLong
+		, (6371000 * acos(cos(radians(#{userLat})) * cos(radians(SHOP_LOCATION_LAT)) * cos(radians(SHOP_LOCATION_LONG) - radians(#{userLong})) + sin(radians(#{userLat})) * sin(radians(SHOP_LOCATION_LAT))))  as shopDist 
+		, case when ifnull(secd.USER_SEQ,'0') = '0' then '0' else '1' end as downloadYn
+		, case when ifnull(secu.USER_SEQ,'0') = '0' then '0' else '1' end as useYn
+		, sm.SHOP_MENU as shopMenu
+		, case when ifnull(ufs.USER_SEQ,'0') = '0' then '0' else '1' end as bookmark
+		, sm.shop_addr1 as shop_addr
+		, REVIEW_GRADE as reviewGrade
+		FROM shop_mst sm 
+		INNER JOIN code_mst cm ON sm.shop_kind = cm.code_id AND cm.code_type = 'shop_type'
+		INNER JOIN SHOP_EVENT_MST sem ON sm.shop_seq = sem.shop_seq 
+		INNER JOIN SHOP_EVENT_IMG sei ON sem.event_seq = sei.event_seq AND sei.event_order = 0
+		LEFT JOIN USER_FAVORITES_SHOP ufs ON sm.shop_seq = ufs.shop_seq AND ufs.USER_SEQ = #{userSeq}
+		LEFT JOIN SHOP_EVENT_CP_DOWN secd ON sem.EVENT_SEQ = secd.EVENT_SEQ AND secd.USER_SEQ = #{userSeq}
+		LEFT JOIN SHOP_EVENT_CP_USE secu ON sem.EVENT_SEQ = secu.EVENT_SEQ AND secu.USER_SEQ = #{userSeq}
+		LEFT JOIN  (SELECT SHOP_SEQ , sum(REVIEW_GRADE)/count(*) as  REVIEW_GRADE FROM SHOP_REVIEW group by SHOP_SEQ) as sr 
+		ON sm.shop_seq = sr.shop_seq
+		WHERE DATE_FORMAT(NOW(),'%Y-%m-%d') BETWEEN EVENT_START_DAY and EVENT_END_DAY
+		<if test="sido != null and sido != ''">
+		AND sm.shop_addr1 like CONCAT('%',#{addr},'%')
+		</if>
+
+		<if test='orderBy == "R"'>
+		order by ifnull(sr.review_grade,0) desc
+		</if>
+
+		<if test='orderBy != "R"'>
+		order by ifnull(shopDist,0)
+		</if>
+
+	</select>
+
+	<select id="mainMyCouponList" parameterType="map" resultType="AppApiCouponVo">
+
+		SELECT 
+		sem.event_seq as eventSeq
+		, sm.SHOP_NAME as shopTitle
+		, sem.event_title as eventTitle
+		, sei.IMG_PATH as eventImageUrl
+		, '' as eventLinkUrl
+		, sem.event_discount_way as eventDiscountWay
+		, sem.event_discount_target as eventDiscountTarget
+		, sem.event_discount as eventDiscount
+		, EVENT_START_DAY as eventStartDay
+		, EVENT_END_DAY as eventEndDay
+		, sm.shop_kind as shopKind
+		, cm.code_name as shopCategory
+		, sm.SHOP_LOCATION_LAT as shopLat
+		, sm.SHOP_LOCATION_LONG as shopLong
+		, case when ifnull(secd.USER_SEQ,'0') = '0' then '0' else '1' end as downloadYn
+		, case when ifnull(secu.USER_SEQ,'0') = '0' then '0' else '1' end as useYn
+		, case when ifnull(ufs.USER_SEQ,'0') = '0' then '0' else '1' end as bookmark
+		, sm.shop_addr1 as shop_addr
+		, REVIEW_GRADE as reviewGrade
+		FROM shop_mst sm 
+		INNER JOIN code_mst cm ON sm.shop_kind = cm.code_id AND cm.code_type = 'shop_type'
+		INNER JOIN SHOP_EVENT_MST sem ON sm.shop_seq = sem.shop_seq 
+		INNER JOIN SHOP_EVENT_IMG sei ON sem.event_seq = sei.event_seq AND sei.event_order = 0
+		INNER JOIN SHOP_EVENT_CP_DOWN secd ON sem.event_seq = secd.event_seq and secd.user_seq = #{userSeq}
+		LEFT JOIN USER_FAVORITES_SHOP ufs ON sm.shop_seq = ufs.shop_seq AND ufs.USER_SEQ = #{userSeq}
+		LEFT JOIN SHOP_EVENT_CP_USE secu ON sem.event_seq = secu.event_seq and secu.user_seq = #{userSeq}
+		LEFT JOIN  (SELECT SHOP_SEQ , sum(REVIEW_GRADE)/count(*) as  REVIEW_GRADE FROM SHOP_REVIEW group by SHOP_SEQ) as sr 
+		ON sm.shop_seq = sr.shop_seq
+
+		WHERE 1=1
+		
+		<if test="couponType == 'UG'">
+		AND DATE_FORMAT(NOW(),'%Y-%m-%d') BETWEEN EVENT_START_DAY and EVENT_END_DAY
+		AND secu.use_seq is null
+		</if>
+		<if test="couponType == 'UD'">
+		AND secu.use_seq is not null
+		</if>
+		<if test="couponType == 'FC'">
+		AND EVENT_END_DAY > DATE_FORMAT(NOW(),'%Y-%m-%d')
+		AND secu.use_seq is null
+		</if>
+
+		order by down_datetime desc
+
+	</select>
+
+	<delete id="myCouponDelete" parameterType="map">
+		DELETE FROM SHOP_EVENT_CP_DOWN WHERE EVENT_SEQ = #{eventSeq} AND USER_SEQ = #{userSeq}
+	</delete>
+
+	<delete id="myCouponUseDelete" parameterType="map">
+		DELETE FROM SHOP_EVENT_CP_USE WHERE EVENT_SEQ = #{eventSeq} AND USER_SEQ = #{userSeq}
+	</delete>
+
+	<insert id="viewLogInsert" parameterType="map">
+		insert into USER_VIEW_PAGE  (USER_SEQ,VIEW_PAGE,VIEW_DATETIME)
+						values (#{userSeq},#{viewPage},now())
+	</insert>
+
+	<insert id="locationInsert" parameterType="map">
+		insert into SHOP_AROUND_CUSTOMER (USER_SEQ,SHOP_SEQ,AROUND_DATETIME)
+		SELECT #{userSeq},shop_seq,now() 
+		FROM shop_mst
+		<![CDATA[
+		WHERE (6371000 * acos(cos(radians(#{userLat})) * cos(radians(SHOP_LOCATION_LAT)) * cos(radians(SHOP_LOCATION_LONG) - radians(#{userLong})) + sin(radians(#{userLat})) * sin(radians(SHOP_LOCATION_LAT)))) < 100.0
+		]]>
+	</insert>
+
+	<select id="sidoList" parameterType="map" resultType="AppApiSiDoVo">
+
+		SELECT 
+		id as sidoId
+		, name as sidoName
+		FROM SIDO 
+		order by name
+
+	</select>
+
+	<select id="sigugunList" parameterType="map" resultType="AppApiSiGuGunVo">
+
+		SELECT 
+		id as sigugunId
+		, name as sigugunName
+		FROM SIGUGUN 
+		WHERE sido_id = #{sidoId}
+		order by name
+
+	</select>
+
+	</mapper>

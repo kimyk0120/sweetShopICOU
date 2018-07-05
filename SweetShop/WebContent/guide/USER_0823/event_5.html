@@ -1,0 +1,191 @@
+<!doctype html>
+<!-- ie조건부주석 Conditional Comment //-->
+<!--[if lt IE 7]>      <html class="ie6"> <![endif]-->
+<!--[if IE 7]>         <html class="ie7"> <![endif]-->
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html lang="ko">
+<!--<![endif]-->
+<head>
+<title>USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+<meta name="apple-mobile-web-app-title" content="">
+<meta property="og:title" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:site_name" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:image" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:description" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta name="keywords" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Generator" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Author" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Keywords" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Description" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
+
+<link rel="stylesheet" href="./src/css/import.css" type="text/css" />
+<link rel="stylesheet" href="./src/css/swiper.min.css">
+<script  src="./src/js/jquery-1.11.3.min.js"></script>
+<script  src="./src/js/default.js"></script>
+
+<script>
+$(function(){ 
+	function pop_layer( show ){
+		if( show ){
+			$("#overlay_t").show();
+			setTimeout(function(){
+				show_pop($("#popup_layer_insert"));		
+			}, 100 );
+			$("body").on("touchmove", function(e){e.preventDefault()});
+		}else{
+			$('#popup_layer_insert, #overlay_t').hide(); 	
+			$("body").off("touchmove");
+		}
+	}   	
+   
+   $('#overlay_t, .close').click(function(e){ 
+	   e.preventDefault(); 
+	   pop_layer(false);
+   }); 	
+   
+	function show_pop( obj ){
+		obj.show();				
+		var popH = obj.innerHeight();
+		var popW = obj.innerWidth();
+		var winW = $(window).width();
+		var winH = $(window).height();
+		var posW = (winW-popW)/2;
+		var posY = (winH-popH)/2;
+		obj.css({"left":posW, "top":posY});	   
+	}
+   
+   pop_layer(true);		
+   
+	/*
+	  //자동실행시에 필요 없음   $('.trigger').click(function(){ 
+        $('#popup_layer_insert, #overlay_t').show(); 
+		var $layerPopupObj = $('#popup_layer_insert');
+		var left = ( $(window).scrollLeft() + ($(window).width() - $layerPopupObj.width()) / 2 );
+		var top = ( $(window).scrollTop() + ($(window).height() - $layerPopupObj.height()) / 2 );
+		$layerPopupObj.css({'left':left,'top':top, 'position':'absolute'});
+   //자동실행시에 필요 없음   }); 
+    $('#overlay_t, .close').click(function(e){ 
+        e.preventDefault(); 
+        $('#popup_layer_insert, #overlay_t').hide(); 
+    });
+	*/ 
+});
+</script>
+
+
+</head>
+
+<body >
+
+
+<!-- 클릭으로 오픈 시 사용 <a href="#" class="trigger">레이어팝업 열기</a> //-->
+<div id="overlay_t"></div> 
+<div id="popup_layer_insert">
+
+	
+		<div class="bg_insert_circle">
+			<div class="insert_circle">
+				<img src="./images/common/icon_icou_noevent.png" style="width:25px; height:auto;" />
+				<p>챙기기 완료</p>	
+			</div>		
+		</div>
+
+		<div class="insert_text">쿠폰함으로 이동하시겠어요?</div>
+		<div class="pop_btn_wrap">
+			<p class="btn_pop_no"><a href="#" class="close">아니요</a></p>
+			<p class="btn_pop_yes"><a href="#">네</a></p>
+		</div>
+		
+</div><!--END popup_layer_insert//-->
+
+
+
+<div id="wrap_wide" >
+	<!-- 서브 상단 //-->
+	<header class="sub">
+		<ul>
+			<li><a href="javascript: var uAgent=navigator.userAgent; if(uAgent.match(/opr|u;/i)) location.href=document.referrer; else history.back();"  class="menu-btn"><img src="./images/common/btn_arrow_back.png" style="width:16px; height:auto; margin-right:5px;" />Back</a></li>
+			<li>예다손</li>
+			<li><a href="#" class="menu-btn"><img src="./images/common/btn_logout.png" style="width:18px; height:auto; margin-right:5px;" /></a></li>
+		</ul>
+	</header>
+
+
+
+	<section class="sub_content_wrap">
+	
+	<!-- 섹션 시작 //-->
+	<div class="shop_detail">
+		<div class="ribbon"><img src="./images/common/ribbon_cafe.png" /></div>
+		<div class="favorite"><img src="./images/common/icon_favorite_off.png"  /></div>
+		
+		<ul class="cont">
+			<li class="title"><a href="http://daum.net" class="color_cafe"><p class="notcolor">카페ㆍ석촌호수</p>예다손</a></li>
+			<li class="photo"><a href="#"><img src="./images/common/@photo_02.jpg"  /></a></li>
+			<li class="memo">바쁘고 지친 여러분께 여유를 드립니다. <br />고즈넉한 아름다움을 지닌 전통카페, 예다손</li>
+			<li class="infomation">
+				<ul>
+					<li><img src="./images/common/icon_list_new.png" /><img src="./images/common/icon_list_dc.png" /></li>
+					<li><p><img src="./images/common/star_gray_min_5.png" /></p>985m</li>
+				</ul>			
+			</li>
+		</ul>
+
+		<div class="dot_garo"></div>
+
+		<div class="evcoupon_text">
+			<ul>
+				<li>2016.07.15 ~ 2016.07.31</li>
+				<li>갈증나는 여름날 <br />시원한 할인쿠폰을 쏩니다!</li>
+				<li  class="color_cafe">모든 다과류 구매시 음료, <p>50% 할인</p></li>
+				<li>
+					<div class="evcoupon_btn_wrap">
+						<p class="btn_where"><a href="#">어디야</a></p>
+						<p class="btn_dam"><a href="#" class="bg_cafe">챙기기</a></p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div><!-- 섹션 끝 //-->
+
+
+	<dl class="evcoupon_guide">
+		<dt>본 쿠폰은 예다손에서만 사용이 가능한 쿠폰입니다.</dt>
+		<dd>
+			음료 주문시에 먼저 제시해주세요.<br />
+			원활하고 빠른 계산을 위해 미리 앱을 실행시켜서 쿠폰을 준비해주세요.<br /><br />
+			*유의사항<br />
+			타 할인 및 기타 이벤트와 중복 적용 불가<br />
+			다과류 구매시에만, 적용 가능
+		</dd>
+	</dl>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div><!-- END wrap//-->
+</body>
+</html>

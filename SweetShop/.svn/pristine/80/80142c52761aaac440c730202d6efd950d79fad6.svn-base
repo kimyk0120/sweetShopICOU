@@ -1,0 +1,573 @@
+<!doctype html>
+<!-- ie조건부주석 Conditional Comment //-->
+<!--[if lt IE 7]>      <html class="ie6"> <![endif]-->
+<!--[if IE 7]>         <html class="ie7"> <![endif]-->
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html lang="ko">
+<!--<![endif]-->
+<head>
+<title>USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+<meta name="apple-mobile-web-app-title" content="">
+<meta property="og:title" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:site_name" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:image" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:description" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta name="keywords" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Generator" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Author" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Keywords" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Description" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
+
+<link rel="stylesheet" href="./src/css/import.css" type="text/css" />
+<script  src="./src/js/jquery-1.11.3.min.js"></script>
+<script  src="./src/js/default.js"></script>
+
+<script>
+	$(function(){
+		
+		$(".accorion_row").on("click", function(e){
+			e.preventDefault();
+			if( $(this).hasClass("on") ){
+				list_fold( $(this) );
+			}else{
+				list_fold( $(".accorion_row") );
+				list_unfold( $(this) );
+			}
+		})
+		
+		function list_fold( obj ){
+			obj.removeClass("on");
+			obj.find(".review_r p").addClass("over_1line");	
+			obj.find(".review_r span").addClass("over_2line");
+			obj.css({"height":"70px"})	
+		}
+		
+		function list_unfold( obj ){			
+			obj.find(".review_r p").removeClass("over_1line");	
+			obj.find(".review_r span").removeClass("over_2line");
+			setTimeout(function(){
+				var hl = obj.find(".review_l").innerHeight();	
+				var hr = obj.find(".review_r").innerHeight();	
+				var maxH = Math.max( hl, hr );
+				console.log(hl, hr, maxH )
+				obj.find(".review_l").css({"height":maxH})	;
+				obj.find(".review_r").css({"height":maxH})	;
+				obj.css({"height":maxH});
+			}, 100);
+			
+			obj.addClass("on");	
+		}
+		
+	});
+</script>
+
+</head>
+
+<body >
+<p class="btn_review2"><a href="#"><img src="./images/common/btn_review_write.png" style="width:65px; height:auto;" /></a></p>
+
+
+<div id="wrap_wide" >
+
+	<!-- 서브 상단 //-->
+	<header class="sub">
+		<ul>
+			<li><a href="javascript: var uAgent=navigator.userAgent; if(uAgent.match(/opr|u;/i)) location.href=document.referrer; else history.back();" class="menu-btn"><img src="./images/common/btn_arrow_back.png" style="width:16px; height:auto; margin-right:5px;" />Back</a></li>
+			<li>리뷰</li>
+			<li></li>
+		</ul>
+	</header>
+
+
+
+<section class="sub_content_wrap_wide">
+	<!-- 리뷰 디자인 시작 //-->
+	<div class="deatil_review_wrap">
+		<ul>
+			<li>
+				<p class="reviews"><img src="./images/common/icon_people.png" style="width:16px; height:auto;" /><span>113</span> Reviews</p>
+				<div class="review_jumsu">
+					<ul>
+						<li>4</li>
+						<li>.</li>
+						<li>8</li>
+					</ul>
+				</div>
+				<p class="review_star"><img src="./images/common/star_big_full.png" /><img src="./images/common/star_big_full.png" /><img src="./images/common/star_big_full.png" /><img src="./images/common/star_big_half.png" /><img src="./images/common/star_big_no.png" /></p>
+
+			</li>
+
+			<li>
+				<ul class="jumsu">
+					<li>서비스<p>4.5<span> / 5</span></p></li>
+					<li>품질<p>4<span> / 5</span></p></li>
+					<li>가격<p>4.1<span> / 5</span></p></li>
+					<li>청결도<p>4.8<span> / 5</span></p></li>
+					<li>시설<p>3.2<span> / 5</span></p></li>
+					<li>위치<p>3.2<span> / 5</span></p></li>
+				</ul>			
+			</li>
+
+			<li>
+				<ul class="jumsu_star">
+					<li>
+						5.0<span>
+						<img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" />
+						</span><strong>45%</strong>
+					</li>
+					<li>
+						4.0<span>
+						<img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" />
+						</span><strong>38%</strong>
+					</li>
+					<li>
+						3.0<span>
+						<img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" />
+						</span><strong>11%</strong>
+					</li>
+					<li>
+						2.0<span>
+						<img src="./images/common/star_gray_single.png" /><img src="./images/common/star_gray_single.png" />
+						</span><strong>8%</strong>
+					</li>
+					<li>1.0<span>
+						<img src="./images/common/star_gray_single.png" />
+						</span><strong>6%</strong>
+					</li>
+				</ul>					
+			</li>
+		</ul>
+	</div><!-- end review_wrap //-->
+
+</section>
+
+
+
+<section class="sub_content_wrap">
+	
+	<div class="choice_filet">
+		<select class="review_filter">
+			 <option selected>최신등록순</option>
+			 <option>높은 평점순</option>
+			 <option>낮은 평점순</option>
+		</select>
+	</div>
+
+	<div class="accordion review_list">
+		
+		<!-- 1번 //-->
+		<ul class="accorion_row">
+			<li class="bg_alpha100 review_l">
+				<div class="list_review_jumsu">
+					<ul>
+						<li>5</li>
+						<li>.</li>
+						<li>0</li>
+					</ul>
+				</div>
+				<div class="review_write_info">2016.07.22<br />한다정</div>
+				<div class="review_list_star"><img src="./images/common/star_min_white.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /></div>		
+
+				<div class="list_review_jumsu_plus">
+					<ul>
+						<li>서비스<span><strong>4.5</strong> / 5</span></li>
+						<li>품질<span><strong>4</strong> / 5</span></li>
+						<li>가격<span><strong>4.1</strong> / 5</span></li>
+						<li>청결도<span><strong>4.8</strong> / 5</span></li>
+						<li>시설<span><strong>3.2</strong> / 5</span></li>
+						<li>위치<span><strong>3.2</strong> / 5</span></li>
+					</ul>
+				</div>
+				<div class="list_revew_text">2015.03에<br />비즈니스로 방문하셨습니다.</div>
+			</li>
+
+			<li class="review_r">
+				<a href="#" id="btn_review_view">
+					<p class="over_1line">워크샵으로 방문햇었는데요. 제목이 두줄 세줄 될때 자동 높이값도 맞추도 오픈 될 때 모두 나오게 처리 </p>
+					<span class="over_2line">제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. 제목은 무조건 1줄 처리 후에 오픈 클릭되면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음</span>
+				</a>
+			</li>
+
+		</ul>
+
+		<!-- 2번 //-->
+		<ul class="accorion_row">
+			<li class="bg_alpha95 review_l">
+				<div class="list_review_jumsu">
+					<ul>
+						<li>4</li>
+						<li>.</li>
+						<li>5</li>
+					</ul>
+				</div>
+				<div class="review_write_info">2016.07.22<br />한다정</div>
+				<div class="review_list_star"><img src="./images/common/star_min_white_half.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /></div>		
+
+				<div class="list_review_jumsu_plus">
+					<ul>
+						<li>서비스<span><strong>4.5</strong> / 5</span></li>
+						<li>품질<span><strong>4</strong> / 5</span></li>
+						<li>가격<span><strong>4.1</strong> / 5</span></li>
+						<li>청결도<span><strong>4.8</strong> / 5</span></li>
+						<li>시설<span><strong>3.2</strong> / 5</span></li>
+						<li>위치<span><strong>3.2</strong> / 5</span></li>
+					</ul>
+				</div>
+				<div class="list_revew_text">2015.03에<br />비즈니스로 방문하셨습니다.</div>
+
+			</li>
+			<li class="review_r">
+				<a href="#" id="btn_review_view">
+					<p class="over_1line">두번째 후기 내용 워크샵으로 방문햇었는데요.</p>
+					<span class="over_2line">제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br>제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. <br></span>
+				</a>
+			</li>
+		</ul>
+
+		<!-- 3번 //-->
+		<ul class="accorion_row">
+			<li class="bg_alpha90 review_l">
+				<div class="list_review_jumsu">
+					<ul>
+						<li>4</li>
+						<li>.</li>
+						<li>0</li>
+					</ul>
+				</div>
+				<div class="review_write_info">2016.07.22<br />한다정</div>
+				<div class="review_list_star"><img src="./images/common/star_min_white.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /></div>	
+				
+				<div class="list_review_jumsu_plus">
+					<ul>
+						<li>서비스<span><strong>4.5</strong> / 5</span></li>
+						<li>품질<span><strong>4</strong> / 5</span></li>
+						<li>가격<span><strong>4.1</strong> / 5</span></li>
+						<li>청결도<span><strong>4.8</strong> / 5</span></li>
+						<li>시설<span><strong>3.2</strong> / 5</span></li>
+						<li>위치<span><strong>3.2</strong> / 5</span></li>
+					</ul>
+				</div>
+				<div class="list_revew_text">2015.03에<br />비즈니스로 방문하셨습니다.</div>
+
+			</li>
+			<li class="review_r">
+				<a href="#" id="btn_review_view">
+					<p class="over_1line">두번째 후기 내용 워크샵으로 방문햇었는데요.</p>
+					<span class="over_2line">제목은 무조건 1줄 처리 후에 오픈 클릭되면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. 제목은 무조건 1줄 처리 후에 오픈 클릭되면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음제목 한줄 나오고면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음</span>
+				</a>
+			</li>
+		</ul>
+
+
+		<!-- 4번 //-->
+		<ul class="accorion_row">
+			<li class="bg_alpha85 review_l">
+				<div class="list_review_jumsu">
+					<ul>
+						<li>3</li>
+						<li>.</li>
+						<li>5</li>
+					</ul>
+				</div>
+				<div class="review_write_info">2016.07.22<br />한다정</div>
+				<div class="review_list_star"><img src="./images/common/star_min_white_half.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /></div>
+				
+				<div class="list_review_jumsu_plus">
+					<ul>
+						<li>서비스<span><strong>4.5</strong> / 5</span></li>
+						<li>품질<span><strong>4</strong> / 5</span></li>
+						<li>가격<span><strong>4.1</strong> / 5</span></li>
+						<li>청결도<span><strong>4.8</strong> / 5</span></li>
+						<li>시설<span><strong>3.2</strong> / 5</span></li>
+						<li>위치<span><strong>3.2</strong> / 5</span></li>
+					</ul>
+				</div>
+				<div class="list_revew_text">2015.03에<br />비즈니스로 방문하셨습니다.</div>
+
+			</li>
+			<li class="review_r">
+				<a href="#" id="btn_review_view">
+					<p class="over_1line">두번째 후기 내용 워크샵으로 방문햇었는데요.</p>
+					<span class="over_2line">제목 한줄 나오고퀄리도 처리 되었음제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. 제목은 무조건 1줄 처리 후에 오픈 클릭되면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음</span>
+				</a>
+			</li>
+		</ul>
+
+		<!-- 5번 //-->
+		<ul class="accorion_row">
+			<li class="bg_alpha80 review_l">
+				<div class="list_review_jumsu">
+					<ul>
+						<li>3</li>
+						<li>.</li>
+						<li>0</li>
+					</ul>
+				</div>
+				<div class="review_write_info">2016.07.22<br />한다정</div>
+				<div class="review_list_star"><img src="./images/common/star_min_white.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /></div>	
+				
+				<div class="list_review_jumsu_plus">
+					<ul>
+						<li>서비스<span><strong>4.5</strong> / 5</span></li>
+						<li>품질<span><strong>4</strong> / 5</span></li>
+						<li>가격<span><strong>4.1</strong> / 5</span></li>
+						<li>청결도<span><strong>4.8</strong> / 5</span></li>
+						<li>시설<span><strong>3.2</strong> / 5</span></li>
+						<li>위치<span><strong>3.2</strong> / 5</span></li>
+					</ul>
+				</div>
+				<div class="list_revew_text">2015.03에<br />비즈니스로 방문하셨습니다.</div>
+
+
+			</li>
+			<li class="review_r">
+				<a href="#" id="btn_review_view">
+					<p class="over_1line">두번째 후기 내용 워크샵으로 방문햇었는데요.</p>
+					<span class="over_2line">제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. 제목은 무조건 1줄 처리 후에 오픈 클릭되면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. 제목은 무조건 1줄 처리 후에 오픈 클릭되면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. 제목은 무조건 1줄 처리 후에 오픈 클릭되면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음</span>
+				</a>
+			</li>
+		</ul>
+
+
+		<!-- 6번 //-->
+		<ul class="accorion_row">
+			<li class="bg_alpha75 review_l">
+				<div class="list_review_jumsu">
+					<ul>
+						<li>2</li>
+						<li>.</li>
+						<li>5</li>
+					</ul>
+				</div>
+				<div class="review_write_info">2016.07.22<br />한다정</div>
+				<div class="review_list_star"><img src="./images/common/star_min_white_half.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /></div>	
+				<div class="list_review_jumsu_plus">
+					<ul>
+						<li>서비스<span><strong>4.5</strong> / 5</span></li>
+						<li>품질<span><strong>4</strong> / 5</span></li>
+						<li>가격<span><strong>4.1</strong> / 5</span></li>
+						<li>청결도<span><strong>4.8</strong> / 5</span></li>
+						<li>시설<span><strong>3.2</strong> / 5</span></li>
+						<li>위치<span><strong>3.2</strong> / 5</span></li>
+					</ul>
+				</div>
+				<div class="list_revew_text">2015.03에<br />비즈니스로 방문하셨습니다.</div>
+
+			</li>
+			<li class="review_r">
+				<a href="#" id="btn_review_view">
+					<p class="over_1line">두번째 후기 내용 워크샵으로 방문햇었는데요.</p>
+					<span class="over_2line">제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. 제목은 무조건 1줄 처리 후에 오픈 클릭되면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. 제목은 무조건 1줄 처리 후에 오픈 클릭되면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. 제목은 무조건 1줄 처리 후에 오픈 클릭되면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음</span>
+				</a>
+			</li>
+		</ul>
+
+
+		<!-- 7번 //-->
+		<ul class="accorion_row">
+			<li class="bg_alpha70 review_l">
+				<div class="list_review_jumsu">
+					<ul>
+						<li>2</li>
+						<li>.</li>
+						<li>0</li>
+					</ul>
+				</div>
+				<div class="review_write_info">2016.07.22<br />한다정</div>
+				<div class="review_list_star"><img src="./images/common/star_min_white.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /></div>		
+
+				<div class="list_review_jumsu_plus">
+					<ul>
+						<li>서비스<span><strong>4.5</strong> / 5</span></li>
+						<li>품질<span><strong>4</strong> / 5</span></li>
+						<li>가격<span><strong>4.1</strong> / 5</span></li>
+						<li>청결도<span><strong>4.8</strong> / 5</span></li>
+						<li>시설<span><strong>3.2</strong> / 5</span></li>
+						<li>위치<span><strong>3.2</strong> / 5</span></li>
+					</ul>
+				</div>
+				<div class="list_revew_text">2015.03에<br />비즈니스로 방문하셨습니다.</div>
+
+
+			</li>
+			<li class="review_r">
+				<a href="#" id="btn_review_view">
+					<p class="over_1line">두번째 후기 내용 워크샵으로 방문햇었는데요.</p>
+					<span class="over_2line">제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. 제목은 무조건 1줄 처리 후에 오픈 클릭되면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. 제목은 무조건 1줄 처리 후에 오픈 클릭되면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. 제목은 무조건 1줄 처리 후에 오픈 클릭되면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음</span>
+				</a>
+			</li>
+		</ul>
+
+
+		<!-- 8번 //-->
+		<ul class="accorion_row">
+			<li class="bg_alpha65 review_l">
+				<div class="list_review_jumsu">
+					<ul>
+						<li>1</li>
+						<li>.</li>
+						<li>5</li>
+					</ul>
+				</div>
+				<div class="review_write_info">2016.07.22<br />한다정</div>
+				<div class="review_list_star"><img src="./images/common/star_min_white_half.png" alt="" /><img src="./images/common/star_min_white.png" alt="" /></div>		
+
+				<div class="list_review_jumsu_plus">
+					<ul>
+						<li>서비스<span><strong>4.5</strong> / 5</span></li>
+						<li>품질<span><strong>4</strong> / 5</span></li>
+						<li>가격<span><strong>4.1</strong> / 5</span></li>
+						<li>청결도<span><strong>4.8</strong> / 5</span></li>
+						<li>시설<span><strong>3.2</strong> / 5</span></li>
+						<li>위치<span><strong>3.2</strong> / 5</span></li>
+					</ul>
+				</div>
+				<div class="list_revew_text">2015.03에<br />비즈니스로 방문하셨습니다.</div>
+
+
+			</li>
+			<li class="review_r">
+				<a href="#" id="btn_review_view">
+					<p class="over_1line">두번째 후기 내용 워크샵으로 방문햇었는데요.</p>
+					<span class="over_2line">제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. 제목은 무조건 1줄 처리 후에 오픈 클릭되면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. 제목은 무조건 1줄 처리 후에 오픈 클릭되면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. 제목은 무조건 1줄 처리 후에 오픈 클릭되면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음</span>
+				</a>
+			</li>
+		</ul>
+
+
+		<!-- 9번 //-->
+		<ul class="accorion_row">
+			<li class="bg_alpha60 review_l">
+				<div class="list_review_jumsu">
+					<ul>
+						<li>1</li>
+						<li>.</li>
+						<li>0</li>
+					</ul>
+				</div>
+				<div class="review_write_info">2016.07.22<br />한다정</div>
+				<div class="review_list_star"><img src="./images/common/star_min_white.png" alt="" /></div>		
+
+				<div class="list_review_jumsu_plus">
+					<ul>
+						<li>서비스<span><strong>4.5</strong> / 5</span></li>
+						<li>품질<span><strong>4</strong> / 5</span></li>
+						<li>가격<span><strong>4.1</strong> / 5</span></li>
+						<li>청결도<span><strong>4.8</strong> / 5</span></li>
+						<li>시설<span><strong>3.2</strong> / 5</span></li>
+						<li>위치<span><strong>3.2</strong> / 5</span></li>
+					</ul>
+				</div>
+				<div class="list_revew_text">2015.03에<br />비즈니스로 방문하셨습니다.</div>
+
+
+			</li>
+			<li class="review_r">
+				<a href="#" id="btn_review_view">
+					<p class="over_1line">두번째 후기 내용 워크샵으로 방문햇었는데요.</p>
+					<span class="over_2line">제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. 제목은 무조건 1줄 처리 후에 오픈 클릭되면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. 제목은 무조건 1줄 처리 후에 오픈 클릭되면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요. 제목은 무조건 1줄 처리 후에 오픈 클릭되면 모두 노출 되게 처리 되어야 합니다. 제이퀄리도 처리 되었음</span>
+				</a>
+			</li>
+		</ul>
+
+
+		<!-- 10번 //-->
+		<ul class="accorion_row">
+			<li class="bg_alpha55 review_l">
+				<div class="list_review_jumsu">
+					<ul>
+						<li>0</li>
+						<li>.</li>
+						<li>5</li>
+					</ul>
+				</div>
+				<div class="review_write_info">2016.07.22<br />한다정</div>
+				<div class="review_list_star"><img src="./images/common/star_min_white_half.png" alt="" /></div>		
+
+				<div class="list_review_jumsu_plus">
+					<ul>
+						<li>서비스<span><strong>4.5</strong> / 5</span></li>
+						<li>품질<span><strong>4</strong> / 5</span></li>
+						<li>가격<span><strong>4.1</strong> / 5</span></li>
+						<li>청결도<span><strong>4.8</strong> / 5</span></li>
+						<li>시설<span><strong>3.2</strong> / 5</span></li>
+						<li>위치<span><strong>3.2</strong> / 5</span></li>
+					</ul>
+				</div>
+				<div class="list_revew_text">2015.03에<br />비즈니스로 방문하셨습니다.</div>
+
+			</li>
+			<li class="review_r">
+				<a href="#" id="btn_review_view">
+					<p class="over_1line">두번째 후기 내용 워크샵으로 방문햇었는데요.</p>
+					<span class="over_2line">제목 한줄 나오고 ㅠ.ㅠ 제목 길이나 내용 길이 때문에 맞추기가 정말 어려운 레이아웃이네요.</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+
+
+	<!--  리스트 개별 전체 보기 아코디언 
+	<script type="text/javascript">
+		(function($) {			
+			$('.accordion > ul').css({height:'70px', overflow:'hidden'});	/* 높이값 조정시 contents.css에서 478번 li쪽에도 min-height값 맞춰 줘야 함 */
+			$('.accordion > ul > li > a >  p').addClass("subject_off");
+
+				$('.accordion > ul').click(function() {		
+				var index = $(".accordion > ul").index(this);				
+
+					$('.accordion > ul > li > a >  p').addClass("subject_off");
+					$('.accordion > ul').css({height:'70px', overflow:'hidden'});
+
+
+					if($(this).data('clicked')) {
+						$(this).find("p").addClass("subject_off");
+						$(this).css({height:'70px', overflow:'hidden'});	
+						$(this).data('clicked', false);
+						//alert($(this).css("overflow"));		
+						
+					} else {						
+						$(this).find("p").removeClass("subject_off");
+						$(this).css({height:'auto', overflow:'none'});	
+						$(this).data('clicked', true);											
+					}
+					 return false;
+			});
+		})(jQuery);
+	</script>
+	//-->
+
+
+
+	<!-- li 좌우값 긴것으로 자동 조정
+	<script type="text/javascript">
+		  $('.accordion > ul').click(function() {
+		   var max_h=0;
+		   $(".review_list > ul > li").each(function(){
+		 var h = parseInt($(this).css("height"));
+			if(max_h<h){ max_h = h; }
+		   });
+		   $(".review_list > ul > li").each(function(){
+		 $(this).css({height:max_h});
+		   });
+		  });
+	</script>
+	 //-->
+
+
+</section>
+
+
+
+
+</div><!-- END wrap//-->
+</body>
+</html>

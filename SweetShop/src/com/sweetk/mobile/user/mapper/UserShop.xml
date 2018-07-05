@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.sweetk.mobile.user.mapper.UserShopMapper">
+
+    <select id="shop" parameterType="String" resultType="hashmap">
+
+		SELECT 
+			*,
+			<!-- TRUNCATE(reviewAvg,0) as reviewAvgFloor -->
+			CAST(reviewAvg AS signed integer)  as reviewAvgFloor,
+			ROUND((6371 * acos(cos(radians(#{2})) * cos(radians(SHOP_LOCATION_LAT)) * cos(radians(SHOP_LOCATION_LONG) - radians(#{3})) + sin(radians(#{2})) * sin(radians(SHOP_LOCATION_LAT)))),1)  as distanceKmeter,
+		    CAST(ROUND((6371000 * acos(cos(radians(#{2})) * cos(radians(SHOP_LOCATION_LAT)) * cos(radians(SHOP_LOCATION_LONG) - radians(#{3})) + sin(radians(#{2})) * sin(radians(SHOP_LOCATION_LAT)))),0) AS signed integer)  as distanceMeter 
+		FROM
+		(
+			SELECT sm.shop_seq,
+				   sm.shop_name,
+				   sm.shop_reg_number,
+				   sm.shop_zip,
+				   sm.shop_sido,
+				   sm.shop_gu,
+				   sm.shop_addr1,
+				   sm.shop_addr2,
+				   sm.shop_location_lat,
+				   sm.shop_location_long,
+				   sm.shop_tel,
+				   sm.shop_kind,
+				   sm.shop_menu,
+				   sm.shop_owner_name,
+				   sm.shop_phone,
+				   sm.shop_fax,
+				   sm.shop_homepage_url,
+				   sm.shop_img_path,
+				   sm.shop_img_name,
+				   sm.shop_img_org_name,
+				   sm.shop_reg_date,
+				   case when ifnull(ufs.user_seq,'') = '' then '0' else '1' end as bookmark,
+				   cm.code_name as shop_category,
+				   ifnull(sbc.SHOP_INTRO,'') as shop_intro ,
+				   ifnull(sbc.ETC_TEXT,'') as shop_etc,
+				   (SELECT IFNULL(round(avg(REVIEW_GRADE),0),0)
+							FROM SHOP_REVIEW a
+							where a.shop_seq = sm.SHOP_SEQ
+	                ) as reviewAvg                
+			FROM shop_mst sm 
+			INNER JOIN code_mst cm ON sm.shop_kind = cm.code_id AND cm.code_type = 'shop_type' and cm.code_use_yn = 'y'
+			LEFT JOIN SHOP_BUSINESS_CARD sbc ON sm.shop_seq=sbc.shop_seq
+			LEFT JOIN USER_FAVORITES_SHOP ufs ON sm.shop_seq=ufs.shop_seq AND ufs.USER_SEQ = #{1}
+			where sm.shop_seq = #{0}
+		) as asdf
+
+	</select>
+
+    <select id="shopEventList" parameterType="String" resultType="UserEventVO">
+		
+		SELECT
+		sem.event_seq as eventSeq 
+		,sem.shop_seq as shopSeq
+		,sem.event_title as eventTitle
+		,sem.event_kind as eventKind
+		,sem.EVENT_DISCOUNT as eventDiscount 
+		,sem.EVENT_DISCOUNT_WAY as eventDiscountWay
+		,sem.EVENT_DISCOUNT_TARGET as eventDiscountTarget
+		,sem.EVENT_DETAIL_DESC as eventDetailDesc
+		,sem.EVENT_START_DAY as eventStartDay
+		,sem.EVENT_END_DAY as eventEndDay
+		, case when secu.event_seq is null then '0' else '1' end as eventUseYn
+		,sei.IMG_PATH as eventImageUrl
+		, case when secd.event_seq is null then '0' else '1' end as eventDownloadYn
+		FROM SHOP_EVENT_MST as sem
+		INNER JOIN SHOP_EVENT_IMG sei ON sem.event_seq = sei.event_seq AND sei.event_order = 0
+		LEFT JOIN SHOP_EVENT_CP_DOWN secd ON sem.event_seq = secd.event_seq and secd.user_seq = #{1}
+		LEFT JOIN SHOP_EVENT_CP_USE secu ON sem.event_seq = secu.event_seq and secu.user_seq = #{1}
+		where sem.shop_seq = #{0}
+		AND DATE_FORMAT(NOW(),'%Y-%m-%d') BETWEEN EVENT_START_DAY and EVENT_END_DAY
+		
+	</select>
+
+    <select id="shopReview" parameterType="String" resultType="hashmap">
+
+		SELECT
+		count(*) as reviewCount
+		,round(sum(review_grade)/count(*),1) as reviewGrade
+		, substring(round(sum(review_grade)/count(*),1),1,1) as gradeFirst
+		, substring(round(sum(review_grade)/count(*),1),3,1) as gradeLast
+		FROM SHOP_REVIEW
+		WHERE shop_seq = #{0}
+
+	</select>
+
+    <select id="shopReviewGrade" parameterType="String" resultType="UserShopReviewGradeVO">
+
+		SELECT 
+      cm.code_id
+      ,cm.code_name
+      ,ifnull(review_grade,0) as reviewGrade
+      ,ifnull(gradeCount,0) as gradeCount
+      FROM 
+      (SELECT code_id,code_name from code_mst where code_type = 'review_grade' and code_use_yn = 'y') cm
+      LEFT JOIN (
+      SELECT sum(gradeCount) as gradeCount,review_grade from
+      (
+      SELECT
+      shop_seq
+      ,Ceil(review_grade) as review_grade ,count(*)  as gradeCount
+      FROM SHOP_REVIEW
+      WHERE shop_seq =  #{0}
+      GROUP BY Ceil(review_grade)
+      ) a group by review_grade
+      ) b ON cm.code_id = b.review_grade
+      order  by cm.code_id desc
+	</select>
+
+    <select id="shopReviewDetail" parameterType="String" resultType="UserShopReviewDetailGradeVO">
+
+		SELECT 
+		cm.code_id
+		,cm.code_name
+		,ifnull(reviewDetailGrade,0) as reviewDetailGrade
+		,ifnull(reviewDetailCount,0) as reviewDetailCount
+		FROM 
+		(SELECT code_id,code_name from code_mst where code_type = 'review_type' and code_use_yn = 'y') cm
+		LEFT JOIN (
+		SELECT
+		REVIEW_DETAIL_TYPE
+		,count(*) as reviewDetailCount
+		,round(sum(REVIEW_DETAIL_GRADE)/count(*),1) as reviewDetailGrade
+		FROM SHOP_REVIEW sr 
+		INNER JOIN SHOP_REVIEW_DETAIL srd ON sr.review_seq = srd.review_seq
+		WHERE shop_seq = #{0}
+		group by REVIEW_DETAIL_TYPE
+		) b ON cm.code_id = b.REVIEW_DETAIL_TYPE
+
+	</select>
+
+    <select id="shopReviewList" parameterType="map" resultType="UserShopReviewListVO">
+		<![CDATA[
+		SELECT 
+		sr.REVIEW_SEQ as reviewSeq 
+		,DATE_FORMAT(sr.REVIEW_DATE,'%Y-%m-%d') as reviewDate
+		,sr.SHOP_SEQ as shopSeq
+		,sr.USER_SEQ as userSeq
+		,sr.REVIEW_TITLE as reviewTitle 
+		,sr.REVIEW_COMMENT as reviewComment 
+		,sr.REVIEW_GRADE as reviewGrade 
+		,substring(sr.REVIEW_GRADE,1,1) as gradeFirst
+		,substring(sr.REVIEW_GRADE,3,1) as gradeLast
+		,cm.code_name as reviewVisitType
+		,sr.REVIEW_VISIT_DATE as reviewVisitDate 
+		,case when sr.WRITER_GENDER ='M' then '남성' else '여성' end as writerGender
+		,case when DATE_FORMAT(NOW(),'%Y') - sr.WRITER_YEAR + 1 < 20 then '10대' 
+         when DATE_FORMAT(NOW(),'%Y') - sr.WRITER_YEAR + 1 < 30 then '20대' 
+         when DATE_FORMAT(NOW(),'%Y') - sr.WRITER_YEAR + 1 < 40 then '30대' 
+         when DATE_FORMAT(NOW(),'%Y') - sr.WRITER_YEAR + 1 < 50 then '40대' 
+         when DATE_FORMAT(NOW(),'%Y') - sr.WRITER_YEAR + 1 < 60 then '50대' 
+         when DATE_FORMAT(NOW(),'%Y') - sr.WRITER_YEAR + 1 > 59 then '60대이상' 
+         end as writerYear
+		, '가격' as reviewDetail01
+		, ifnull(rd1.REVIEW_DETAIL_GRADE,'0.0') as reviewDetail01Grade
+		, '맛' as reviewDetail02
+		, ifnull(rd2.REVIEW_DETAIL_GRADE,'0.0') as reviewDetail02Grade
+		, '청결도' as reviewDetail03
+		, ifnull(rd3.REVIEW_DETAIL_GRADE,'0.0') as reviewDetail03Grade
+		, '서비스' as reviewDetail04
+		, ifnull(rd4.REVIEW_DETAIL_GRADE,'0.0') as reviewDetail04Grade
+		, '시설' as reviewDetail05
+		, ifnull(rd5.REVIEW_DETAIL_GRADE,'0.0') as reviewDetail05Grade
+		, '위치' as reviewDetail06
+		, ifnull(rd6.REVIEW_DETAIL_GRADE,'0.0') as reviewDetail06Grade
+		FROM SHOP_REVIEW sr 
+		INNER JOIN code_mst cm ON sr.REVIEW_VISIT_TYPE = cm.code_id AND cm.code_type = 'visit_type'
+		LEFT JOIN SHOP_REVIEW_DETAIL rd1 ON sr.REVIEW_SEQ = rd1.REVIEW_SEQ AND rd1.REVIEW_DETAIL_TYPE = 'd01'
+		LEFT JOIN SHOP_REVIEW_DETAIL rd2 ON sr.REVIEW_SEQ = rd2.REVIEW_SEQ AND rd2.REVIEW_DETAIL_TYPE = 'd02'
+		LEFT JOIN SHOP_REVIEW_DETAIL rd3 ON sr.REVIEW_SEQ = rd3.REVIEW_SEQ AND rd3.REVIEW_DETAIL_TYPE = 'd03'
+		LEFT JOIN SHOP_REVIEW_DETAIL rd4 ON sr.REVIEW_SEQ = rd4.REVIEW_SEQ AND rd4.REVIEW_DETAIL_TYPE = 'd04'
+		LEFT JOIN SHOP_REVIEW_DETAIL rd5 ON sr.REVIEW_SEQ = rd5.REVIEW_SEQ AND rd5.REVIEW_DETAIL_TYPE = 'd05'
+		LEFT JOIN SHOP_REVIEW_DETAIL rd6 ON sr.REVIEW_SEQ = rd6.REVIEW_SEQ AND rd6.REVIEW_DETAIL_TYPE = 'd06'
+		WHERE sr.SHOP_SEQ = #{shopSeq}
+		]]>
+		<if test='ord == "rgDt"'>
+		ORDER BY sr.REVIEW_DATE desc
+		</if>
+		<if test='ord == "mxGd"'>
+		ORDER BY sr.REVIEW_GRADE desc
+		</if>
+		<if test='ord == "mnGd"'>
+		ORDER BY sr.REVIEW_GRADE
+		</if>
+		limit #{page} , 10
+
+	</select>
+
+    <select id="shopReviewListCount" parameterType="map" resultType="int">
+		<![CDATA[
+		SELECT count(*) as reviewCount
+		FROM SHOP_REVIEW sr 
+		INNER JOIN code_mst cm ON sr.REVIEW_VISIT_TYPE = cm.code_id AND cm.code_type = 'visit_type'
+		WHERE sr.SHOP_SEQ = #{shopSeq}
+		]]>
+
+	</select>
+
+	<insert id="eventDownloadInsert"  parameterType="String">
+		INSERT INTO SHOP_EVENT_CP_DOWN (EVENT_SEQ,USER_SEQ,DOWN_DATETIME)
+		VALUES (#{0},#{1},now());
+	</insert>
+
+	<insert id="eventUseInsert"  parameterType="String">
+		INSERT INTO SHOP_EVENT_CP_USE (EVENT_SEQ,USER_SEQ,USE_DATETIME)
+		VALUES (#{0},#{1},now());
+	</insert>
+
+    <select id="userInfo" parameterType="String" resultType="hashmap">
+
+		SELECT user_device,user_gender,user_age 
+		FROM user_mst 
+		WHERE user_seq = #{0}
+
+	</select>
+
+    <update id="userInfoUpdateTemp" parameterType="map" >
+
+		UPDATE SET user_gender = #{gender},user_age =#{birthDayH}
+		FROM user_mst 
+		WHERE user_seq = #{userSeq}
+
+	</update>
+
+	<insert id="reviewInsert"  parameterType="map" useGeneratedKeys="true" keyProperty="reviewSeq">
+		INSERT INTO SHOP_REVIEW (REVIEW_DATE,SHOP_SEQ,USER_SEQ,REVIEW_TITLE,REVIEW_COMMENT,REVIEW_GRADE,REVIEW_VISIT_TYPE,REVIEW_VISIT_DATE,WRITER_GENDER,WRITER_YEAR)
+		VALUES (now(),#{shopSeq},#{userSeq},#{reviewTitle},#{reviewText},#{totalJumsu},#{visitType},#{visitDate},#{gender},#{birthDayH});
+	</insert>
+
+	<insert id="reviewDetailInsert"  parameterType="String" >
+		INSERT INTO SHOP_REVIEW_DETAIL (REVIEW_SEQ,REVIEW_DETAIL_TYPE,REVIEW_DETAIL_GRADE)
+		VALUES (#{0},#{1},#{2});
+	</insert>
+
+	</mapper>

@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/views/admin/notice/notice_detail.jsp=UTF-8
+encoding//WebContent/WEB-INF/views/admin/notice/notice_list.jsp=UTF-8
+encoding//WebContent/WEB-INF/views/admin/notice/notice_modify.jsp=UTF-8
+encoding//WebContent/WEB-INF/views/admin/notice/notice_search_result.jsp=UTF-8
+encoding//WebContent/WEB-INF/views/user/noticeQna/noticeQnaFrame.jsp=UTF-8
+encoding//WebContent/WEB-INF/views/user/noticeQna/qna_list.jsp=UTF-8
+encoding//WebContent/src/owner/jsp/chart.jsp=UTF-8
+encoding/<project>=UTF-8

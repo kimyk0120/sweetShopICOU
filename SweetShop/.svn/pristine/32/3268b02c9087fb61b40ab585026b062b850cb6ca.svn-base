@@ -1,0 +1,134 @@
+@charset "utf-8";
+
+
+@media only screen and (max-width: 1598px) {
+}
+
+
+@media only screen and (max-width: 1200px) {
+}
+
+@media only screen and (max-width: 1000px) {
+}
+
+
+/*** 960 태블릿 ************************************************************************************/
+@media only screen and (max-width: 959px) {
+	div#gnb_web { display:none; }
+	div#content_area {  padding-left:10px;  }
+
+	/* 상단 헤더 조정 */
+	div#header {  height:65px; }
+	h1 { height:65px;  line-height:65px;  font-size:16px; }
+	/*
+	div.log_info {display:none; }
+	div.log_info_mobile { display:block; }
+	*/
+	div.log_info {  top:22px;  }
+	div#go_loginfo_1 { position:absolute; top:80px; right: 20px; }
+	span.log_text { display:none; }
+
+	/* 모바일 일때 whkcmr 상단 메뉴 노출 */
+	div.gnb_mobile {display:block; }
+
+	/* 로그인 박스 */
+	div#login_title { margin:0 auto 20px; padding-top:40px}
+	div#login_area  > ul > li:nth-child(1) { font-size:14px; }
+	div#login_area > ul > li:nth-child(1) > p > strong { font-size: 20px; }
+	div#login_area  > ul > li { float:left; width:90%; padding:0 5% 0px;}
+	div#login_area  > ul > li:nth-child(1) > p {padding-top:5%; padding-left:0;}
+	div#login_area  > ul > li:nth-child(2) { padding-top:0; }
+	div#login_area {	width:90%;  margin:0 5% 0 5%; background:#fff;  }
+	div#login_area  > ul > li > input { width:96%; padding-left:4%; }
+
+
+
+
+
+
+	#bbs_list_table { width:100%; font-size:14px; }
+	#bbs_list_table thead th {display:none;}
+	#bbs_list_table tbody th { display:none; }
+	#bbs_list_table tbody td { display: block;  font-size:14px; color:#888; height:20px; text-align:left; padding:0px 20px;}
+	#bbs_list_table tbody td.process_ing { display: block; color:#007aff; padding-top:10px;}
+	#bbs_list_table tbody td.process_end { display: block; color:#888;  padding-top:10px;}
+
+	#bbs_list_table tbody td.subject { color:#2c2c2c }
+	#bbs_list_table tbody td.ev_date { text-align:left; color:#888 }
+	#bbs_list_table tbody td.report { text-align:right; padding-bottom:10px;  border-bottom:1px solid #eee; }
+	#bbs_list_table tfoot { border-top:0px solid #eee;  }
+
+	p.mo_gotop { display:inline-block; }
+
+
+
+
+
+	div.dash_area_01 li p.number {  font-size:32px;}
+}
+
+
+/*** 이 이하는 모바일 화면으로 전환 되는 시점 ************************************************************************************/
+@media only screen and (max-width: 767px) {
+
+	div.guide_area li { width:100%; }
+
+
+
+}
+
+
+/****************************************************************************************/
+@media only screen and (max-width: 641px) {
+
+	div.dash_cate_type {position:absolute; width:80px; }
+	div.dash_cate_type ul li a { font-size:12px; }
+	
+	
+	div.dash_area_01 li { width:100%;     margin-right: 0%;}
+	div.dash_event_area li { width:100%; margin-bottom:15px; } 
+	div.dash_event_area li:nth-child(3) {margin-bottom:0;  }
+
+	div.dash_review_area li{ width:100%;margin-bottom:15px; }
+	div.dash_review_area li:nth-child(4) {margin-bottom:0;  }	
+	div.dash_review_area li.web { display:none;}
+	div.dash_review_area li.mobile {display:block;}
+
+	div.dash_counter_area li:nth-child(1), div.dash_counter_area li:nth-child(4)   { width:49%; margin-right:1%;  }
+	div.dash_counter_area li:nth-child(2), div.dash_counter_area li:nth-child(5)  { width:49%; margin-left:1%; margin-right:0; }
+	div.dash_counter_area li p.number { font-size:24px;}
+	div.dash_counter_area li:nth-child(1), div.dash_counter_area li:nth-child(2) { margin-bottom: 2%; }
+	div.dash_counter_area li.mobile { width:100%; margin:2% 0 0 0; }
+
+
+
+	div.dash_counter_area li.web { display:none;}
+	div.dash_counter_area li.mobile {display:block;}
+
+
+	div.rev_counter_area li {position:relative;  float:none; width:100%; margin-right:0%; margin-bottom:0%;}
+
+
+	p.sform > input { margin-left:0px; }
+
+
+	div#footer { clear:both; width:90%; max-width:1180px; margin:0 auto; padding:30px 0 50px; text-align:right; }
+
+
+
+	
+
+}
+
+
+/** 480 스마트폰 가로 *******************************************************************/
+@media only screen and (max-width: 480px) {
+
+
+
+}
+
+
+/** 320픽셀 세로 ************************************************************************/
+@media only screen and (max-width: 480px) {
+}

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.sweetk.web.shop.mapper.AnalysisMapper">
+
+		<select id="shop_around_count" parameterType="hashmap" resultType="int">
+			SELECT count(distinct USER_SEQ)
+			FROM SHOP_AROUND_CUSTOMER
+			where shop_seq = #{shop_seq}
+			and around_datetime BETWEEN #{start_date} and #{end_date}
+		</select>
+
+		<select id="shop_interest_count" parameterType="hashmap" resultType="int">
+			SELECT count(distinct USER_SEQ)
+			FROM SHOP_INTEREST_CUSTOMER
+			where shop_seq = #{shop_seq}
+			and interest_datetime BETWEEN #{start_date} and #{end_date}
+		</select>
+
+		<select id="shop_buy_count" parameterType="hashmap" resultType="int">
+			SELECT count(distinct USER_SEQ)
+			FROM SHOP_BUY_CUSTOMER
+			where shop_seq = #{shop_seq}
+			and buy_date BETWEEN #{start_date} and #{end_date}
+		</select>
+
+		<select id="shop_around_gender_chart" parameterType="map" resultType="hashmap">
+			SELECT IFNULL(sum(if(gender = "M",AROUND_COUNT,null)),0) as "m",
+					IFNULL(sum(if(gender = "F",AROUND_COUNT,null)),0) as "f"
+			FROM SHOP_CUSTOMER_GENDER_AGE_RESULT
+			where shop_seq = #{shop_seq}
+			and rs_date BETWEEN #{start_date} and #{end_date}
+		</select>
+
+		<select id="shop_interest_gender_chart" parameterType="map" resultType="hashmap">
+			SELECT IFNULL(sum(if(gender = "M",INTEREST_COUNT,null)),0) as "m",
+					IFNULL(sum(if(gender = "F",INTEREST_COUNT,null)),0) as "f"
+			FROM SHOP_CUSTOMER_GENDER_AGE_RESULT
+			where shop_seq = #{shop_seq}
+			and rs_date BETWEEN #{start_date} and #{end_date}
+		</select>
+
+		<select id="shop_buy_gender_chart" parameterType="map" resultType="hashmap">
+			SELECT IFNULL(sum(if(gender = "M",BUY_COUNT,null)),0) as "m",
+				IFNULL(sum(if(gender = "F",BUY_COUNT,null)),0) as "f"
+			FROM SHOP_CUSTOMER_GENDER_AGE_RESULT
+			where shop_seq = #{shop_seq}
+			and rs_date BETWEEN #{start_date} and #{end_date}
+		</select>
+
+		<select id="shop_around_age_chart" parameterType="map" resultType="hashmap">
+			SELECT IFNULL(sum(if(age = 10,AROUND_COUNT,null)),0) as "Y10",
+					IFNULL(sum(if(age = 20,AROUND_COUNT,null)),0) as "Y20",
+			        IFNULL(sum(if(age = 30,AROUND_COUNT,null)),0) as "Y30",
+			        IFNULL(sum(if(age = 40,AROUND_COUNT,null)),0) as "Y40",
+			        IFNULL(sum(if(age = 50,AROUND_COUNT,null)),0) as "Y50",
+			        IFNULL(sum(if(age = 60,AROUND_COUNT,null)),0) as "Y60"
+			FROM SHOP_CUSTOMER_GENDER_AGE_RESULT
+			where shop_seq= #{shop_seq}
+			and rs_date BETWEEN #{start_date} and #{end_date}
+		</select>
+
+		<select id="shop_interest_age_chart" parameterType="map" resultType="hashmap">
+			SELECT IFNULL(sum(if(age = 10,INTEREST_COUNT,null)),0) as "Y10",
+					IFNULL(sum(if(age = 20,INTEREST_COUNT,null)),0) as "Y20",
+			        IFNULL(sum(if(age = 30,INTEREST_COUNT,null)),0) as "Y30",
+			        IFNULL(sum(if(age = 40,INTEREST_COUNT,null)),0) as "Y40",
+			        IFNULL(sum(if(age = 50,INTEREST_COUNT,null)),0) as "Y50",
+			        IFNULL(sum(if(age = 60,INTEREST_COUNT,null)),0) as "Y60"
+			FROM SHOP_CUSTOMER_GENDER_AGE_RESULT
+			where shop_seq= #{shop_seq}
+			and rs_date BETWEEN #{start_date} and #{end_date}
+		</select>
+
+		<select id="shop_buy_age_chart" parameterType="map" resultType="hashmap">
+			SELECT IFNULL(sum(if(age = 10,BUY_COUNT,null)),0)  as "Y10",
+					IFNULL(sum(if(age = 20,BUY_COUNT,null)),0)  as "Y20",
+			        IFNULL(sum(if(age = 30,BUY_COUNT,null)),0)  as "Y30",
+			        IFNULL(sum(if(age = 40,BUY_COUNT,null)),0)  as "Y40",
+			        IFNULL(sum(if(age = 50,BUY_COUNT,null)),0)  as "Y50",
+			        IFNULL(sum(if(age = 60,BUY_COUNT,null)),0)  as "Y60"
+			FROM SHOP_CUSTOMER_GENDER_AGE_RESULT
+			where shop_seq= #{shop_seq}
+			and rs_date BETWEEN #{start_date} and #{end_date}
+		</select>
+
+		<select id="shop_review_count" parameterType="map" resultType="int">
+			SELECT IFNULL(sum(REVIEW_COUNT),0)
+			FROM SHOP_REVIEW_DATE_RESULT
+			where shop_seq = #{shop_seq}
+			and rs_date BETWEEN #{start_date} and #{end_date}
+		</select>
+
+		<select id="shop_review_avg" parameterType="map" resultType="float">
+			SELECT IFNULL(round(avg(REVIEW_GRADE),1),0)
+			FROM SHOP_REVIEW_DATE_RESULT
+			where shop_seq = #{shop_seq}
+			and rs_date BETWEEN #{start_date} and #{end_date}
+		</select>
+
+		<select id="shop_review_avg_date" parameterType="map" resultType="hashmap">
+			SELECT rs_date,
+					review_grade
+			FROM SHOP_REVIEW_DATE_RESULT
+			where shop_seq = #{shop_seq}
+			and rs_date BETWEEN #{start_date} and #{end_date}
+			group by RS_DAY
+		</select>
+
+		<select id="shop_review_gender" parameterType="map" resultType="hashmap">
+			SELECT IFNULL(sum(if(gender = "M",REVIEW_COUNT,null)),0) as "m",
+					IFNULL(sum(if(gender = "F",REVIEW_COUNT,null)),0) as "f"
+			FROM SHOP_REVIEW_GENDER_AGE_RESULT
+			where shop_seq = #{shop_seq}
+			and rs_date BETWEEN #{start_date} and #{end_date}
+		</select>
+
+		<select id="shop_review_age" parameterType="map" resultType="hashmap">
+			SELECT IFNULL(sum(if(age = 10,REVIEW_COUNT,null)),0) as "Y10",
+					IFNULL(sum(if(age = 20,REVIEW_COUNT,null)),0) as "Y20",
+			        IFNULL(sum(if(age = 30,REVIEW_COUNT,null)),0) as "Y30",
+			        IFNULL(sum(if(age = 40,REVIEW_COUNT,null)),0) as "Y40",
+			        IFNULL(sum(if(age = 50,REVIEW_COUNT,null)),0) as "Y50",
+			        IFNULL(sum(if(age = 60,REVIEW_COUNT,null)),0) as "Y60"
+			FROM SHOP_REVIEW_GENDER_AGE_RESULT
+			where shop_seq = #{shop_seq}
+			and rs_date BETWEEN #{start_date} and #{end_date}
+		</select>
+
+		<select id="shop_review_visit" parameterType="map" resultType="hashmap">
+			SELECT IFNULL(sum(if(REVIEW_VISIT_TYPE = 'v01',VISIT_TYPE_COUNT,null)),0) as "v01",
+					IFNULL(sum(if(REVIEW_VISIT_TYPE = 'v02',VISIT_TYPE_COUNT,null)),0) as "v02",
+			        IFNULL(sum(if(REVIEW_VISIT_TYPE = 'v03',VISIT_TYPE_COUNT,null)),0) as "v03",
+			        IFNULL(sum(if(REVIEW_VISIT_TYPE = 'v04',VISIT_TYPE_COUNT,null)),0) as "v04",
+			        IFNULL(sum(if(REVIEW_VISIT_TYPE = 'v05',VISIT_TYPE_COUNT,null)),0) as "v05"
+			FROM SHOP_REVIEW_VISIT_TYPE_RESULT
+			where shop_seq = #{shop_seq}
+			and rs_date BETWEEN #{start_date} and #{end_date}
+		</select>
+
+		<select id="shop_review_visit_date" parameterType="map" resultType="hashmap">
+			SELECT rs_date,review_count
+			 FROM SHOP_REVIEW_DATE_RESULT
+			where shop_seq = #{shop_seq}
+			and rs_date BETWEEN #{start_date} and #{end_date}
+		</select>
+
+		<select id="shop_review_visit_detail" parameterType="map" resultType="hashmap">
+		SELECT code_name, round(avg(REVIEW_DETAIL_GRADE),1) as grade
+			FROM SHOP_REVIEW_VISIT_DETAIL_RESULT t1
+			join code_mst t2
+			on t1.REVIEW_DETAIL_TYPE = t2.code_id
+			where shop_seq = #{shop_seq}
+			and t1.rs_date BETWEEN #{start_date} and #{end_date}
+			group by REVIEW_DETAIL_TYPE
+		</select>
+
+		<select id="shop_time_avg" parameterType="map" resultType="hashmap">
+			SELECT rs_time,
+					IFNULL(round(avg(AROUND_COUNT),1),0) as around_count,
+					IFNULL(round(avg(INTEREST_COUNT),1),0) as interest_count,
+			        IFNULL(round(avg(BUY_COUNT),1),0) as buy_count
+			FROM SHOP_CUSTOMER_TIME_RESULT
+			where shop_seq = #{shop_seq}
+			and rs_date BETWEEN #{start_date} and #{end_date}
+			group by RS_TIME
+		</select>
+
+		<select id="shop_date_avg" parameterType="map" resultType="hashmap">
+			SELECT rs_day,
+					IFNULL(round(avg(AROUND_COUNT),1),0) as around_count,
+					IFNULL(round(avg(INTEREST_COUNT),1),0) as interest_count,
+					IFNULL(round(avg(BUY_COUNT),1),0) as buy_count
+					FROM icou.SHOP_CUSTOMER_DATE_RESULT
+			where shop_seq = #{shop_seq}
+			and rs_date BETWEEN #{start_date} and #{end_date}
+			group by RS_DAY
+		</select>
+
+		<select id="event_status" parameterType="map" resultType="hashmap">
+			SELECT
+			   <![CDATA[
+			count(if(event_end_day < now(),"",null)) as event_end,
+			count(if(event_end_day > now(),"",null)) as event_use
+			   ]]>
+			FROM SHOP_EVENT_MST
+			where shop_seq = #{shop_seq}
+			and reg_date BETWEEN #{start_date} and #{end_date}
+		</select>
+
+		<select id="event_count" parameterType="map" resultType="hashmap">
+			SELECT IFNULL(sum(VIEW_COUNT),0) as view_count,
+					IFNULL(sum(DOWN_COUNT),0) as down_count
+			FROM SHOP_EVENT_DATE_RESULT
+			where shop_seq = #{shop_seq}
+			and rs_date BETWEEN #{start_date} and #{end_date}
+		</select>
+
+		<select id="promotion_count" parameterType="map" resultType="hashmap">
+			SELECT IFNULL(sum(VIEW_COUNT),0) as view_count,
+					IFNULL(sum(DOWN_COUNT),0) as down_count
+			FROM SHOP_PROMOTION_DATE_RESULT
+			where shop_seq = #{shop_seq}
+			and rs_date BETWEEN #{start_date} and #{end_date}
+		</select>
+
+	</mapper>

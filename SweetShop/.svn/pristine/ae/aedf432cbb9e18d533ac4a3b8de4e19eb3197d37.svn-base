@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.sweetk.mobile.user.mapper.UserPromotionMapper">
+		
+		<select id="selectPromotionCnt" parameterType="int" resultType="int">
+			SELECT count(*)
+			FROM SHOP_PROMOTION_CP_DOWN
+			WHERE USER_SEQ = #{0}
+		</select> 
+		
+		 <select id="selectPromotionList" resultType="UserPromotionVO">
+			SELECT 	
+		    *,
+		    datediff(endday ,nowday )  as dateDiff,
+		    datediff( nowday,startday )  as dateDiff2,
+		    TRUNCATE(reviewAvg,0) as reviewAvgFloor,
+		    ROUND((6371 * acos(cos(radians(#{1})) * cos(radians(SHOP_LOCATION_LAT)) * cos(radians(SHOP_LOCATION_LONG) - radians(#{2})) + sin(radians(#{1})) * sin(radians(SHOP_LOCATION_LAT)))),1)  as distanceKmeter,
+		    ROUND((6371000 * acos(cos(radians(#{1})) * cos(radians(SHOP_LOCATION_LAT)) * cos(radians(SHOP_LOCATION_LONG) - radians(#{2})) + sin(radians(#{1})) * sin(radians(SHOP_LOCATION_LAT)))),0)  as distanceMeter
+				FROM
+				(
+				SELECT 
+					a.USER_SEQ,
+					DOWN_SEQ,
+				    a.PROMOTION_SEQ,
+					DOWN_DATETIME,
+				    b.SHOP_SEQ,
+				    PROMOTION_DETAIL_DESC,
+				    PROMOTION_START_DAY,
+				    PROMOTION_END_DAY,
+				    PROMOTION_STATUS,
+				    b.IMG_PATH,
+				    b.IMG_FILE_NAME,
+				    b.IMG_ORG_NAME,
+				    b.REG_DATE,
+				    c.SHOP_NAME,
+				    c.SHOP_REG_NUMBER,
+				    c.SHOP_ZIP,
+				    c.SHOP_SIDO,
+				    c.SHOP_GU,
+				    c.SHOP_ADDR1,
+				    c.SHOP_ADDR2,
+				    c.SHOP_LOCATION_LAT,
+				    c.SHOP_LOCATION_LONG,
+				    c.SHOP_TEL,
+				    c.SHOP_KIND,
+				    c.SHOP_MENU,
+				    c.SHOP_OWNER_NAME,
+				    c.SHOP_PHONE,
+				    c.SHOP_FAX,
+				    c.SHOP_HOMEPAGE_URL,
+				    c.SHOP_IMG_PATH,
+				    c.SHOP_IMG_NAME,
+				    c.SHOP_IMG_ORG_NAME,
+				    c.SHOP_REG_DATE,
+				    date_format(cast(PROMOTION_END_DAY as datetime),'%Y-%m-%d' ) as endday,
+				    date_format(cast(PROMOTION_START_DAY as datetime),'%Y-%m-%d' ) as startday,
+					date_format(now(),'%Y-%m-%d') as nowday,
+				    case when (
+					    SELECT 
+							count(*)
+						FROM USER_FAVORITES_SHOP a
+						where a.USER_SEQ = #{0} and a.SHOP_SEQ = c.SHOP_SEQ
+					    ) =0 then 'N' else 'Y' end as favoriteYN,
+			  		(
+	                    SELECT count(*)
+	                    FROM USER_FAVORITES_SHOP a
+	                    WHERE a.SHOP_SEQ = c.SHOP_SEQ
+                    ) as favoriteCnt,
+                    (
+	                    SELECT IFNULL(round(avg(REVIEW_GRADE),0),0)
+						FROM SHOP_REVIEW a
+						where a.shop_seq = c.SHOP_SEQ
+                    ) as reviewAvg
+				FROM SHOP_PROMOTION_CP_DOWN a 
+				JOIN SHOP_PROMOTION b on a.PROMOTION_SEQ = b.PROMOTION_SEQ
+				JOIN shop_mst c on b.SHOP_SEQ = c.SHOP_SEQ
+				WHERE USER_SEQ = #{0}
+				ORDER BY DOWN_DATETIME DESC
+				LIMIT #{3},#{4}
+				) as asdf
+		</select> 
+
+		<delete id="deleteDownPromotion" parameterType="int">
+			DELETE FROM SHOP_PROMOTION_CP_DOWN
+			WHERE DOWN_SEQ = #{0}
+		</delete>
+			
+		<insert id="insertPromotionViewCnt" parameterType="int">
+			INSERT INTO SHOP_PROMOTION_VIEW (PROMOTION_SEQ, USER_SEQ)
+							  VALUES (#{0},#{1})
+		</insert> 
+		
+		 <select id="selectPromotionDetail" resultType="UserPromotionVO">
+			SELECT 	
+		    *,
+		    datediff(endday ,nowday )  as dateDiff,
+		    datediff( nowday,startday )  as dateDiff2,
+		    TRUNCATE(reviewAvg,0) as reviewAvgFloor,
+		    ROUND((6371 * acos(cos(radians(#{1})) * cos(radians(SHOP_LOCATION_LAT)) * cos(radians(SHOP_LOCATION_LONG) - radians(#{2})) + sin(radians(#{1})) * sin(radians(SHOP_LOCATION_LAT)))),1)  as distanceKmeter,
+		    ROUND((6371000 * acos(cos(radians(#{1})) * cos(radians(SHOP_LOCATION_LAT)) * cos(radians(SHOP_LOCATION_LONG) - radians(#{2})) + sin(radians(#{1})) * sin(radians(SHOP_LOCATION_LAT)))),0)  as distanceMeter
+				FROM
+				(
+				SELECT 
+					PROMOTION_SEQ,
+				    b.SHOP_SEQ,
+				    PROMOTION_DETAIL_DESC,
+				    PROMOTION_START_DAY,
+				    PROMOTION_END_DAY,
+				    PROMOTION_STATUS,
+				    b.IMG_PATH,
+				    b.IMG_FILE_NAME,
+				    b.IMG_ORG_NAME,
+				    b.REG_DATE,
+				    c.SHOP_NAME,
+				    c.SHOP_REG_NUMBER,
+				    c.SHOP_ZIP,
+				    c.SHOP_SIDO,
+				    c.SHOP_GU,
+				    c.SHOP_ADDR1,
+				    c.SHOP_ADDR2,
+				    c.SHOP_LOCATION_LAT,
+				    c.SHOP_LOCATION_LONG,
+				    c.SHOP_TEL,
+				    c.SHOP_KIND,
+				    c.SHOP_MENU,
+				    c.SHOP_OWNER_NAME,
+				    c.SHOP_PHONE,
+				    c.SHOP_FAX,
+				    c.SHOP_HOMEPAGE_URL,
+				    c.SHOP_IMG_PATH,
+				    c.SHOP_IMG_NAME,
+				    c.SHOP_IMG_ORG_NAME,
+				    c.SHOP_REG_DATE,
+				    date_format(cast(PROMOTION_END_DAY as datetime),'%Y-%m-%d' ) as endday,
+				    date_format(cast(PROMOTION_START_DAY as datetime),'%Y-%m-%d' ) as startday,
+					date_format(now(),'%Y-%m-%d') as nowday,
+				    case when (
+					    SELECT 
+							count(*)
+						FROM USER_FAVORITES_SHOP a
+						where a.USER_SEQ = #{0} and a.SHOP_SEQ = c.SHOP_SEQ
+					    ) =0 then 'N' else 'Y' end as favoriteYN,
+			  		(
+	                    SELECT count(*)
+	                    FROM USER_FAVORITES_SHOP a
+	                    WHERE a.SHOP_SEQ = c.SHOP_SEQ
+                    ) as favoriteCnt,
+                    (
+	                    SELECT IFNULL(round(avg(REVIEW_GRADE),0),0)
+						FROM SHOP_REVIEW a
+						where a.shop_seq = c.SHOP_SEQ
+                    ) as reviewAvg
+				FROM SHOP_PROMOTION b 				
+				JOIN shop_mst c on b.SHOP_SEQ = c.SHOP_SEQ
+				WHERE b.PROMOTION_SEQ = #{3}
+				) as asdf
+		</select> 
+
+	</mapper>

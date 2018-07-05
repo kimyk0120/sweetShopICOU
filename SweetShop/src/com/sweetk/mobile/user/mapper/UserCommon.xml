@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.sweetk.mobile.user.mapper.UserCommonMapper">
+		
+		<delete id="delFavorite" parameterType="int">
+			
+			DELETE FROM USER_FAVORITES_SHOP
+			WHERE USER_SEQ = #{0} AND SHOP_SEQ = #{1}	
+		
+		</delete>
+		
+		<insert id="addFavorite" parameterType="int">
+			
+			INSERT INTO USER_FAVORITES_SHOP (USER_SEQ,SHOP_SEQ)
+			VALUES (#{0},#{1})
+		
+		</insert>
+	</mapper>

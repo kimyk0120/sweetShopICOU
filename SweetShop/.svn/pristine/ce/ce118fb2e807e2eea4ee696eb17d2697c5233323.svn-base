@@ -1,0 +1,60 @@
+				<!-- 섹션 시작 //-->
+				<li class="wrdLatest">
+					<div class="ribbon"><img src="./images/common/ribbon_cafe.png" /></div>
+					<div class="favorite"><img src="./images/common/icon_favorite_off.png"  /></div>
+					<div class="title"><a href="#" class="color_cafe"><p class="notcolor">카페ㆍ석촌호수</p>1Cafe Rosy</a></div>
+					<div class="photo"><a href="#"><img src="./images/common/@photo_01.jpg"  /></a></div>
+					<div class="infomation">
+						<ul>
+							<li><img src="./images/common/icon_list_hot.png" /><img src="./images/common/icon_list_new.png" /><img src="./images/common/icon_list_dc.png" /><img src="./images/common/icon_list_coupon.png" /></li>
+							<li><p><img src="./images/common/star_gray_min_3.png" /></p>1.2km</li>
+						</ul>
+					</div>				
+				</li>
+				<!-- 섹션 끝//-->
+
+				<!-- 섹션 시작 //-->
+				<li class="wrdLatest">
+					<div class="ribbon"><img src="./images/common/ribbon_bakery.png" /></div>
+					<div class="favorite"><img src="./images/common/icon_favorite_on.png"  /></div>
+					<div class="title"><a href="#" class="color_bakery"><p class="notcolor">빵집ㆍ동안구</p>2Bake.B</a></div>
+					<div class="photo"><a href="#"><img src="./images/common/@photo_02.jpg"  /></a></div>
+					<div class="infomation">
+						<ul>
+							<li><img src="./images/common/icon_list_new.png" /><img src="./images/common/icon_list_dc.png" /></li>
+							<li><p><img src="./images/common/star_gray_min_5.png" /></p>3.6km</li>
+						</ul>
+					</div>				
+				</li>
+				<!-- 섹션 끝//-->
+
+				<!-- 섹션 시작 //-->
+				<li class="wrdLatest">
+					<div class="ribbon"><img src="./images/common/ribbon_food.png" /></div>
+					<div class="favorite"><img src="./images/common/icon_favorite_on.png"  /></div>
+					<div class="title"><a href="#" class="color_food"><p class="notcolor">음식점ㆍ가로수길</p>3Tarony</a></div>
+					<div class="photo"><a href="#"><img src="./images/common/@photo_03.jpg"  /></a></div>
+					<div class="infomation">
+						<ul>
+							<li><img src="./images/common/icon_list_new.png" /><img src="./images/common/icon_list_dc.png" /></li>
+							<li><p><img src="./images/common/star_gray_min_1.png" /></p>3.6km</li>
+						</ul>
+					</div>				
+				</li>
+				<!-- 섹션 끝//-->
+
+
+				<!-- 섹션 시작 //-->
+				<li class="wrdLatest">
+					<div class="ribbon"><img src="./images/common/ribbon_beauty.png" /></div>
+					<div class="favorite"><img src="./images/common/icon_favorite_off.png"  /></div>
+					<div class="title"><a href="#" class="color_beauty"><p class="notcolor">미용/스파ㆍ한남동</p>4Sandals</a></div>
+					<div class="photo"><a href="#"><img src="./images/common/@photo_04.jpg"  /></a></div>
+					<div class="infomation">
+						<ul>
+							<li><img src="./images/common/icon_list_hot.png" /><img src="./images/common/icon_list_new.png" /><img src="./images/common/icon_list_dc.png" /><img src="./images/common/icon_list_coupon.png" /></li>
+							<li><p><img src="./images/common/star_gray_min_4.png" /></p>10.6km</li>
+						</ul>
+					</div>				
+				</li>
+				<!-- 섹션 끝//-->

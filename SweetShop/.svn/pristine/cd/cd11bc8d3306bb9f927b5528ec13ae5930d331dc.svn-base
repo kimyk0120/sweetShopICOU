@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.sweetk.mobile.user.mapper.SearchMapper">
+		
+		<select id="getSearchStoreList" resultType="UserPromotionVO">
+			SELECT 	
+		    *,
+		    TRUNCATE(reviewAvg,0) as reviewAvgFloor,
+		    ROUND((6371 * acos(cos(radians(#{1})) * cos(radians(SHOP_LOCATION_LAT)) * cos(radians(SHOP_LOCATION_LONG) - radians(#{2})) + sin(radians(#{1})) * sin(radians(SHOP_LOCATION_LAT)))),1)  as distanceKmeter,
+		    ROUND((6371000 * acos(cos(radians(#{1})) * cos(radians(SHOP_LOCATION_LAT)) * cos(radians(SHOP_LOCATION_LONG) - radians(#{2})) + sin(radians(#{1})) * sin(radians(SHOP_LOCATION_LAT)))),0)  as distanceMeter
+				FROM
+				(
+					SELECT 
+						SHOP_SEQ,
+					    SHOP_NAME,
+					    SHOP_LOCATION_LAT,
+					    SHOP_LOCATION_LONG,
+					    a.SHOP_KIND,
+					    SHOP_MENU,
+					    SHOP_SIDO,
+					    SHOP_GU,
+					    SHOP_ADDR1,
+					    SHOP_ADDR2,
+					    case when (
+									SELECT 
+										count(*)
+									FROM USER_FAVORITES_SHOP b
+									where b.USER_SEQ = #{0} and a.SHOP_SEQ = b.SHOP_SEQ
+									) =0 then 'N' else 'Y' end as favoriteYN,
+						SHOP_IMG_PATH,
+					    (
+							SELECT IFNULL(round(avg(REVIEW_GRADE),0),0)
+							FROM SHOP_REVIEW c
+							where a.shop_seq = c.SHOP_SEQ
+						) as reviewAvg,
+						d.code_name as codeNm
+					FROM shop_mst a LEFT JOIN code_mst d ON a.SHOP_KIND = d.code_id
+					WHERE SHOP_NAME LIKE CONCAT('%',#{5},'%') || SHOP_SIDO LIKE CONCAT('%',#{5},'%') 
+							|| SHOP_GU LIKE CONCAT('%',#{5},'%') || SHOP_ADDR1 LIKE CONCAT('%',#{5},'%') 
+							|| 	SHOP_ADDR2 LIKE CONCAT('%',#{5},'%') || SHOP_MENU LIKE CONCAT('%',#{5},'%') || code_name LIKE CONCAT('%',#{5},'%')
+					order by SHOP_REG_DATE DESC 
+					LIMIT #{3},#{4}
+				) as asdf
+		</select>	
+	</mapper>

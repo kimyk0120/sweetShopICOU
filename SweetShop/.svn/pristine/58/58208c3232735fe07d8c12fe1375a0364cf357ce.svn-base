@@ -1,0 +1,21 @@
+/*
+	 http://css-tricks.com
+*/
+
+
+#well {   width: 100%;}
+
+h2 { width: 100%; }
+#slider { background: url(../images/common/btn_cutting.png) no-repeat; background-size:70px 70px; width: 70px;	height: 70px; display: inline-block; vertical-align: middle; line-height: 1; }
+
+
+/*
+@-webkit-keyframes slidetounlock {
+	0% {
+		background-position: -720px 0;
+	}
+	100%{
+		background-position: 720px 0;
+	}
+}
+*/

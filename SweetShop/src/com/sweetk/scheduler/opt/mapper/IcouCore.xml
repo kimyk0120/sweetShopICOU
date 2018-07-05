@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sweetk.scheduler.opt.mapper.IcouCoreMapper">
+
+	<select id="select_hotel_char_all" resultType="ShopTypeVO">
+		SELECT
+			CA.CNT AS C1
+			, CB.CNT AS C2
+			, CC.CNT AS C3
+			, CD.CNT AS C4
+			, CE.CNT AS C5
+		FROM
+			(SELECT 1 AS TK, COUNT(SHOP_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 1)
+			CA,
+			(SELECT 1 AS TK, COUNT(SHOP_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 2)
+			CB,
+			(SELECT 1 AS TK, COUNT(SHOP_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 3)
+			CC,
+			(SELECT 1 AS TK, COUNT(SHOP_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 4)
+			CD,
+			(SELECT 1 AS TK, COUNT(SHOP_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 5)
+			CE
+		WHERE
+			CA.TK=CB.TK AND CB.TK=CC.TK AND CC.TK=CD.TK AND CD.TK=CE.TK			
+			
+	</select>
+	
+	<select id="select_hotel_char" resultType="ShopTypeVO">
+		SELECT
+			SHOP_SEQ
+			, IFNULL((SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 1 AND SHOP_SEQ = RM.SHOP_SEQ) / (SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE SHOP_SEQ = RM.SHOP_SEQ),0) AS C1
+			, IFNULL((SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 2 AND SHOP_SEQ = RM.SHOP_SEQ) / (SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE SHOP_SEQ = RM.SHOP_SEQ),0) AS C2
+			, IFNULL((SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 3 AND SHOP_SEQ = RM.SHOP_SEQ) / (SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE SHOP_SEQ = RM.SHOP_SEQ),0) AS C3
+			, IFNULL((SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 4 AND SHOP_SEQ = RM.SHOP_SEQ) / (SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE SHOP_SEQ = RM.SHOP_SEQ),0) AS C4
+			, IFNULL((SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 5 AND SHOP_SEQ = RM.SHOP_SEQ) / (SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE SHOP_SEQ = RM.SHOP_SEQ),0) AS C5
+		FROM
+			SHOP_REVIEW AS RM
+		GROUP BY
+			SHOP_SEQ
+	</select>
+	
+	<select id="select_rated_shop_count" resultType="Integer">
+		SELECT
+			COUNT(DISTINCT SHOP_SEQ)
+		FROM
+			SHOP_REVIEW
+		WHERE
+			SHOP_SEQ <![CDATA[<>]]> 0
+	</select>
+	
+	<select id="select_user_char" resultType="ShopTypeVO">
+		SELECT
+			SU_DIST.USER_IDX AS USER_SEQ
+			, SUM(C1*CC) / SUM(CC) AS C1
+			, SUM(C2*CC) / SUM(CC) AS C2
+			, SUM(C3*CC) / SUM(CC) AS C3
+			, SUM(C4*CC) / SUM(CC) AS C4
+			, SUM(C5*CC) / SUM(CC) AS C5
+		FROM
+			(
+			SELECT
+				RM.SHOP_SEQ AS SHOP_IDX
+				, RM.USER_SEQ AS USER_IDX
+				, COUNT(RM.REVIEW_SEQ) AS CC
+				, IFNULL((SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 1 AND SHOP_SEQ = RM.SHOP_SEQ) / (SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE SHOP_SEQ = RM.SHOP_SEQ),0) AS C1
+				, IFNULL((SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 2 AND SHOP_SEQ = RM.SHOP_SEQ) / (SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE SHOP_SEQ = RM.SHOP_SEQ),0) AS C2
+				, IFNULL((SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 3 AND SHOP_SEQ = RM.SHOP_SEQ) / (SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE SHOP_SEQ = RM.SHOP_SEQ),0) AS C3
+				, IFNULL((SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 4 AND SHOP_SEQ = RM.SHOP_SEQ) / (SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE SHOP_SEQ = RM.SHOP_SEQ),0) AS C4
+				, IFNULL((SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 5 AND SHOP_SEQ = RM.SHOP_SEQ) / (SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE SHOP_SEQ = RM.SHOP_SEQ),0) AS C5
+	
+			FROM 
+				SHOP_REVIEW RM
+			WHERE
+				RM.SHOP_SEQ <![CDATA[<>]]> 0
+			GROUP BY 
+				RM.SHOP_SEQ, RM.USER_SEQ
+			ORDER BY
+				RM.USER_SEQ
+			) SU_DIST
+			
+			GROUP BY SU_DIST.USER_IDX
+	</select>
+	
+	<select id="select_user_taste" resultType="ShopTypeVO">
+		SELECT
+			SU_DIST.USER_IDX AS O_USER_IDX
+			, (C1-AVG(C1*CC))*(C1-AVG(C1*CC)) / SUM(CC) 
+			+ (C2-AVG(C2*CC))*(C2-AVG(C2*CC)) / SUM(CC) 
+			+ (C3-AVG(C3*CC))*(C3-AVG(C3*CC)) / SUM(CC) 
+			+ (C4-AVG(C4*CC))*(C4-AVG(C4*CC)) / SUM(CC) 
+			+ (C5-AVG(C5*CC))*(C5-AVG(C5*CC)) / SUM(CC) AS user_taste
+		FROM
+			(
+			SELECT 
+				RM.SHOP_SEQ AS SHOP_IDX
+				, RM.USER_SEQ AS USER_IDX
+				, COUNT(RM.REVIEW_SEQ) AS CC
+				, IFNULL((SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 1 AND SHOP_SEQ = RM.SHOP_SEQ) / (SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE SHOP_SEQ = RM.SHOP_SEQ),0) AS C1
+				, IFNULL((SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 2 AND SHOP_SEQ = RM.SHOP_SEQ) / (SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE SHOP_SEQ = RM.SHOP_SEQ),0) AS C2
+				, IFNULL((SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 3 AND SHOP_SEQ = RM.SHOP_SEQ) / (SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE SHOP_SEQ = RM.SHOP_SEQ),0) AS C3
+				, IFNULL((SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 4 AND SHOP_SEQ = RM.SHOP_SEQ) / (SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE SHOP_SEQ = RM.SHOP_SEQ),0) AS C4
+				, IFNULL((SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE REVIEW_VISIT_TYPE = 5 AND SHOP_SEQ = RM.SHOP_SEQ) / (SELECT COUNT(REVIEW_SEQ) AS CNT FROM SHOP_REVIEW WHERE SHOP_SEQ = RM.SHOP_SEQ),0) AS C5
+	
+			FROM 
+				SHOP_REVIEW RM
+			WHERE
+				RM.SHOP_SEQ <![CDATA[<>]]> 0
+			GROUP BY 
+				RM.SHOP_SEQ, RM.USER_SEQ
+			ORDER BY
+				RM.USER_SEQ
+			) SU_DIST
+			
+			GROUP BY SU_DIST.USER_IDX	
+	</select>
+	
+	<update id="update_reviewer_info" parameterType="String">
+		UPDATE
+			O_USER
+		SET
+			OUSER_GENDER = #{1}
+			, OUSER_BIRTHDATE = #{2}
+		
+		WHERE OUSER_ID=#{0}
+	</update>
+	
+	<update id="update_matching_distance" parameterType="ShopTypeVO">
+		UPDATE
+			O_SCORE_AGG
+		SET
+			o_matching_dist = #{match_d}
+		WHERE 
+			O_USER_IDX=#{o_user_idx} AND O_SHOP_IDX=#{o_shop_idx}
+	</update>
+	
+	
+	<update id="update_user_taste" parameterType="ShopTypeVO">
+		UPDATE
+			O_SCORE_AGG
+		SET
+			o_taste = #{user_taste}
+		WHERE 
+			O_USER_IDX=#{o_user_idx}
+	</update>
+	
+	
+	<insert id="insert_opt_data">
+		INSERT INTO O_SCORE_AGG (
+			  O_REVIEWS_IDX
+			, O_SHOP_IDX
+			, O_USER_IDX
+			, O_SCORE
+			, O_REVIEW_NUMBER
+			, O_ELITE
+			, O_REVIEW_FREQ
+			, O_AGE
+			, WRITE_DATE
+			, REG_DATE
+		) 
+		SELECT
+			  D.O_REVIEWS_IDX
+			, D.O_SHOP_IDX
+			, D.O_USER_IDX
+			, D.O_SCORE
+			, D.O_REVIEW_NUMBER
+			, IF(D.HIST <![CDATA[>]]> 50, 1, 
+			  IF(D.HIST <![CDATA[>]]> 20 , 2,
+			  IF(D.HIST <![CDATA[>]]> 10 , 3,
+			  IF(D.HIST <![CDATA[>]]> 5 , 4,
+			  IF(D.HIST <![CDATA[>]]> 2 , 5,
+				6
+			  ))))) AS ELITE
+			 , IFNULL(O_REVIEW_NUMBER / O_INTERVAL, 1) AS O_REVIEW_FREQ
+			 , D.O_AGE
+			 , D.WRITE_DATE
+			 , NOW()
+		FROM (
+			SELECT 
+				  O_REVIEWS_IDX 
+				, O_SHOP_IDX
+				, O_USER_IDX
+				, SCORE AS O_SCORE
+				, o_user_review_count AS HIST
+				, (SELECT COUNT(O_REVIEWS_IDX) FROM O_ZORO AS M WHERE M.O_USER_IDX = A.O_USER_IDX AND M.WRITE_DATE <![CDATA[<]]> A.WRITE_DATE) AS O_REVIEW_NUMBER
+				, (SELECT A.write_date-MIN(M.write_date)+1 FROM O_ZORO AS M WHERE M.O_USER_IDX = A.O_USER_IDX) AS O_INTERVAL
+				, (SELECT A.write_date-MIN(M.write_date) FROM O_ZORO AS M WHERE M.O_SHOP_IDX = A.O_SHOP_IDX) AS O_AGE
+				, WRITE_DATE
+				, NOW() AS REG_DATE
+			FROM
+				O_ZORO AS A
+			ORDER BY
+				A.O_SHOP_IDX, A.WRITE_DATE
+
+		) D
+		
+	</insert>
+	
+	<insert id="insert_zoro" parameterType="java.util.Map">
+		INSERT INTO O_ZORO (
+			  O_SHOP_IDX
+			, O_USER_IDX
+			, SCORE
+			, VISIT_TYPE
+			, WRITE_DATE
+			, O_USER_REVIEW_COUNT
+		) VALUES 
+		<foreach item="OZoroVO" collection="list" separator="," >
+			( ${OZoroVO.o_shop_idx}, ${OZoroVO.o_user_idx}, ${OZoroVO.score}, ${OZoroVO.visit_type}, ${OZoroVO.write_date}, 0 )
+		</foreach>
+	
+	</insert>
+	
+	
+	<select id="select_agg_data_count" resultType="Integer">
+		SELECT
+			COUNT(O_SCORE_AGG_IDX)
+		FROM
+			O_SCORE_AGG
+	</select>	
+	
+	<select id="select_agemth" resultType="Double">
+		SELECT
+			AGE_MTH
+		FROM
+			O_SCORE_AGG
+	</select>	
+	
+	<select id="select_reviews_idx" resultType="Integer">
+		SELECT
+			O_REVIEWS_IDX
+		FROM
+			O_SCORE_AGG
+	</select>	
+	
+	<select id="select_reviews_score" resultType="Integer">
+		SELECT
+			O_SCORE
+		FROM
+			O_SCORE_AGG
+	</select>	
+	
+	
+	<update id="update_age_mth" parameterType="Integer">
+		UPDATE
+			O_SCORE_AGG
+		SET
+			AGE_MTH = CEIL(O_AGE / #{0})
+	</update>
+	
+	<update id="update_oa" parameterType="double">
+		UPDATE
+			O_SCORE_AGG
+		SET
+			O_AVG = #{0}
+		WHERE
+			O_REVIEWS_IDX = #{1}
+	</update>
+<!-- 	<update id="update_oa" parameterType="java.util.Map">
+		<foreach item="OZoroVO" collection="list" separator=" " >
+		UPDATE O_SCORE_AGG SET O_AVG = ${OZoroVO.o_avg} WHERE O_REVIEWS_IDX = ${OZoroVO.o_reviews_idx};
+		</foreach>
+	</update> -->
+	
+</mapper>   

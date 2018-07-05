@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.sweetk.web.shop.mapper.PromotionMapper">
+
+	<select id="promotion_list" parameterType="map" resultType="map">
+		select promotion_seq,
+			   shop_seq,
+			   promotion_detail_desc,
+			   promotion_start_day,
+			   promotion_end_day,
+			   <![CDATA[
+			   if(promotion_end_day > now(),"0","1") as promotion_status,
+			   ]]>
+			   img_path,
+			   img_file_name,
+			   img_org_name,
+			   reg_date,
+			   edit_date
+		from SHOP_PROMOTION
+		where shop_seq = #{shop_seq}
+		and reg_date BETWEEN #{start_date} and #{end_date}
+		and promotion_detail_desc like CONCAT('%',#{promotion_name},'%')
+		order by reg_date desc
+		limit  #{page_num}, #{page_size}
+	</select>
+
+	<select id="promotion_count" parameterType="map" resultType="int">
+		select count(*)
+		from SHOP_PROMOTION
+		where shop_seq = #{shop_seq}
+		and reg_date BETWEEN #{start_date} and #{end_date}
+		and promotion_detail_desc like CONCAT('%',#{promotion_name},'%')
+	</select>
+
+	<select id="shop" parameterType="String" resultType="hashmap">
+
+		SELECT t1.shop_seq,
+			   t1.shop_name,
+			   t1.shop_reg_number,
+			   t1.shop_zip,
+			   t1.shop_sido,
+			   t1.shop_gu,
+			   t1.shop_addr1,
+			   t1.shop_addr2,
+			   t1.shop_location_lat,
+			   t1.shop_location_long,
+			   t1.shop_tel,
+			   t1.shop_kind,
+			   t1.shop_menu,
+			   t1.shop_owner_name,
+			   t1.shop_phone,
+			   t1.shop_fax,
+			   t1.shop_homepage_url,
+			   t1.shop_img_path,
+			   t1.shop_img_name,
+			   t1.shop_img_org_name,
+			   t1.shop_reg_date,
+			   t2.code_name
+        FROM shop_mst t1 JOIN code_mst t2
+        on t1.SHOP_KIND = t2.code_id
+		where t1.shop_seq =  #{0}
+
+	</select>
+
+	<select id="promotion" parameterType="int" resultType="hashmap">
+
+		SELECT promotion_seq,
+			   shop_seq,
+			   promotion_detail_desc,
+			   promotion_start_day,
+			   promotion_end_day,
+			   promotion_status,
+			   img_path,
+			   img_file_name,
+			   img_org_name,
+			   reg_date,
+			   edit_date
+			   FROM SHOP_PROMOTION
+		where promotion_seq = #{0}
+
+	</select>
+
+ 	<update id="promotion_update" parameterType="ShopPromotionVo">
+		UPDATE SHOP_PROMOTION
+		SET
+			promotion_detail_desc = #{promotion_detail_desc},
+			promotion_start_day = #{promotion_start_day},
+			promotion_end_day = #{promotion_end_day},
+			promotion_status = #{promotion_status},
+			img_path = #{img_path},
+			img_file_name = #{img_file_name},
+			img_org_name = #{img_org_name},
+			edit_date = NOW()
+		WHERE
+			promotion_seq = #{promotion_seq}
+	</update>
+
+	<insert id="promotion_insert" parameterType="ShopPromotionVo">
+		insert into SHOP_PROMOTION(shop_seq,
+							   promotion_detail_desc,
+							   promotion_start_day,
+							   promotion_end_day,
+							   promotion_status,
+							   img_path,
+							   img_file_name,
+							   img_org_name,REG_DATE)
+						values (#{shop_seq},
+								#{promotion_detail_desc},
+								#{promotion_start_day},
+								#{promotion_end_day},
+								#{promotion_status},
+								#{img_path},
+								#{img_file_name},
+								#{img_org_name},now())
+	</insert>
+
+	<select id="getPromotionSeq" parameterType="ShopPromotionVo" resultType="String">
+		SELECT max(promotion_seq) as promotion_seq FROM SHOP_PROMOTION WHERE shop_seq = #{shop_seq}
+	</select>
+
+ 	<update id="shop_card_update" parameterType="ShopCardVo">
+		UPDATE SHOP_BUSINESS_CARD
+		SET
+			etc_text = #{etc_text},
+			shop_intro = #{shop_intro},
+			img_path = #{img_path},
+			img_file_name = #{img_file_name},
+			img_org_name = #{img_org_name},
+			edit_date = NOW()
+		WHERE
+			shop_seq = #{shop_seq}
+	</update>
+
+	<insert id="shop_card_insert" parameterType="ShopCardVo">
+		insert into SHOP_BUSINESS_CARD(shop_seq,
+							   shop_intro,
+							   etc_text,
+							   img_path,
+							   img_file_name,
+							   img_org_name)
+						values (#{shop_seq},
+								#{shop_intro},
+								#{etc_text},
+								#{img_path},
+								#{img_file_name},
+								#{img_org_name})
+	</insert>
+
+	<select id="shop_card" parameterType="int" resultType="hashmap">
+
+		SELECT shop_seq,
+			   shop_intro,
+			   etc_text,
+			   img_path,
+			   img_file_name,
+			   img_org_name,
+			   reg_date,
+			   edit_date
+		FROM SHOP_BUSINESS_CARD
+		where shop_seq = #{0}
+
+	</select>
+
+    <select id="promotion_view_count" parameterType="map" resultType="int">
+        SELECT count(*) as event_count
+        FROM SHOP_PROMOTION_VIEW
+        where promotion_seq = #{promotion_seq}
+	</select>
+
+	<select id="promotion_down_count" parameterType="map" resultType="int">
+        SELECT count(*) as event_count
+        FROM SHOP_PROMOTION_CP_DOWN
+        where promotion_seq = #{promotion_seq}
+	</select>
+
+
+	<select id="promotion_date_chart" parameterType="map" resultType="hashmap">
+		SELECT shop_seq,
+			   promotion_seq,
+			   rs_date,
+			   rs_day,
+			   view_count,
+			   down_count
+		FROM SHOP_PROMOTION_DATE_RESULT
+        where promotion_seq = #{promotion_seq}
+	</select>
+
+	<select id="promotion_time_chart" parameterType="map" resultType="hashmap">
+		SELECT rs_time,
+			   IFNULL(avg(VIEW_COUNT),0) as view_count,
+			   IFNULL(avg(DOWN_COUNT),0) as down_count
+	    FROM icou.SHOP_PROMOTION_TIME_RESULT
+        where promotion_seq = #{promotion_seq}
+	    group by RS_TIME
+	    order by CAST(RS_TIME AS SIGNED)
+	</select>
+
+	<select id="promotion_view_gender_chart" parameterType="map" resultType="hashmap">
+		SELECT IFNULL(sum(if(gender = "M",VIEW_COUNT,null)),0) as "m",
+				IFNULL(sum(if(gender = "F",VIEW_COUNT,null)),0) as "f"
+        FROM SHOP_PROMOTION_GENDER_AGE_RESULT
+		where promotion_seq = #{promotion_seq}
+	</select>
+
+	<select id="promotion_down_gender_chart" parameterType="map" resultType="hashmap">
+		SELECT IFNULL(sum(if(gender = "M",DOWN_COUNT,null)),0) as "m",
+				IFNULL(sum(if(gender = "F",DOWN_COUNT,null)),0) as "f"
+        FROM SHOP_PROMOTION_GENDER_AGE_RESULT
+		where promotion_seq = #{promotion_seq}
+	</select>
+
+	<select id="promotion_view_age_chart" parameterType="map" resultType="hashmap">
+			SELECT IFNULL(sum(if(age = 10,VIEW_COUNT,null)),0) as "Y10",
+					IFNULL(sum(if(age = 20,VIEW_COUNT,null)),0) as "Y20",
+			        IFNULL(sum(if(age = 30,VIEW_COUNT,null)),0) as "Y30",
+			        IFNULL(sum(if(age = 40,VIEW_COUNT,null)),0) as "Y40",
+			        IFNULL(sum(if(age = 50,VIEW_COUNT,null)),0) as "Y50",
+			        IFNULL(sum(if(age = 60,VIEW_COUNT,null)),0) as "Y60"
+			FROM SHOP_PROMOTION_GENDER_AGE_RESULT
+			where promotion_seq= #{promotion_seq}
+	</select>
+
+	<select id="promotion_down_age_chart" parameterType="map" resultType="hashmap">
+			SELECT IFNULL(sum(if(age = 10,DOWN_COUNT,null)),0) as "Y10",
+					IFNULL(sum(if(age = 20,DOWN_COUNT,null)),0) as "Y20",
+			        IFNULL(sum(if(age = 30,DOWN_COUNT,null)),0) as "Y30",
+			        IFNULL(sum(if(age = 40,DOWN_COUNT,null)),0) as "Y40",
+			        IFNULL(sum(if(age = 50,DOWN_COUNT,null)),0) as "Y50",
+			        IFNULL(sum(if(age = 60,DOWN_COUNT,null)),0) as "Y60"
+			FROM SHOP_PROMOTION_GENDER_AGE_RESULT
+			where promotion_seq= #{promotion_seq}
+	</select>
+
+	<select id="getPushPromotionUserList" parameterType="map" resultType="map">
+		SELECT um.user_seq,
+			   um.user_device,
+			   um.user_push_key
+		FROM USER_SETTING US INNER JOIN user_mst um ON US.USER_SEQ = um.user_seq
+		WHERE PROMOTION = '1'
+
+	</select>
+
+	</mapper>

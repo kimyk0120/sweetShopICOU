@@ -1,0 +1,307 @@
+<!doctype html>
+<!-- ie조건부주석 Conditional Comment //-->
+<!--[if lt IE 7]>      <html class="ie6"> <![endif]-->
+<!--[if IE 7]>         <html class="ie7"> <![endif]-->
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html lang="ko">
+<!--<![endif]-->
+<head>
+<title>USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+<meta name="apple-mobile-web-app-title" content="">
+<meta property="og:title" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:site_name" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:image" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta property="og:description" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스"/>
+<meta name="keywords" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Generator" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Author" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Keywords" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<meta name="Description" content="USER ▒ 소상공인을 위한 실시간 홍보 및 이벤트 제공 서비스">
+<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
+
+<link rel="stylesheet" href="./src/css/import.css" type="text/css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script  src="./src/js/default.js"></script>
+<script type="text/javascript" src="http://apis.daum.net/maps/maps3.js?apikey=ef0c0f96a62e5f62c7f7f80ecf2fa4ec"></script>
+
+<script>
+	$(function(){
+		function pop_layer( show ){
+			if( show ){
+				$("#overlay_t").show();
+				setTimeout(function(){
+					show_pop($("#popup_layer_insert"));		
+				}, 100 );
+				$("body").on("touchmove", function(e){e.preventDefault()});
+			}else{
+				$('#popup_layer_insert, #overlay_t').hide(); 	
+				$("body").off("touchmove");
+			}
+		}   	
+	   
+	   $('#overlay_t, .close').click(function(e){ 
+		   e.preventDefault(); 
+		   pop_layer(false);
+	   }); 	
+	   
+		function show_pop( obj ){
+			obj.show();				
+			var popH = obj.innerHeight();
+			var popW = obj.innerWidth();
+			var winW = $(window).width();
+			var winH = $(window).height();
+			var posW = (winW-popW)/2;
+			var posY = (winH-popH)/2;
+			obj.css({"left":posW, "top":posY});	   
+		}
+	   
+	   pop_layer(true);		
+		
+		function map_show(){
+			var mapContainer = document.getElementById('location_map'), // 지도를 표시할 div 
+				mapOption = { 
+					center: new daum.maps.LatLng(37.3901724,126.95388200000002), // 지도의 중심좌표
+					level: 3 // 지도의 확대 레벨
+				};
+			
+			var map = new daum.maps.Map(mapContainer, mapOption);
+			
+			// 마커가 표시될 위치입니다 
+			var markerPosition  = new daum.maps.LatLng(37.3901724,126.95388200000002); 
+			
+			// 마커를 생성합니다
+			var marker = new daum.maps.Marker({
+				position: markerPosition
+			});
+			
+			// 마커가 지도 위에 표시되도록 설정합니다
+			marker.setMap(map);
+			
+		}		
+		map_show();
+		
+		var currentShow = false;
+		//상세설명
+		$(".shoview_detail_text .arrow a").on("click", function(){		
+			if($(this).hasClass("on")){
+				$(this).removeClass("on");
+				$(".shoview_detail_text .cont").addClass("over_2line");
+			}else{
+				$(this).addClass("on");
+				$(".shoview_detail_text .cont").removeClass("over_2line");
+			}
+			
+		});
+		
+		//위치정보
+		$(".shoview_detail_map .arrow a").on("click", function(){		
+			if($(this).hasClass("on")){
+				$("#location_map").hide();			
+				$(this).removeClass("on");
+			}else{
+				$("#location_map").show();
+				if( !currentShow ){
+					map_show();
+				}
+				$(this).addClass("on");
+				currentShow = true;	
+			}
+			
+		});
+		
+		 
+		
+	});
+	
+	
+</script>
+
+<!-- 좌우 스크롤 슬라이드 스와이프 //-->
+<link rel="stylesheet" href="./src/css/swiper.min.css">
+
+
+</head>
+
+<body >
+
+
+
+<!-- 클릭으로 오픈 시 사용 <a href="#" class="trigger">레이어팝업 열기</a> //-->
+<div id="overlay_t"></div> 
+<div id="popup_layer_insert">
+
+    <div class="bg_insert_circle">
+        <div class="insert_circle">
+            <img src="./images/common/icon_icou_noevent.png" style="width:25px; height:auto;" />
+            <p>챙기기 완료</p>	
+        </div>		
+    </div>
+
+    <div class="insert_text">i.COU로 이동하시겠어요?</div>
+    <div class="pop_btn_wrap">
+        <p class="btn_pop_no"><a href="#" class="close">아니요</a></p>
+        <p class="btn_pop_yes"><a href="#">네</a></p>
+    </div>
+
+</div><!--END popup_layer_insert//-->
+
+
+
+<div id="wrap_wide" >
+	<!-- 서브 상단 //-->
+	<header class="sub">
+		<ul>
+			<li><a href="javascript: var uAgent=navigator.userAgent; if(uAgent.match(/opr|u;/i)) location.href=document.referrer; else history.back();"  class="menu-btn"><img src="./images/common/btn_arrow_back.png" style="width:16px; height:auto; margin-right:5px;" />Back</a></li>
+			<li>Sandals</li>
+			<li><a href="#" class="menu-btn"><img src="./images/common/btn_logout.png" style="width:18px; height:auto; margin-right:5px;" /></a></li>
+		</ul>
+	</header>
+
+
+
+	<section class="sub_content_wrap">
+	
+	<!-- 섹션 시작 //-->
+	<div class="shop_detail">
+		<div class="ribbon"><img src="./images/common/ribbon_bakery.png" /></div>
+		<div class="favorite"><img src="./images/common/icon_favorite_off.png"  /></div>
+		
+		<ul class="cont">
+			<li class="title"><a href="http://daum.net" class="color_bakery"><p class="notcolor">빵집ㆍ석촌호수</p>2Cafe Rosy</a></li>
+			<li class="photo"><a href="#"><img src="./images/common/@photo_02.jpg"  /></a></li>
+			<li class="memo">노곤한 몸의 피로를 풀어줄 <br />THE VINOTHERAPY SPA "Sandals"</li>
+			<li class="infomation">
+				<ul>
+					<li><img src="./images/common/icon_list_new.png" /><img src="./images/common/icon_list_dc.png" /></li>
+					<li><p><img src="./images/common/star_gray_min_5.png" /></p>3.6km</li>
+				</ul>			
+			</li>
+		</ul>
+
+		<div class="shop_info_basic">
+			<dl>
+				<dt><img src="./images/common/icon_coremenu.png" style="width:14px; height:auto; margin-right:7px;" alt="" />주요메뉴</dt>
+				<dd>바캉스 패키지</dd>
+			</dl>
+			<dl>
+				<dt><img src="./images/common/icon_opentime.png" style="width:14px; height:auto; margin-right:7px;" alt="" />영업시간</dt>
+				<dd>09:00 ~ 20:00</dd>
+			</dl>
+			<dl>
+				<dt><img src="./images/common/icon_homepage.png" style="width:14px; height:auto; margin-right:7px;" alt="" />홈페이지</dt>
+				<dd class="underline">www.liberty.com</dd>
+			</dl>
+			<dl>
+				<dt><img src="./images/common/icon_tel.png" style="width:14px; height:auto; margin-right:7px;" alt="" />휴대전화</dt>
+				<dd class="underline"><span class="tel_color">010-8282-4021</span></dd>
+			</dl>
+		</div>
+
+
+
+<!-- 아코디언 효과 필요 //-->
+		<div class="shoview_detail_text">
+			<p class="arrow"><a href="#"></a></p>
+			<p class="title">상세설명</p>
+			<p class="cont over_2line">기본 구성 패키지는 10만원 부터 시작됩니다. 방문 전 상담 및 예약 일정을 잡기본 구성 패키지는 10만원 부터 시작됩니다. 방문 전 상담 및 예약 일정을 잡기본 구성 패키지는 10만원 부터 시작됩니다. 방문 전 상담 및 예약 일정을 잡기본 구성 패키지는 10만원 부터 시작됩니다. 방문 전 상담 및 예약 일정을 잡기본 구성 패키지는 10만원 부터 시작됩니다. 방문 전 상담 및 예약 일정을 잡기본 구성 패키지는 10만원 부터 시작됩니다. 방문 전 상담 및 예약 일정을 잡</p>
+		</div>
+
+		<div class="shoview_detail_map">
+			<p class="arrow"><a href="#"></a></p>
+			<p class="title">위치정보</p>
+			<p class="cont" id="location_map"></p>
+			<p class="address_text">경기도 안양시 동안구 평촌대로217번길 45 평촌코아주 3층</p>
+		</div>
+
+
+
+
+	</div><!-- 섹션 끝 //-->
+
+
+
+
+</section>
+<section class="sub_content_wrap_wide  pl5 pr5">
+	<div class="evre_menu">
+		<ul>
+			<li class="on"><a href="#">Event</a></li>
+			<li><a href="#">Review</a></li>
+		</ul>
+	</div>
+	<!-- 티켓 디자인 시작 //-->
+	<div class="event_ticket_wrap">
+		<ul>
+			<li>
+				<div class="tick_ribbon"><img src="./images/common/ribbon_bakery.png" /></div>
+				<img src="./images/common/@photo_02.jpg"  />	
+			</li>
+			<li>
+				<div class="tick_favorite"><img src="./images/common/icon_favorite_off.png"  /></div>
+				<div class="tick_title"><a href="http://daum.net" class="color_bakery"><p class="notcolor">빵집ㆍ석촌호수</p>2Cafe Rosy</a></div>
+				<div class="tick_addr">서울특별시 송파구<br />석촌호수로 230, 2층</div>
+				<div class="tick_infomation">
+				<ul>
+					<li><img src="./images/common/icon_list_new.png" /><img src="./images/common/icon_list_dc.png" /></li>
+					<li><p><img src="./images/common/star_gray_min_5.png" /></p>3.6km</li>
+				</ul>			
+			</div>
+			</li>
+			<li class="color_bakery">
+				모든 다과류 구매시 음료<strong>50%</strong><p class="btn_ticket_insert bg_bakery"><span class=""><a href="#">챙기기</a></span></p>
+			</li>
+		</ul>
+	</div><!-- end event_ticket_wrap //-->
+
+
+	<!-- 티켓 디자인 시작 //-->
+	<div class="event_ticket_wrap">
+		<ul>
+			<li>
+				<div class="tick_ribbon"><img src="./images/common/ribbon_cafe.png" /></div>
+				<img src="./images/common/@photo_02.jpg"  />	
+			</li>
+			<li>
+				<div class="tick_favorite"><img src="./images/common/icon_favorite_on.png"  /></div>
+				<div class="tick_title"><a href="http://daum.net" class="color_cafe"><p class="notcolor">카페ㆍ석촌호수</p>2Cafe Rosy</a></div>
+				<div class="tick_addr">서울특별시 송파구<br />석촌호수로 230, 2층</div>
+				<div class="tick_infomation">
+				<ul>
+					<li><img src="./images/common/icon_list_new.png" /><img src="./images/common/icon_list_dc.png" /></li>
+					<li><p><img src="./images/common/star_gray_min_5.png" /></p>3.6km</li>
+				</ul>			
+			</div>
+			</li>
+			<li class="color_cafe">
+				모든 다과류 구매시 음료<strong>50%</strong><p class="btn_ticket_insert bg_useing"><span class=""><a href="#">사용하기</a></span></p>
+			</li>
+		</ul>
+	</div><!-- end event_ticket_wrap //-->
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div><!-- END wrap//-->
+</body>
+</html>

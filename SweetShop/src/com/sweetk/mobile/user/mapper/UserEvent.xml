@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.sweetk.mobile.user.mapper.UserEventMapper">
+		
+		<insert id="insertEventViewCnt" parameterType="int">
+			INSERT INTO SHOP_EVENT_VIEW (USER_SEQ, EVENT_SEQ)
+							  VALUES (#{0},#{1})
+		</insert>
+		
+		<select id="selectEventDetail" resultType="UserEventVO">
+		SELECT 	
+	    *,
+	    datediff(nowday,eventStartDay) as dateDiff,
+	    TRUNCATE(reviewAvg,0) as reviewAvgFloor,
+	    ROUND((6371 * acos(cos(radians(#{1})) * cos(radians(SHOP_LOCATION_LAT)) * cos(radians(SHOP_LOCATION_LONG) - radians(#{2})) + sin(radians(#{1})) * sin(radians(SHOP_LOCATION_LAT)))),1)  as distanceKmeter,
+	    ROUND((6371000 * acos(cos(radians(#{1})) * cos(radians(SHOP_LOCATION_LAT)) * cos(radians(SHOP_LOCATION_LONG) - radians(#{2})) + sin(radians(#{1})) * sin(radians(SHOP_LOCATION_LAT)))),0)  as distanceMeter
+			FROM
+			(
+			SELECT 
+				a.EVENT_SEQ as eventSeq,
+				a.EVENT_TITLE as eventTitle,
+				a.EVENT_STATUS,
+				a.EVENT_KIND as eventKind,
+				a.EVENT_DISCOUNT_WAY as eventDiscountWay,
+				a.EVENT_DISCOUNT_TARGET as eventDiscountTarget,
+				a.EVENT_DISCOUNT as eventDiscount,
+				a.EVENT_DETAIL_DESC as eventDetailDesc,
+				date_format(cast(a.EVENT_START_DAY as datetime),'%Y-%m-%d' ) as eventStartDay,
+				date_format(now(),'%Y-%m-%d') as nowday,
+				a.EVENT_END_DAY as eventEndDay,
+				a.REG_DATE,
+				b.SHOP_SEQ as shopSeq,
+				b.SHOP_NAME,
+				b.SHOP_SIDO,
+				b.SHOP_GU,
+				b.SHOP_ADDR1,
+				b.SHOP_ADDR2,
+				b.SHOP_LOCATION_LAT,
+				b.SHOP_LOCATION_LONG,
+				b.SHOP_TEL,
+				b.SHOP_KIND,
+				b.SHOP_MENU,
+				b.SHOP_HOMEPAGE_URL,
+				b.SHOP_REG_DATE,
+				c.IMG_PATH,
+				f.SHOP_INTRO,
+					(
+	                    SELECT count(*)
+	                    FROM USER_FAVORITES_SHOP a
+	                    WHERE a.SHOP_SEQ = b.SHOP_SEQ
+                    ) as favoriteCnt,
+				case when (
+					    SELECT 
+							count(*)
+						FROM USER_FAVORITES_SHOP d
+						where d.USER_SEQ = #{3} and d.SHOP_SEQ = b.SHOP_SEQ
+					    ) =0 then 'N' else 'Y' end as favoriteYN,
+				case when (
+					    SELECT 
+							count(*)
+						FROM SHOP_EVENT_CP_USE e
+						where e.USER_SEQ = #{3} and a.EVENT_SEQ = #{0} 
+					    ) =0 then 'N' else 'Y' end as eventUseYn,
+			    (
+                    SELECT IFNULL(round(avg(REVIEW_GRADE),0),0)
+					FROM SHOP_REVIEW 
+					where a.shop_seq = b.SHOP_SEQ
+                 ) as reviewAvg	    					    
+			FROM SHOP_EVENT_MST	a
+				JOIN shop_mst b on a.SHOP_SEQ = b.SHOP_SEQ
+				LEFT JOIN 
+					(SELECT EVENT_SEQ, IMG_PATH from SHOP_EVENT_IMG WHERE EVENT_SEQ = #{0} ORDER BY EVENT_ORDER limit 1) c ON c.EVENT_SEQ = a.EVENT_SEQ 
+				LEFT JOIN SHOP_BUSINESS_CARD f on a.SHOP_SEQ = f.SHOP_SEQ
+			WHERE a.EVENT_SEQ = #{0}
+     		) asdf
+		</select>
+		
+	   <select id="eventDownCheckYN" parameterType="int" resultType="int">
+			SELECT count(*)
+			FROM SHOP_EVENT_CP_DOWN
+			where USER_SEQ = #{0} and EVENT_SEQ = #{1}	   
+	   </select>
+
+	   <select id="eventUseCheckYN" parameterType="int" resultType="int">
+			SELECT count(*)
+			FROM SHOP_EVENT_CP_USE
+			where USER_SEQ = #{0} and EVENT_SEQ = #{1}	   
+	   </select>
+		
+		<insert id="insertEventUse" parameterType="int">
+			INSERT INTO SHOP_EVENT_CP_USE (USER_SEQ, EVENT_SEQ)
+							  VALUES (#{0},#{1})
+		</insert>	
+		
+	</mapper>

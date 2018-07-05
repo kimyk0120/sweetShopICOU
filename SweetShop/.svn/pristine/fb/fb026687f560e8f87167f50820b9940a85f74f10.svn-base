@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="useGeneratedKeys" value="true" />
+		<setting name="defaultExecutorType" value="REUSE" />
+	</settings>
+
+ 	<typeAliases>
+
+		<typeAlias type="com.sweetk.web.admin.vo.LoginVo" 	alias="LoginVo"/>
+		<typeAlias type="com.sweetk.web.admin.vo.ShopVo" 	alias="ShopVo"/>
+		<typeAlias type="com.sweetk.web.admin.vo.CodeVo" 	alias="CodeVo"/>
+		<typeAlias type="com.sweetk.web.shop.vo.ShopEventVo" 	alias="ShopEventVo"/>
+		<typeAlias type="com.sweetk.web.shop.vo.ShopPromotionVo" 	alias="ShopPromotionVo"/>
+		<typeAlias type="com.sweetk.web.shop.vo.ShopCardVo" 	alias="ShopCardVo"/>
+		<typeAlias type="com.sweetk.web.shop.vo.NoticeVo" 	alias="NoticeVo"/>
+		<typeAlias type="com.sweetk.web.shop.vo.QnaVo" 	alias="QnaVo"/>
+		<typeAlias type="com.sweetk.web.shop.vo.EventImgVo" 	alias="EventImgVo"/>
+		
+		<!-- user -->
+		<typeAlias type="com.sweetk.mobile.user.vo.UserPromotionVO" 	alias="UserPromotionVO"/>
+		<typeAlias type="com.sweetk.mobile.user.vo.AlarmVO" 	alias="AlarmVO"/>
+		<typeAlias type="com.sweetk.mobile.user.vo.NoticeQnAVO" 	alias="NoticeQnAVO"/>
+		<typeAlias type="com.sweetk.mobile.user.vo.UserEventVO" 	alias="UserEventVO"/>
+		<typeAlias type="com.sweetk.mobile.user.vo.UserShopVO" 	alias="UserShopVO"/>
+		<typeAlias type="com.sweetk.mobile.user.vo.UserShopReviewGradeVO" 	alias="UserShopReviewGradeVO"/>
+		<typeAlias type="com.sweetk.mobile.user.vo.UserShopReviewDetailGradeVO" 	alias="UserShopReviewDetailGradeVO"/>
+		<typeAlias type="com.sweetk.mobile.user.vo.UserShopReviewListVO" 	alias="UserShopReviewListVO"/>
+		<typeAlias type="com.sweetk.mobile.user.vo.UserMstVO" 	alias="UserMstVO"/>
+				
+			
+		<typeAlias type="com.sweetk.mobile.api.vo.AppApiShopVo" 	alias="AppApiShopVo"/>
+		<typeAlias type="com.sweetk.mobile.api.vo.AppApiEventVo" 	alias="AppApiEventVo"/>
+		<typeAlias type="com.sweetk.mobile.api.vo.AppApiCouponVo" 	alias="AppApiCouponVo"/>
+		<typeAlias type="com.sweetk.mobile.api.vo.AppApiSiDoVo" 	alias="AppApiSiDoVo"/>
+		<typeAlias type="com.sweetk.mobile.api.vo.AppApiSiGuGunVo" 	alias="AppApiSiGuGunVo"/>
+		
+		<typeAlias type="com.sweetk.scheduler.opt.vo.OZoroVO" 	alias="OZoroVO"/>
+		<typeAlias type="com.sweetk.scheduler.opt.vo.ReviewVO" 	alias="ReviewVO"/>
+		<typeAlias type="com.sweetk.scheduler.opt.vo.ShopTypeVO" 	alias="ShopTypeVO"/>
+
+	</typeAliases>
+
+</configuration>

@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+nav:not(.mm-menu) { display: none; }
+
+li.gnb_bg01 { background:url("/src/owner/images/common/mo_gnb_bg_01.png") no-repeat 40px 26px; }
+li.gnb_bg02 { background:url("/src/owner/images/common/mo_gnb_bg_02.png") no-repeat 40px 26px; }
+li.gnb_bg03 { background:url("/src/owner/images/common/mo_gnb_bg_03.png") no-repeat 40px 26px; }
+li.gnb_bg04 { background:url("/src/owner/images/common/mo_gnb_bg_04.png") no-repeat 40px 26px; }
+li.gnb_bg05 { background:url("/src/owner/images/common/mo_gnb_bg_05.png") no-repeat 40px 26px; }
+li.gnb_bg06 { background:url("/src/owner/images/common/mo_gnb_bg_06.png") no-repeat 40px 26px; }
+li.gnb_bg01, li.gnb_bg02, li.gnb_bg03, li.gnb_bg04, li.gnb_bg05, li.gnb_bg06 {background-size:15px; }
+
+div#mm-1 ul, div#mm-2 ul, div#mm-3 ul, div#mm-4 ul  { }
+div#mm-1 ul li a, div#mm-2 ul li a, div#mm-3 ul li a, div#mm-4 ul li a  { height:30px; line-height:30px; font-size:16px; color:#999;}
+div#mm-1 ul li:after, div#mm-2 ul li:after, div#mm-3 ul li:after, div#mm-4 ul li:after  { border-bottom:none; }
+div#mm-1 ul li:last-child, div#mm-2 ul li:last-child, div#mm-3 ul li:last-child, div#mm-4 ul li:last-child { padding-bottom:25px; }
+

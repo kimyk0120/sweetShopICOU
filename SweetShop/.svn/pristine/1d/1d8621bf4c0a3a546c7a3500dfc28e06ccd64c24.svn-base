@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.sweetk.mobile.user.mapper.UserLikeitMapper">
+		
+		<select id="selectLikeCnt" resultType="int" parameterType="int">
+			SELECT count(*)
+			FROM USER_FAVORITES_SHOP
+			WHERE USER_SEQ = #{0}
+		</select>
+		
+		<select id="selectLikeList" resultType="UserPromotionVO">
+			SELECT 	
+		    *,
+		    TRUNCATE(reviewAvg,0) as reviewAvgFloor,
+		    ROUND((6371 * acos(cos(radians(#{1})) * cos(radians(SHOP_LOCATION_LAT)) * cos(radians(SHOP_LOCATION_LONG) - radians(#{2})) + sin(radians(#{1})) * sin(radians(SHOP_LOCATION_LAT)))),1)  as distanceKmeter,
+		    ROUND((6371000 * acos(cos(radians(#{1})) * cos(radians(SHOP_LOCATION_LAT)) * cos(radians(SHOP_LOCATION_LONG) - radians(#{2})) + sin(radians(#{1})) * sin(radians(SHOP_LOCATION_LAT)))),0)  as distanceMeter
+				FROM
+				(
+				SELECT 
+					a.USER_SEQ,
+					c.SHOP_SEQ,
+				    c.SHOP_NAME,
+				    c.SHOP_REG_NUMBER,
+				    c.SHOP_ZIP,
+				    c.SHOP_SIDO,
+				    c.SHOP_GU,
+				    c.SHOP_ADDR1,
+				    c.SHOP_ADDR2,
+				    c.SHOP_LOCATION_LAT,
+				    c.SHOP_LOCATION_LONG,
+				    c.SHOP_TEL,
+				    c.SHOP_KIND,
+				    c.SHOP_MENU,
+				    c.SHOP_OWNER_NAME,
+				    c.SHOP_PHONE,
+				    c.SHOP_FAX,
+				    c.SHOP_HOMEPAGE_URL,
+				    c.SHOP_IMG_PATH,
+				    c.SHOP_IMG_NAME,
+				    c.SHOP_IMG_ORG_NAME,
+				    c.SHOP_REG_DATE,
+				    case when (
+					    SELECT 
+							count(*)
+						FROM USER_FAVORITES_SHOP a
+						where a.USER_SEQ = #{0} and a.SHOP_SEQ = c.SHOP_SEQ
+					    ) =0 then 'N' else 'Y' end as favoriteYN,
+			  	
+                    (
+	                    SELECT IFNULL(round(avg(REVIEW_GRADE),0),0)
+						FROM SHOP_REVIEW a
+						where a.shop_seq = c.SHOP_SEQ
+                    ) as reviewAvg
+				FROM USER_FAVORITES_SHOP a 
+				JOIN shop_mst c on a.SHOP_SEQ = c.SHOP_SEQ
+				WHERE USER_SEQ = #{0}
+				ORDER BY REG_DATE DESC
+				LIMIT #{3},#{4}
+				) as asdf
+		</select>	
+	</mapper>
